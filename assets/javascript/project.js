@@ -7,20 +7,20 @@ var addingIngredient = document.getElementById("addBtn")
 
 
 
-function createWheel(){
-let arrL = ingredients.length;
-let colMax = 3;
-let rowsNeeded = Math.ceil(arrL/colMax);
-let rowCount = 1;
-do{
-for (i = 0; i < colMax; i++){
+function createWheel() {
+    let arrL = ingredients.length;
+    let colMax = 3;
+    let rowsNeeded = Math.ceil(arrL / colMax);
+    let rowCount = 1;
+    do {
+        for (i = 0; i < colMax; i++) {
+
+        }
+
+
+    } while (rowCount < rowsNeeded);
 
 }
-
-
-} while (rowCount < rowsNeeded);
-
-
 
 
 
@@ -77,8 +77,8 @@ addToIngredientsArray()
 makeButtons()
 
 
-function searchDrink(ingredient){
-    var queryURL = "https://www.thecocktaildb.com/api/json/v1/1/filter.php?i="+ingredient
+function searchDrink(ingredient) {
+    var queryURL = "https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=" + ingredient
 
     $.ajax({
         url: queryURL,
@@ -95,7 +95,7 @@ function searchDrink(ingredient){
 
 
 $(document).ready(function () {
-   
+
 
 
 })
