@@ -10,6 +10,8 @@
     <!--Import materialize.css-->
     <link type="text/css" rel="stylesheet" href="materialize/css/materialize.css" media="screen,projection" />
     <link rel='stylesheet' href="assets/css/style.css">
+    <script type="text/javascript" src="materialize/js/materialize.min.js"></script>
+    <script type="text/javascript" src="./assets/javascript/project.js"></script>
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
@@ -64,48 +66,10 @@
 </div>
 <body>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="assets/javascript/project.js"></script>
+
     <!--JavaScript at end of body for optimized loading-->
     <script type="text/javascript" src="materialize/js/materialize.min.js"></script>
-    <script>
-        var ingredients = ['tequila', 'gin', 'vodka', 'whiskey', 'orange juice', 'lime', 'cranberry juice',]
-        console.log(ingredients)
-        var addingIngredient = document.getElementById("addBtn")
-        function createIngredientBtn(ingredient) {
-            //creates buttons with each ingredient in the array
-            var makingIngredientBtn = document.createElement('button')
-            makingIngredientBtn.textContent = ingredient
-            //adding an attribute for the ajax call function
-            $(makingIngredientBtn).attr("ing-data", ingredient)
-            //adds the materialize class to the button
-            $(makingIngredientBtn).addClass("waves-effect waves-light btn-small")
-            //append each item to buttonsDiv
-            $('#btnsGoHere').append(makingIngredientBtn)
-        }
-        function makeButtons() {
-            //forEach loop to create a button for each item in the array
-            //uses the create ingredient button function to make buttons for the items that are already in the array
-            ingredients.forEach(createIngredientBtn)
-        }
-        function addToIngredientsArray() {
-            //clears out the input
-            $('#btnsGoHere').empty()
-            //event listener
-            addingIngredient.addEventListener('click', function (event) {
-                //keeps the page from clearing out when it refreshes
-                event.preventDefault()
-                //what happens when the button is click?
-                //take the user input 
-                //takes the user input and make it a value attribute so that we can use the attribute to call it when we need it
-                var userInput = $('#userInput').val();
-                //adds it to the array
-                ingredients.push(userInput)
-                createIngredientBtn(userInput)
-                console.log(ingredients)
-            })
-        }
-        addToIngredientsArray()
-        makeButtons()
-        
-    </script>
+    
 </body>
 </html>
