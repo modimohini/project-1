@@ -1,7 +1,28 @@
+
+
 var ingredients = ['tequila', 'gin', 'vodka', 'whiskey', 'orange juice', 'lime', 'cranberry juice',]
 console.log(ingredients)
 
 var addingIngredient = document.getElementById("addBtn")
+
+
+
+function createWheel(){
+let arrL = ingredients.length;
+let colMax = 3;
+let rowsNeeded = Math.ceil(arrL/colMax);
+let rowCount = 1;
+do{
+for (i = 0; i < colMax; i++){
+
+}
+
+
+} while (rowCount < rowsNeeded);
+
+
+
+
 
 function createIngredientBtn(ingredient) {
 
@@ -56,20 +77,25 @@ addToIngredientsArray()
 makeButtons()
 
 
-
-
-
-
-$(document).ready(function () {
-    var queryURL = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita"
+function searchDrink(ingredient){
+    var queryURL = "https://www.thecocktaildb.com/api/json/v1/1/filter.php?i="+ingredient
 
     $.ajax({
         url: queryURL,
         method: "GET",
     }).then(function (response) {
+        //todo write out response
         console.log(response)
     });
 
+}
+
+
+
+
+
+$(document).ready(function () {
+   
 
 
 })
