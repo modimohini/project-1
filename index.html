@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,7 +16,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 <!-- Navbar goes here -->
-
 <nav>
     <div class="nav-wrapper">
         <a href="#" class="brand-logo right">title</a>
@@ -26,63 +24,46 @@
            </ul> -->
     </div>
 </nav>
-
-<div class='container'>
-    <!-- Page Layout here -->
-    <div class="row">
-
-        <div class="grid-example col l3"><span class="flow-text"></span>
-
-
-            <div id="formDiv">
-
-                <form id="form" class=".left-align ">
-                    <input id='userInput' class="form-control mr-sm-2" type="search" placeholder="ingredient"
-                        aria-label="Search">
-
-
-                    <button id="addBtn" class="btn .left-align" type="submit" name="action">create
-                        <i class="material-icons right"></i>
-                    </button>
-
-                </form>
-            </div>
-
-         
-        </div>
-    </div>
+<div class="container">
+        <div class="col s3 .left-align ">
+            <!--<h3>Type in ingredient</h3>-->
+            <div class="col s12 m7">
+                <h2 class="header">
+                    <h3>some header to add</h3>
+                </h2>
+                <div class="card horizontal" style = "width:100%">
+                    <div class="card-stacked">
+                        <div class="card-content">
+                            <div id="formDiv">
+                                <form id="form" class=".left-align ">
+                                    <input id='userInput' class="form-control mr-sm-2" type="search"
+                                        placeholder="ingredient" aria-label="Search">
+                                    <a id="addBtn" class="btn-floating btn-large waves-effect waves-light red"><i
+                                            class="material-icons">+</i></a>
+                                    <i class="material-icons right"></i>
+                                    </button>
     
-    <div class='section'>
-        <h4>Ingredient Choices</h4>
-        <div id="btnsGoHere"> </div>
-        <!-- this is where the buttons will go       -->
-
-        <div id="userChoices"></div>
-
-    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="card-action">
+                            <div id="btnsGoHere"> </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="col s9">6-columns (one-half)</div>
+        </div>
     <div class="grid-example col l9"><span class="flow-text">Results</span>
-
         <div id="resultsGoHere"> </div>
         <!-- user search results will go here -->
         This is where the user results will go
-
-
-
-
-
     </div>
-
 </div>
-
 <!-- </div> -->
-
-
-
-
 <!-- FOOTER STARTS HERE -->
-
 </div>
-
 <body>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="assets/javascript/project.js"></script>
@@ -91,5 +72,4 @@
     <script type="text/javascript" src="materialize/js/materialize.min.js"></script>
     
 </body>
-
 </html>
