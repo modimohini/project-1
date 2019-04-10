@@ -11,3 +11,19 @@ body {
    margin: 2px;
   }    
  
+.gridRow{
+margin: 10px 20px;
+padding: 10px;
+font-size: 40px;
+display: inline-block;
+letter-spacing: 2px;
+
+}
+.gridCell{
+  
+
+}
+.gridContainer{
+  background-color:#b2dfdb;
+ justify-content: center;
+}
