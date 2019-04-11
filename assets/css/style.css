@@ -21,9 +21,13 @@ letter-spacing: 2px;
 }
 .gridCell{
   
-
+  border-style: solid 3px black;
+  /* background-color:#b2dfdb; */
 }
 .gridContainer{
-  background-color:#b2dfdb;
  justify-content: center;
+ 
+}
+#addBtn{
+  display: inline-block;
 }
