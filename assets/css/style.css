@@ -43,3 +43,6 @@ div.gridCell{
   /* display: inline-block; */
   float: left;
 }
+div.input-field{
+  padding-left: 20px;
+}

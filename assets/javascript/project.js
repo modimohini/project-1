@@ -1,6 +1,6 @@
 
 
-var ingredients = ['tequila', 'gin', 'vodka', 'whiskey', 'orange juice', 'lime', 'cranberry juice','tonic','rum']
+var ingredients = ['tequila', 'orange juice', 'vodka', 'whiskey', 'gin', 'lime', 'cranberry juice','tonic','rum']
 console.log(ingredients)
 
 var addingIngredient = document.getElementById("addBtn")
@@ -62,7 +62,7 @@ function createIngredientBtn(ingredient) {
 
 
     //adds the materialize class to the button
-    $(makingIngredientBtn).addClass("waves-effect waves-light btn-small")
+    $(makingIngredientBtn).addClass("waves-effect waves-light btn-small teal lighten-2")
 
     //append each item to buttonsDiv
     $('#btnsGoHere').append(makingIngredientBtn)
