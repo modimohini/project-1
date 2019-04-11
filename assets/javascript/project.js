@@ -103,7 +103,7 @@ console.log(numCells);
         makeButtons()   
         createWheel();
         //event listener
-         addingIngredient.addEventListener('click', function (event) {
+         $("#addBtn").on('click', function (event) {
 
         //keeps the page from clearing out when it refreshes
         event.preventDefault()
