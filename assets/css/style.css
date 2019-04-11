@@ -8,26 +8,38 @@ body {
     flex: 1 0 auto;
   }
   .btn-small{
-   margin: 2px;
+   margin: 1px;
   }    
  
-.gridRow{
-margin: 10px 20px;
-padding: 10px;
-font-size: 40px;
+div.gridRow{
+margin: 0;
+font-size: 20px;
 display: inline-block;
 letter-spacing: 2px;
+width:33%;
+height: 20%;
+align-content: baseline;
 
 }
-.gridCell{
-  
-  border-style: solid 3px black;
+div.gridCell{
+  margin: 0;
+  padding: 20px;
+  text-transform: uppercase;
+  line-height: 20px;
+  /* border-style: solid; */
+
   /* background-color:#b2dfdb; */
 }
+.center-align{
+  justify-content: center;
+  flex-grow: 1;
+  flex-direction: column;
+}
 .gridContainer{
- justify-content: center;
- 
+ justify-content: space-evenly;
+ align-items: stretch;
 }
 #addBtn{
-  display: inline-block;
+  /* display: inline-block; */
+  float: left;
 }

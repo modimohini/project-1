@@ -1,6 +1,6 @@
 
 
-var ingredients = ['tequila', 'gin', 'vodka', 'whiskey', 'orange juice', 'lime', 'cranberry juice',]
+var ingredients = ['tequila', 'gin', 'vodka', 'whiskey', 'orange juice', 'lime', 'cranberry juice','tonic','rum']
 console.log(ingredients)
 
 var addingIngredient = document.getElementById("addBtn")
@@ -57,7 +57,7 @@ function createIngredientBtn(ingredient) {
     //adding an attribute for the ajax call function
     $(makingIngredientBtn).attr("ing-data", ingredient)
     $(makingIngredientBtn).attr("data-position", "bottom")
-    $(makingIngredientBtn).attr("data-tooltip", "add ingredient to wheel")
+    $(makingIngredientBtn).attr("data-tooltip", "add to wheel")
     $(makingIngredientBtn).attr("class", "btn tooltipped")
 
 
