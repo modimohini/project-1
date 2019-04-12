@@ -14,8 +14,9 @@ var curActive;
 var chosen;
 var index;
 function createWheel() {
+
     $(".gridContainer").empty();
-    let arrL = searchArrLength;
+    let arrL = ingredients.length;
 
     let colMax = 3;
     let rowsNeeded = Math.ceil(arrL / colMax);
@@ -97,7 +98,7 @@ function pickATimeBasedOnIndex(){
 }
 function changeBground() {
 
-    let rando = Math.floor(Math.random() * searchArrLength);
+    let rando = Math.floor(Math.random() * ingredients.length);
     
    
     
@@ -107,7 +108,7 @@ function changeBground() {
 
     if (rando == prevActive) {
         rando++;
-        if (rando == searchArrLength) {
+        if (rando == ingredients.length) {
             rando = 0;
         }
     }
@@ -116,6 +117,15 @@ function changeBground() {
     $(`#cell${rando}`).css('background', 'red');
 }
 
+function removeIngredient(event){
+    event.preventDefault();
+    let ix = ingredients.indexOf($(this).text())
+    ingredients.splice(ix, 1)
+    console.log($(this).text())
+    $('#btnsGoHere').empty()
+    makeButtons()
+ 
+ }
 
 function createIngredientBtn(ingredient) {
 
@@ -127,12 +137,15 @@ function createIngredientBtn(ingredient) {
     $(makingIngredientBtn).attr("ing-data", ingredient)
     $(makingIngredientBtn).attr("data-position", "bottom")
     $(makingIngredientBtn).attr("data-tooltip", "add to wheel")
-    $(makingIngredientBtn).attr("class", "btn tooltipped")
+    // $(makingIngredientBtn).attr("class", "btn tooltipped")
+    // $(makingIngredientBtn).attr("onclick", "{(e)=>{e.preventDefault()}}")
 
 
     //adds the materialize class to the button
     $(makingIngredientBtn).addClass("waves-effect waves-light btn-small teal lighten-2")
 
+    //adds the materialize class to the button
+    $(makingIngredientBtn).addClass("btn mCat waves-effect waves-light btn-small")
     //append each item to buttonsDiv
     $('#btnsGoHere').append(makingIngredientBtn)
     createWheel();
@@ -143,7 +156,7 @@ function makeButtons() {
     //forEach loop to create a button for each item in the array
     //uses the create ingredient button function to make buttons for the items that are already in the array
     ingredients.forEach(createIngredientBtn)
-
+    createWheel();
 }
 
 function addToIngredientsArray() {
@@ -164,11 +177,11 @@ $(document).ready(function () {
     addToIngredientsArray()
     makeButtons()
     searchYelp();
-    searchDrink()
+    // searchDrink()
     // createWheel();
     //event listener
     $(document.body).on("click", "#spinToWin", spinItUp);
-
+    $(document.body).on("click", ".mCat", removeIngredient);
 
 
     addingIngredient.addEventListener('click', function (event) {
@@ -188,32 +201,33 @@ $(document).ready(function () {
 
 
     })
-
-    function searchDrink(ingredient) {
-        var queryURL = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s="
-
-        $.ajax({
-            url: queryURL,
-            method: "GET",
-        }).then(function (response) {
-            var results = response.data
-            for (let i = 0; i < 5; i++) {
-
-
-                // var newCard = $("<div>")
-                // var name = results[i].strDrink
-                // var p = $("<p>").text("Drink Name  " + name);
-                // var searchImage = $("<img>");
-                // searchImage.attr("src", results[i].strDrinkThumb);
-                // newCard.prepend(p);
-                // newCard.prepend(searchImage);
-                // newCard.attr('id', new_id)
-            }
-            console.log(response)
-        });
-    }
-
 })
+
+    // function searchDrink(ingredient) {
+    //     var queryURL = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s="
+
+    //     $.ajax({
+    //         url: queryURL,
+    //         method: "GET",
+    //     }).then(function (response) {
+    //         var results = response.data
+    //         for (let i = 0; i < 5; i++) {
+
+
+    //             // var newCard = $("<div>")
+    //             // var name = results[i].strDrink
+    //             // var p = $("<p>").text("Drink Name  " + name);
+    //             // var searchImage = $("<img>");
+    //             // searchImage.attr("src", results[i].strDrinkThumb);
+    //             // newCard.prepend(p);
+    //             // newCard.prepend(searchImage);
+    //             // newCard.attr('id', new_id)
+    //         }
+    //         console.log(response)
+    //     });
+    // }
+
+
 
 // JAVASCRIPT FOR FRONT-END CSS WIDGETS
 function searchYelp() {
