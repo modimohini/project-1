@@ -141,6 +141,8 @@ function createIngredientBtn(ingredient) {
     // $(makingIngredientBtn).attr("onclick", "{(e)=>{e.preventDefault()}}")
 
 
+    //adds the materialize class to the button
+    $(makingIngredientBtn).addClass("waves-effect waves-light btn-small teal lighten-2")
 
     //adds the materialize class to the button
     $(makingIngredientBtn).addClass("btn mCat waves-effect waves-light btn-small")
