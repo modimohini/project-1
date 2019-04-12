@@ -1,5 +1,3 @@
-
-
 var ingredients = ['thai', 'mexican', 'sushi', 'japanese', 'chinese', 'american', 'brewpub', 'froyo', 'pizza', 'italian']
 console.log(ingredients)
 
@@ -13,6 +11,7 @@ var prevActive;
 var curActive;
 var chosen;
 var index;
+
 function createWheel() {
     $(".gridContainer").empty();
     let arrL = searchArrLength;
@@ -55,15 +54,15 @@ function createWheel() {
 }
 
 function spinItUp() {
-    index =0;
+    index = 0;
     if (!isSpinning) {
         isSpinning = true;
         if (curActive != undefined) {
             $(".gridCell").css('background', 'white');
-        }     
-        
+        }
+
     }
-    isSpinning=  true;
+    isSpinning = true;
     doSlowdownThing();
 }
 
@@ -72,38 +71,40 @@ function doSlowdownThing() {
     changeBground();
     index++;
 
-    if(index < 15) {
+    if (index < 15) {
         setTimeout(doSlowdownThing, timeoutDuration);
     } else {
         isSpinning = false;
-    let ele = $("#cell" + prevActive);
-    curActive = prevActive;
-    prevActive = '';
-    chosen = ele.text();
-    console.log(chosen);
+        let ele = $("#cell" + prevActive);
+        curActive = prevActive;
+        prevActive = '';
+        chosen = ele.text();
+        console.log(chosen);
     }
 }
-function pickATimeBasedOnIndex(){
-    if(index < 5) {
+
+function pickATimeBasedOnIndex() {
+    if (index < 5) {
         return 175;
-    } else if(index < 10) {
+    } else if (index < 10) {
         return 250;
-    } else if(index < 15) {
+    } else if (index < 15) {
         return 400;
     } else {
         return 600;
     }
 
 }
+
 function changeBground() {
 
     let rando = Math.floor(Math.random() * searchArrLength);
-    
-   
-    
-        //const previousCell = `#cell${prevActive}t`;       
-        $(".gridCell").css('background', 'white');
-    
+
+
+
+    //const previousCell = `#cell${prevActive}t`;       
+    $(".gridCell").css('background', 'white');
+
 
     if (rando == prevActive) {
         rando++;
@@ -112,7 +113,7 @@ function changeBground() {
         }
     }
     prevActive = rando;
-    rando= rando.toString();
+    rando = rando.toString();
     $(`#cell${rando}`).css('background', 'red');
 }
 
@@ -252,7 +253,7 @@ function searchYelp() {
                 var price = results[i].price
                 var open = results[i].is_closed
                 var aliases = results[i].alias
-                
+
                 const divIds = [
                     '#first',
                     '#second',
@@ -281,7 +282,7 @@ function searchYelp() {
                 var pFour = $("<p>")
                 var pFour = $("<p>").text("Open: " + open)
                 // pFour.attr("src", urlAddress);
-  
+
                 newCard.append(searchImage)
                 newCard.append(pSecondName)
                 newCard.append(pOne)
