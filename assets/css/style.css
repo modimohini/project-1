@@ -11,24 +11,27 @@ body {
    margin: 1px;
   }    
  
-div.gridRow{
+.gridRow{
 margin: 0;
 font-size: 2vw;
-display: inline-block;
+/* display: inline-block; */
 letter-spacing: 2px;
-width:33%;
-height: 30%!;
-align-content: baseline;
-}
+/* width:33%; */
+/* height: 40% !important; */
+/* align-content: baseline; */
 
-div.gridCell{
+
+}
+.gridCell{
   margin: 0;
   padding: 20px;
   text-transform: uppercase;
-  line-height: 20px;
-  /* border-style: solid; */
-  /* height: 100%; */
-
+  /* min-height: 100% important!; */
+  /* line-height: 10px; */
+  border-style: solid;
+  word-wrap: break-word;         /* All browsers since IE 5.5+ */
+  overflow-wrap: break-word;     /* Renamed property in CSS3 draft spec */
+  width: 33%;
   /* background-color:#b2dfdb; */
 }
 
@@ -40,6 +43,7 @@ div.gridCell{
 .gridContainer{
  justify-content: space-evenly;
  align-items: stretch;
+ height: auto;
 }
 #addBtn{
   /* display: inline-block; */
