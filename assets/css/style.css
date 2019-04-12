@@ -22,13 +22,16 @@ letter-spacing: 2px;
 
 
 }
+.spinToWin{
+ 
+}
 .gridCell{
   margin: 0;
   padding: 20px;
   text-transform: uppercase;
   /* min-height: 100% important!; */
   /* line-height: 10px; */
-  border-style: solid;
+  /* border-style: solid; */
   word-wrap: break-word;         /* All browsers since IE 5.5+ */
   overflow-wrap: break-word;     /* Renamed property in CSS3 draft spec */
   width: 33%;

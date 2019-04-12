@@ -1,13 +1,21 @@
-var ingredients = ['tequila', 'gin', 'vodka', 'whiskey', 'orange juice', 'lime', 'cranberry juice', 'tonic', 'rum']
+
+
+var ingredients = ['thai', 'mexican', 'sushi', 'japanese', 'chinese', 'american', 'brewpub', 'froyo', 'pizza', 'italian']
 console.log(ingredients)
 
 var addingIngredient = document.getElementById("addBtn")
-
-
-
+var isSpinning = false;
+var searchArrLength = ingredients.length;
+var gridShown = false;
+var rotaterOne;
+var rotaterTwo;
+var prevActive;
+var curActive;
+var chosen;
+var index;
 function createWheel() {
     $(".gridContainer").empty();
-    let arrL = ingredients.length;
+    let arrL = searchArrLength;
 
     let colMax = 3;
     let rowsNeeded = Math.ceil(arrL / colMax);
@@ -23,7 +31,7 @@ function createWheel() {
         } else {
             numCells = colMax;
         }
-        console.log(numCells);
+
         let row = $("<tr>");
         row.addClass("gridRow");
         row.attr('data-rownum', rowCount);
@@ -31,11 +39,12 @@ function createWheel() {
         for (i = 0; i < numCells; i++) {
             let ele = $("<td>");
             ele.addClass("gridCell");
+            ele.attr("id", "cell" + arrCounter)
             ele.text(ingredients[arrCounter]);
             ele.appendTo(row);
             arrCounter++;
             arrL--;
-            console.log(arrCounter + " " + arrL);
+
         }
         row.appendTo(tbl);
         rowCount++;
@@ -45,7 +54,67 @@ function createWheel() {
     tbl.appendTo(".gridContainer");
 }
 
+function spinItUp() {
+    index =0;
+    if (!isSpinning) {
+        isSpinning = true;
+        if (curActive != undefined) {
+            $(".gridCell").css('background', 'white');
+        }     
+        
+    }
+    isSpinning=  true;
+    doSlowdownThing();
+}
 
+function doSlowdownThing() {
+    const timeoutDuration = pickATimeBasedOnIndex(index);
+    changeBground();
+    index++;
+
+    if(index < 15) {
+        setTimeout(doSlowdownThing, timeoutDuration);
+    } else {
+        isSpinning = false;
+    let ele = $("#cell" + prevActive);
+    curActive = prevActive;
+    prevActive = '';
+    chosen = ele.text();
+    console.log(chosen);
+    }
+}
+function pickATimeBasedOnIndex(){
+    if(index < 5) {
+        return 175;
+    } else if(index < 10) {
+        return 250;
+    } else if(index < 15) {
+        return 400;
+    } else {
+        return 600;
+    }
+
+}
+function changeBground() {
+
+    let rando = Math.floor(Math.random() * searchArrLength);
+    
+   
+    
+        //const previousCell = `#cell${prevActive}t`;       
+        $(".gridCell").css('background', 'white');
+    
+
+    if (rando == prevActive) {
+        rando++;
+        if (rando == searchArrLength) {
+            rando = 0;
+        }
+    }
+    prevActive = rando;
+    rando= rando.toString();
+    $(`#cell${rando}`).css('background', 'red');
+}
 
 
 function createIngredientBtn(ingredient) {
@@ -98,6 +167,10 @@ $(document).ready(function () {
     searchDrink()
     // createWheel();
     //event listener
+    $(document.body).on("click", "#spinToWin", spinItUp);
+
+
+
     addingIngredient.addEventListener('click', function (event) {
 
         //keeps the page from clearing out when it refreshes
@@ -112,7 +185,7 @@ $(document).ready(function () {
         //adds it to the array
         ingredients.push(userInput)
         createIngredientBtn(userInput)
-        console.log(ingredients)
+
 
     })
 
