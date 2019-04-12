@@ -131,7 +131,7 @@ function createIngredientBtn(ingredient) {
 
 
     //adds the materialize class to the button
-    $(makingIngredientBtn).addClass("waves-effect waves-light btn-small")
+    $(makingIngredientBtn).addClass("waves-effect waves-light btn-small teal lighten-2")
 
     //append each item to buttonsDiv
     $('#btnsGoHere').append(makingIngredientBtn)
