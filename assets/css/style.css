@@ -52,3 +52,11 @@ letter-spacing: 2px;
 div.input-field{
   padding-left: 20px;
 }
+#spinToWinHolder{
+  /* display: flex; */
+}
+#spinToWin{
+  border-radius: 25px;
+  background-image: linear-gradient(to right, #b2ebf2 20%, #80deea  45%, #b2ebf2 100%);
+
+}

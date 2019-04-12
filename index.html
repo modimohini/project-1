@@ -29,6 +29,9 @@
            </ul> -->
         </div>
     </nav>
+
+
+    <!-- _________________________________________________________ -->
     <div class="container">
         <div id="firstSection" class="col s3">
             <!--<h3>Type in ingredient</h3>-->
@@ -39,50 +42,82 @@
                 <div class="card horizontal" style="width:100%">
                     <div class="card-stacked">
                         <div class="card-content">
-                                <div id="btnsGoHere"> </div>
-                                <br>
-                         
-                        <div class="card-action">
-                           
-                            <div id="formDiv" class=" row input-field">
+                            <div id="btnsGoHere"> </div>
+                            <br>
+
+                            <div class="card-action">
+
+                                <div id="formDiv" class=" row input-field">
 
                                     <form id="form" class="center-align">
-    
-                                            <div class="row valign-wrapper">
-                                                <form class="col s12">
-                                               
-                                                    <div class="input-field col s6 center-align">
-                                                            <label class="validate" for="userInput">What are you in the mood for?<i
-                                                                class="material-icons"></i></label>
-                                                        <i class="material-icons"></i>
-                                                        <input id='userInput' class="form-control mr-sm-2 validate" type="search"
-                                                           aria-label="Search">
 
-                                                           <!-- a spin wheel button needs to be made -->
-                                            <!-- button text needs to be centered -->
-                                                </div> 
+                                        <div class="row valign-wrapper">
+                                            <form class="col s12">
+
+                                                <div class="input-field col s6 center-align">
+                                                    <label class="validate" for="userInput">What are you in the mood
+                                                        for?<i class="material-icons"></i></label>
+                                                    <i class="material-icons"></i>
+                                                    <input id='userInput' class="form-control mr-sm-2 validate"
+                                                        type="search" aria-label="Search">
+
+                                                    <!-- a spin wheel button needs to be made -->
+                                                    <!-- button text needs to be centered -->
+                                                </div>
                                                 <button id="addBtn" type='submit' name="action"
-                                                class="btn-floating btn-large btn tooltipped waves-effect waves-teal waves-circle  teal lighten-4"
-                                                data-position="right" data-tooltip="make ingredient button"><i
-                                                    class="material-icons">add</i></button>
-                                            <i class="material-icons right"></i>
-                                            </button>
-    
-                                          
-                                       
-    
-    
-                                    </form>
+                                                    class="btn-floating btn-large btn tooltipped waves-effect waves-teal waves-circle  teal lighten-4"
+                                                    data-position="right" data-tooltip="make ingredient button"><i
+                                                        class="material-icons">add</i></button>
+                                                <i class="material-icons right"></i>
+                                                </button>
+
+
+
+
+
+                                            </form>
+                                        </div>
                                 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
                             </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col s12 m7">
+                    <h3 class="header">Horizontal Card</h3>
+                    <div class="card horizontal">
+                        <div class="center-align ">
+                            <div class="gridContainer"></div>
+                        </div>
+                    </div>
+                    <div class="card-stacked">
+                        <div class="card-content">
+                            <!-- card content goes here -->
+                        </div>
+                        <div class="card-action">
+
+                          <div id='spinToWinHolder' align="center">
+                                <a id="spinToWin" class=" pulse btn-large waves-teal teal lighten-4">Spin</a>
 
 
                             
 
+                            </button>
 
-
-
-
+                        </div>
 
 
 
@@ -93,55 +128,37 @@
                 </div>
             </div>
 
-            <div class="col s12 m7">
-                <h3 class="header">Horizontal Card</h3>
-                <div class="card horizontal">
-                    <div class="center-align ">
-                        <div class="gridContainer"></div>
-                    </div>
-                </div>
-                <div class="card-stacked">
-                    <div class="card-content">
-                        <!-- card content goes here -->
-                    </div>
-                    <div class="card-action">
-                        <!-- <a href="#">This is a link</a> -->
-                    </div>
-                </div>
+
+        </div>
+
+        <div class="col s9">6-columns (one-half)
+            This is where the user results will go
+
+
+            <div class="grid-example col l9"><span class="flow-text">Results</span>
+                <!-- i replaced the <div id="resultsGoHere">  with a tbody element-->
+
+                <div id="resultsGoHere"></div>
+
+
+                <ul class="collapsible">
+
+                    <li>
+                        <div class="collapsible-header"><i class="material-icons">filter_drama</i>First</div>
+                        <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+                    </li>
+                    <li>
+                        <div class="collapsible-header"><i class="material-icons">place</i>Second</div>
+                        <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+                    </li>
+                    <li>
+                        <div class="collapsible-header"><i class="material-icons">whatshot</i>Third</div>
+                        <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+                    </li>
+                </ul>
             </div>
+            <!-- user search results will go here -->
         </div>
-
-
-    </div>
-
-    <div class="col s9">6-columns (one-half)
-        This is where the user results will go
-
-
-        <div class="grid-example col l9"><span class="flow-text">Results</span>
-            <!-- i replaced the <div id="resultsGoHere">  with a tbody element-->
-
-            <div id="resultsGoHere"></div>
-
-
-            <ul class="collapsible">
-
-                <li>
-                    <div class="collapsible-header"><i class="material-icons">filter_drama</i>First</div>
-                    <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-                </li>
-                <li>
-                    <div class="collapsible-header"><i class="material-icons">place</i>Second</div>
-                    <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-                </li>
-                <li>
-                    <div class="collapsible-header"><i class="material-icons">whatshot</i>Third</div>
-                    <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-                </li>
-            </ul>
-        </div>
-        <!-- user search results will go here -->
-    </div>
     </div>
 
     <!-- </div> -->
