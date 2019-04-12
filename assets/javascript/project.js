@@ -107,9 +107,11 @@ function searchDrink(ingredient) {
 
 
 $(document).ready(function () {
-
+    $('.collapsible').collapsible();
+    $('.tooltipped').tooltip();
     addToIngredientsArray()
     makeButtons()
+    searchYelp();
     // createWheel();
     //event listener
     addingIngredient.addEventListener('click', function (event) {
@@ -148,6 +150,7 @@ $(document).ready(function () {
 // JAVASCRIPT FOR FRONT-END CSS WIDGETS
 function searchYelp(){
     let yelpSearch = "Thai";
+    var api ="yKOEUCF9Lca7gsPDyifirt-pXKuwx_YIJvpiqO__oUJgJeKQWcNFkwUGpQs4nFxhofY5wI7VKbrXF-E4D5r-28x5BXv7QenKIbXAmKR9HJ5EPtfc4SVXWWqA_-evXHYx";
     let location = "San Diego";
     let url = `https://api.yelp.com/v3/businesses/search?term=${yelpSearch}&location=${location}&limit=12`
 
@@ -157,15 +160,14 @@ $.ajaxPrefilter(function(options) {
             }
         });
         
-        $.ajax(url, { headers: { Authorization: 'Bearer 7RrX7J.........' }})
+        $.ajax(url, { headers: {  "accept": "application/json",
+        "x-requested-with": "xmlhttprequest",
+        "Access-Control-Allow-Origin":"*","Authorization": `Bearer ${api}` }})
             .then(function(response) {
-					//SOME CODE
+					console.log(response);
            	});
 }
 
-$(document).ready(function(){
-    $('.collapsible').collapsible();
-    $('.tooltipped').tooltip();
-  });
+
 // ------------------------------------------------------------------------------------------------------------
 
