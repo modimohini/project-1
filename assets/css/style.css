@@ -22,13 +22,18 @@ letter-spacing: 2px;
 
 
 }
+#spinToWin{
+  border-radius: 25px;
+  background-image: linear-gradient(to right, #b2ebf2 20%, #80deea  45%, #b2ebf2 100%);
+ 
+}
 .gridCell{
   margin: 0;
   padding: 20px;
   text-transform: uppercase;
   /* min-height: 100% important!; */
   /* line-height: 10px; */
-  border-style: solid;
+  /* border-style: solid; */
   word-wrap: break-word;         /* All browsers since IE 5.5+ */
   overflow-wrap: break-word;     /* Renamed property in CSS3 draft spec */
   width: 33%;
@@ -52,11 +57,9 @@ letter-spacing: 2px;
 div.input-field{
   padding-left: 20px;
 }
-#spinToWinHolder{
-  /* display: flex; */
-}
-#spinToWin{
-  border-radius: 25px;
-  background-image: linear-gradient(to right, #b2ebf2 20%, #80deea  45%, #b2ebf2 100%);
 
+
+
+.gridCell {
+  text-align: center;
 }
