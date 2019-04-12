@@ -51,3 +51,7 @@ letter-spacing: 2px;
   /* display: inline-block; */
   float: left;
 }
+
+.gridCell {
+  text-align: center;
+}

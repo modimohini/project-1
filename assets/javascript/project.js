@@ -156,24 +156,6 @@ function addToIngredientsArray() {
 
 
 
-function searchDrink(ingredient) {
-    var queryURL = "https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=" + ingredient
-
-    $.ajax({
-        url: queryURL,
-        method: "GET",
-    }).then(function (response) {
-        //todo write out response
-        console.log(response)
-    });
-
-}
-
-
-function targetIni(){
-    let myNum = 0;
-    $("#cell"+myNum).css("background", 'red');
-}
 
 
 $(document).ready(function () {
@@ -182,6 +164,7 @@ $(document).ready(function () {
     addToIngredientsArray()
     makeButtons()
     searchYelp();
+    searchDrink()
     // createWheel();
     //event listener
     $(document.body).on("click", "#spinToWin", spinItUp);
@@ -207,16 +190,27 @@ $(document).ready(function () {
     })
 
     function searchDrink(ingredient) {
-        var queryURL = "https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=" + ingredient
+        var queryURL = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s="
 
         $.ajax({
             url: queryURL,
             method: "GET",
         }).then(function (response) {
-            //todo write out response
+            var results = response.data
+            for (let i = 0; i < 5; i++) {
+
+
+                // var newCard = $("<div>")
+                // var name = results[i].strDrink
+                // var p = $("<p>").text("Drink Name  " + name);
+                // var searchImage = $("<img>");
+                // searchImage.attr("src", results[i].strDrinkThumb);
+                // newCard.prepend(p);
+                // newCard.prepend(searchImage);
+                // newCard.attr('id', new_id)
+            }
             console.log(response)
         });
-
     }
 
 })
@@ -235,17 +229,80 @@ function searchYelp() {
     });
 
     $.ajax(url, {
-        headers: {
-            "accept": "application/json",
-            "x-requested-with": "xmlhttprequest",
-            "Access-Control-Allow-Origin": "*", "Authorization": `Bearer ${api}`
-        }
-    })
+            headers: {
+                "accept": "application/json",
+                "x-requested-with": "xmlhttprequest",
+                "Access-Control-Allow-Origin": "*",
+                "Authorization": `Bearer ${api}`
+            }
+        })
         .then(function (response) {
             console.log(response);
+            var results = response.businesses
+            for (let i = 0; i < 5; i++) {
+                var newCard = $("<div>")
+                var name = results[i].name
+                var phone = results[i].display_phone
+                const address1 = results[i].location.address1
+                const address2 = results[i].location.address2
+                const address3 = results[i].location.address3
+                const address4 = results[i].location.city
+
+                var location = address1 + address2 + address3 + '   ' + address4
+                var price = results[i].price
+                var open = results[i].is_closed
+                var aliases = results[i].alias
+                
+                const divIds = [
+                    '#first',
+                    '#second',
+                    '#third',
+                    '#fourth',
+                    '#fifth'
+
+                ]
+                const divIdsName = [
+                    '#firstName',
+                    '#secondName',
+                    '#thirdName',
+                    '#fourthName',
+                    '#fifthName'
+
+                ]
+
+                var p = $("<p>").text(name);
+                var searchImage = $("<img>")
+                searchImage.attr("src", results[i].image_url)
+                searchImage.attr('width', 380).attr('height', 300)
+                var pSecondName = $("<p>").text(aliases);
+                var pOne = $("<p>").text("Phone Number:  " + phone);
+                var pTwo = $("<p>").text("Location:  " + location);
+                var pThree = $("<p>").text("Price:  " + price);
+                var pFour = $("<p>")
+                var pFour = $("<p>").text("Open: " + open)
+                // pFour.attr("src", urlAddress);
+  
+                newCard.append(searchImage)
+                newCard.append(pSecondName)
+                newCard.append(pOne)
+                newCard.append(pTwo)
+                newCard.append(pThree);
+                newCard.append(pFour);
+                $(divIds[i]).append(newCard)
+                $(divIdsName[i]).append(p)
+
+
+
+
+
+
+
+
+            }
         });
 }
 
 
-// ------------------------------------------------------------------------------------------------------------
 
+
+// ------------------------------------------------------------------------------------------------------------
