@@ -1,23 +1,29 @@
 
 
-var ingredients = ['tequila', 'gin', 'vodka', 'whiskey', 'orange juice', 'lime', 'cranberry juice','tonic','rum']
+var ingredients = ['thai', 'mexican', 'sushi', 'japanese', 'chinese', 'american', 'brewpub', 'froyo', 'pizza', 'italian']
 console.log(ingredients)
 
 var addingIngredient = document.getElementById("addBtn")
-
-
-
+var isSpinning = false;
+var searchArrLength = ingredients.length;
+var gridShown = false;
+var rotaterOne;
+var rotaterTwo;
+var prevActive;
+var curActive;
+var chosen;
+var index;
 function createWheel() {
     $(".gridContainer").empty();
-    let arrL = ingredients.length;
+    let arrL = searchArrLength;
 
     let colMax = 3;
     let rowsNeeded = Math.ceil(arrL / colMax);
     console.log(arrL + " " + rowsNeeded)
     let rowCount = 0;
     let arrCounter = 0;
-let tbl  = $("<table>");
-tbl.addClass="gridTable";
+    let tbl = $("<table>");
+    tbl.addClass = "gridTable";
     do {
         let numCells = 0;
         if (arrL < colMax) {
@@ -25,7 +31,7 @@ tbl.addClass="gridTable";
         } else {
             numCells = colMax;
         }
-        console.log(numCells);
+
         let row = $("<tr>");
         row.addClass("gridRow");
         row.attr('data-rownum', rowCount);
@@ -33,11 +39,12 @@ tbl.addClass="gridTable";
         for (i = 0; i < numCells; i++) {
             let ele = $("<td>");
             ele.addClass("gridCell");
+            ele.attr("id", "cell" + arrCounter)
             ele.text(ingredients[arrCounter]);
             ele.appendTo(row);
             arrCounter++;
             arrL--;
-            console.log(arrCounter + " " + arrL);
+
         }
         row.appendTo(tbl);
         rowCount++;
@@ -47,7 +54,67 @@ tbl.addClass="gridTable";
     tbl.appendTo(".gridContainer");
 }
 
+function spinItUp() {
+    index =0;
+    if (!isSpinning) {
+        isSpinning = true;
+        if (curActive != undefined) {
+            $(".gridCell").css('background', 'white');
+        }     
+        
+    }
+    isSpinning=  true;
+    doSlowdownThing();
+}
 
+function doSlowdownThing() {
+    const timeoutDuration = pickATimeBasedOnIndex(index);
+    changeBground();
+    index++;
+
+    if(index < 15) {
+        setTimeout(doSlowdownThing, timeoutDuration);
+    } else {
+        isSpinning = false;
+    let ele = $("#cell" + prevActive);
+    curActive = prevActive;
+    prevActive = '';
+    chosen = ele.text();
+    console.log(chosen);
+    }
+}
+function pickATimeBasedOnIndex(){
+    if(index < 5) {
+        return 175;
+    } else if(index < 10) {
+        return 250;
+    } else if(index < 15) {
+        return 400;
+    } else {
+        return 600;
+    }
+
+}
+function changeBground() {
+
+    let rando = Math.floor(Math.random() * searchArrLength);
+    
+   
+    
+        //const previousCell = `#cell${prevActive}t`;       
+        $(".gridCell").css('background', 'white');
+    
+
+    if (rando == prevActive) {
+        rando++;
+        if (rando == searchArrLength) {
+            rando = 0;
+        }
+    }
+    prevActive = rando;
+    rando= rando.toString();
+    $(`#cell${rando}`).css('background', 'red');
+}
 
 
 function createIngredientBtn(ingredient) {
@@ -76,7 +143,7 @@ function makeButtons() {
     //forEach loop to create a button for each item in the array
     //uses the create ingredient button function to make buttons for the items that are already in the array
     ingredients.forEach(createIngredientBtn)
-  
+
 }
 
 function addToIngredientsArray() {
@@ -103,7 +170,10 @@ function searchDrink(ingredient) {
 }
 
 
-
+function targetIni(){
+    let myNum = 0;
+    $("#cell"+myNum).css("background", 'red');
+}
 
 
 $(document).ready(function () {
@@ -114,6 +184,10 @@ $(document).ready(function () {
     searchYelp();
     // createWheel();
     //event listener
+    $(document.body).on("click", "#spinToWin", spinItUp);
+
+
+
     addingIngredient.addEventListener('click', function (event) {
 
         //keeps the page from clearing out when it refreshes
@@ -128,7 +202,7 @@ $(document).ready(function () {
         //adds it to the array
         ingredients.push(userInput)
         createIngredientBtn(userInput)
-        console.log(ingredients)
+
 
     })
 
@@ -148,24 +222,28 @@ $(document).ready(function () {
 })
 
 // JAVASCRIPT FOR FRONT-END CSS WIDGETS
-function searchYelp(){
+function searchYelp() {
     let yelpSearch = "Thai";
-    var api ="yKOEUCF9Lca7gsPDyifirt-pXKuwx_YIJvpiqO__oUJgJeKQWcNFkwUGpQs4nFxhofY5wI7VKbrXF-E4D5r-28x5BXv7QenKIbXAmKR9HJ5EPtfc4SVXWWqA_-evXHYx";
+    var api = "yKOEUCF9Lca7gsPDyifirt-pXKuwx_YIJvpiqO__oUJgJeKQWcNFkwUGpQs4nFxhofY5wI7VKbrXF-E4D5r-28x5BXv7QenKIbXAmKR9HJ5EPtfc4SVXWWqA_-evXHYx";
     let location = "San Diego";
     let url = `https://api.yelp.com/v3/businesses/search?term=${yelpSearch}&location=${location}&limit=12`
 
-$.ajaxPrefilter(function(options) {
-            if (options.crossDomain && $.support.cors) {
-                options.url = 'https://cors-anywhere.herokuapp.com/' + options.url;
-            }
+    $.ajaxPrefilter(function (options) {
+        if (options.crossDomain && $.support.cors) {
+            options.url = 'https://cors-anywhere.herokuapp.com/' + options.url;
+        }
+    });
+
+    $.ajax(url, {
+        headers: {
+            "accept": "application/json",
+            "x-requested-with": "xmlhttprequest",
+            "Access-Control-Allow-Origin": "*", "Authorization": `Bearer ${api}`
+        }
+    })
+        .then(function (response) {
+            console.log(response);
         });
-        
-        $.ajax(url, { headers: {  "accept": "application/json",
-        "x-requested-with": "xmlhttprequest",
-        "Access-Control-Allow-Origin":"*","Authorization": `Bearer ${api}` }})
-            .then(function(response) {
-					console.log(response);
-           	});
 }
 
 
