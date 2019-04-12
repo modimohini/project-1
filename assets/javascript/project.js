@@ -16,7 +16,8 @@ function createWheel() {
     console.log(arrL + " " + rowsNeeded)
     let rowCount = 0;
     let arrCounter = 0;
-
+let tbl  = $("<table>");
+tbl.addClass="gridTable";
     do {
         let numCells = 0;
         if (arrL < colMax) {
@@ -25,12 +26,12 @@ function createWheel() {
             numCells = colMax;
         }
         console.log(numCells);
-        let row = $("<div>");
+        let row = $("<tr>");
         row.addClass("gridRow");
         row.attr('data-rownum', rowCount);
 
         for (i = 0; i < numCells; i++) {
-            let ele = $("<div>");
+            let ele = $("<td>");
             ele.addClass("gridCell");
             ele.text(ingredients[arrCounter]);
             ele.appendTo(row);
@@ -38,11 +39,12 @@ function createWheel() {
             arrL--;
             console.log(arrCounter + " " + arrL);
         }
-        row.appendTo(".gridContainer");
+        row.appendTo(tbl);
         rowCount++;
 
     } while (rowCount < rowsNeeded);
 
+    tbl.appendTo(".gridContainer");
 }
 
 
@@ -66,6 +68,7 @@ function createIngredientBtn(ingredient) {
 
     //append each item to buttonsDiv
     $('#btnsGoHere').append(makingIngredientBtn)
+    createWheel();
 }
 
 function makeButtons() {
@@ -73,6 +76,7 @@ function makeButtons() {
     //forEach loop to create a button for each item in the array
     //uses the create ingredient button function to make buttons for the items that are already in the array
     ingredients.forEach(createIngredientBtn)
+  
 }
 
 function addToIngredientsArray() {
@@ -106,7 +110,7 @@ $(document).ready(function () {
 
     addToIngredientsArray()
     makeButtons()
-    createWheel();
+    // createWheel();
     //event listener
     addingIngredient.addEventListener('click', function (event) {
 
@@ -121,9 +125,7 @@ $(document).ready(function () {
 
         //adds it to the array
         ingredients.push(userInput)
-
         createIngredientBtn(userInput)
-
         console.log(ingredients)
 
     })
@@ -144,6 +146,22 @@ $(document).ready(function () {
 })
 
 // JAVASCRIPT FOR FRONT-END CSS WIDGETS
+function searchYelp(){
+    let yelpSearch = "Thai";
+    let location = "San Diego";
+    let url = `https://api.yelp.com/v3/businesses/search?term=${yelpSearch}&location=${location}&limit=12`
+
+$.ajaxPrefilter(function(options) {
+            if (options.crossDomain && $.support.cors) {
+                options.url = 'https://cors-anywhere.herokuapp.com/' + options.url;
+            }
+        });
+        
+        $.ajax(url, { headers: { Authorization: 'Bearer 7RrX7J.........' }})
+            .then(function(response) {
+					//SOME CODE
+           	});
+}
 
 $(document).ready(function(){
     $('.collapsible').collapsible();
