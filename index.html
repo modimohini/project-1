@@ -22,15 +22,18 @@
 <body>
     <!-- Navbar goes here -->
     <nav>
-        <div class="nav-wrapper">
+        <div class="nav-wrapper teal lighten-4">
             <a href="#" class="brand-logo right">title</a>
             <!-- <ul id="nav-mobile" class="left hide-on-med-and-down">
              <li><a href="sass.html">Sass</a></li>
            </ul> -->
         </div>
     </nav>
+
+
+    <!-- _________________________________________________________ -->
     <div class="container">
-        <div id="firstSectiom" class="col s3">
+        <div id="firstSection" class="col s3">
             <!--<h3>Type in ingredient</h3>-->
             <div class="col s12 m7 left-align">
                 <h2 class="header">
@@ -39,40 +42,59 @@
                 <div class="card horizontal" style="width:100%">
                     <div class="card-stacked">
                         <div class="card-content">
+                            <div id="btnsGoHere"> </div>
+                            <br>
 
-                            <div id="formDiv" class=" row input-field">
+                            <div class="card-action">
 
-                                <form id="form" class="center-align">
+                                <div id="formDiv" class=" row input-field">
 
-                                    <div class="row">
-                                        <form class="col s12">
-                                            <div class="row  valign-wrapper ">
+                                    <form id="form" class="center-align">
+
+                                        <div class="row valign-wrapper">
+                                            <form class="col s12">
+
                                                 <div class="input-field col s6 center-align">
-                                                    <div class="card-action">
-                                                        <div id="btnsGoHere"> </div>
-                                                    </div>
+                                                    <label class="validate" for="userInput">What are you in the mood
+                                                        for?<i class="material-icons"></i></label>
+                                                    <i class="material-icons"></i>
+                                                    <input id='userInput' class="form-control mr-sm-2 validate"
+                                                        type="search" aria-label="Search">
+
+                                                    <!-- a spin wheel button needs to be made -->
+                                                    <!-- button text needs to be centered -->
                                                 </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                            </div> 
-                            <label class="validate" for="userInput">What are you in the mood
-                                for?<i class="material-icons"></i></label>
-                            <i class="material-icons"></i>
-                            <input id='userInput' class="form-control mr-sm-2 validate" type="search"
-                                aria-label="Search">
-                            <button id="addBtn" type='submit' name="action"
-                                class="btn-floating btn-large btn tooltipped waves-effect waves-light  #d96d48"
-                                data-position="right" data-tooltip="make Ingredient button"><i
-                                    class="material-icons">add</i></button>
-                            <i class="material-icons right"></i>
-                            </button>
+                                                <button id="addBtn" type='submit' name="action"
+                                                    class="btn-floating btn-large btn tooltipped waves-effect waves-teal waves-circle  teal lighten-4"
+                                                    data-position="right" data-tooltip="make ingredient button"><i
+                                                        class="material-icons">add</i></button>
+                                                <i class="material-icons right"></i>
+                                                </button>
 
 
+
+
+
+                                            </form>
+                                        </div>
+                                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
             <div class="col s12 m7">
                 <h3 class="header">Horizontal Card</h3>
@@ -81,34 +103,52 @@
                         <div class="gridContainer"></div>
                     </div>
                 </div>
-                <div class="offset-s6" id="spinToWin">
-                    <a class="waves-effect waves-light btn-large"><i class="material-icons left">cloud</i>SPIN TO WIN</a>
+                <div class="offset-s6"  align="center">
+                    <a id="spinToWin" class="pulse btn-large waves-teal teal lighten-4"><i class="material-icons left"></i>SPIN TO WIN</a>
                 </div>
                 <div class="card-stacked">
                     <div class="card-content">
                         <!-- card content goes here -->
                     </div>
-                    <div class="card-action">
-                        <!-- <a href="#">This is a link</a> -->
+                    <div class="card-stacked">
+                        <div class="card-content">
+                            <!-- card content goes here -->
+                        </div>
+                        <div class="card-action">
+
+                          
+                               
+
+
+                            
+
+                            </button>
+
+                        </div>
+
+
+
+
+
+                        </div>
                     </div>
                 </div>
             </div>
+
+
         </div>
 
-
-    </div>
-
-    <div class="col s9">6-columns (one-half)
-        This is where the user results will go
+        <div class="col s9">6-columns (one-half)
+            This is where the user results will go
 
 
-        <div class="grid-example col l9"><span class="flow-text">Results</span>
-            <!-- i replaced the <div id="resultsGoHere">  with a tbody element-->
+            <div class="grid-example col l9"><span class="flow-text">Results</span>
+                <!-- i replaced the <div id="resultsGoHere">  with a tbody element-->
 
-            <div id="resultsGoHere"></div>
+                <div id="resultsGoHere"></div>
 
 
-            <ul class="collapsible">
+                <ul class="collapsible">
 
                 <li>
                     <div class="collapsible-header" id="firstName"><i class="material-icons">filter_drama</i></div>
@@ -132,16 +172,14 @@
                 </li>
             </ul>
         </div>
-        <!-- user search results will go here -->
     </div>
-    </div>
-
+</div>
     <!-- </div> -->
 
     </div>
     <!-- FOOTER STARTS HERE -->
 
-    <footer class="page-footer">
+    <footer class="page-footer teal lighten-5">
         <div class="container">
             <div class="row">
                 <div class="col l6 s12">
@@ -165,10 +203,10 @@
 
     <!-- ------------------------------------------------------------------- -->
     <!-- jQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
 
     <!-- materialize javascript CDN -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script> -->
 
     <!-- javascript file -->
     <script type="text/javascript" src="assets/javascript/project.js"></script>
