@@ -12,6 +12,38 @@ var curActive;
 var chosen;
 var index;
 
+var offset = "";
+
+document.addEventListener('DOMContentLoaded', () => {
+    const $geolocateButton = document.getElementById('spinToWin');
+    $geolocateButton.addEventListener('click', geolocate); 
+ })
+
+function geolocate() {
+    navigator.geolocation.getCurrentPosition(onGeolocateSuccess, onGeolocateError);
+  }
+
+
+function onGeolocateSuccess(coordinates) {
+    const { latitude, longitude } = coordinates.coords;
+    console.log('Found coordinates: ', latitude, longitude);
+  }
+  
+  function onGeolocateError(error) {
+    console.warn(error.code, error.message);
+   
+    if (error.code === 1) {
+      // they said no
+    } else if (error.code === 2) {
+      // position unavailable
+    } else if (error.code === 3) {
+      // timeout
+    }
+  }
+ 
+
+
+
 function createWheel() {
 
     $(".gridContainer").empty();
@@ -171,11 +203,19 @@ function addToIngredientsArray() {
 
 
 $(document).ready(function () {
+    swal({
+        title: "Enter your Zipcode",
+        content: "input",
+        buttons: [true, "Enter"],
+
+      });
+
     $('.collapsible').collapsible();
     $('.tooltipped').tooltip();
     addToIngredientsArray()
     makeButtons()
     searchYelp();
+
     // searchYelpById()
 
     // searchDrink()
@@ -183,6 +223,10 @@ $(document).ready(function () {
     //event listener
     $(document.body).on("click", "#spinToWin", spinItUp);
     $(document.body).on("click", ".mCat", removeIngredient);
+    // $(document.body).on("click", "nextFive", nextFive);
+
+
+
 
 
     addingIngredient.addEventListener('click', function (event) {
@@ -253,63 +297,64 @@ $(document).ready(function () {
         .then(function (response) {
             console.log(response);
             var results = response.businesses
-            for (let i = 0; i < 5; i++) {
-                var newCard = $("<div>")
-                var name = results[i].name
-                var phone = results[i].display_phone
-                const address1 = results[i].location.address1
-                const address2 = results[i].location.address2
-                const address3 = results[i].location.address3
-                const address4 = results[i].location.city
-
-                var location = address1 + address2 + address3 + '   ' + address4
-                var price = results[i].price
-                var open = results[i].is_closed
-                var aliases = results[i].alias
-
-                const divIds = [
-                    '#first',
-                    '#second',
-                    '#third',
-                    '#fourth',
-                    '#fifth'
-
-                ]
-                const divIdsName = [
-                    '#firstName',
-                    '#secondName',
-                    '#thirdName',
-                    '#fourthName',
-                    '#fifthName'
-
-                ]
-
-                var p = $("<p>").text(name);
-                var searchImage = $("<img>")
-                searchImage.attr("src", results[i].image_url)
-                searchImage.attr('width', 380).attr('height', 300)
-                var pSecondName = $("<p>").text(aliases);
-                var pOne = $("<p>").text("Phone Number:  " + phone);
-                var pTwo = $("<p>").text("Location:  " + location);
-                var pThree = $("<p>").text("Price:  " + price);
-                var pFour = $("<p>")
-                var pFour = $("<p>").text("Open: " + open)
-                // pFour.attr("src", urlAddress);
-
-                newCard.append(searchImage)
-                newCard.append(pSecondName)
-                newCard.append(pOne)
-                newCard.append(pTwo)
-                newCard.append(pThree);
-                newCard.append(pFour);
-                $(divIds[i]).append(newCard)
-                $(divIdsName[i]).append(p)
-
-
-            }
-        });
-}
-
+                for (let i = 0; i < 5; i++) {
+                    var newCard = $("<div>")
+                    var name = results[i].name
+                    var phone = results[i].display_phone
+                    const address1 = results[i].location.address1
+                    const address2 = results[i].location.address2
+                    const address3 = results[i].location.address3
+                    const address4 = results[i].location.city
+                    
+                    var location = address1 + address2 + address3 + '   ' + address4
+                    var price = results[i].price
+                    var open = results[i].is_closed
+                    var aliases = results[i].alias
+                    
+                    const divIds = [
+                        '#first',
+                        '#second',
+                        '#third',
+                        '#fourth',
+                        '#fifth'
+                        
+                    ]
+                    const divIdsName = [
+                        '#firstName',
+                        '#secondName',
+                        '#thirdName',
+                        '#fourthName',
+                        '#fifthName'
+                        
+                    ]
+                    
+                    var p = $("<p>").text(name);
+                    var searchImage = $("<img>")
+                    searchImage.attr("src", results[i].image_url)
+                    searchImage.attr('width', 380).attr('height', 300)
+                    var pSecondName = $("<p>").text(aliases);
+                    var pOne = $("<p>").text("Phone Number:  " + phone);
+                    var pTwo = $("<p>").text("Location:  " + location);
+                    var pThree = $("<p>").text("Price:  " + price);
+                    var pFour = $("<p>")
+                    var pFour = $("<p>").text("Open: " + open)
+                    // pFour.attr("src", urlAddress);
+                    
+                    newCard.append(searchImage)
+                    newCard.append(pSecondName)
+                    newCard.append(pOne)
+                    newCard.append(pTwo)
+                    newCard.append(pThree);
+                    newCard.append(pFour);
+                    $(divIds[i]).append(newCard)
+                    $(divIdsName[i]).append(p)
+                    
+                }
+                    
+                
+            });
+        }
+        
  function searchYelpById() {
 // JAVASCRIPT FOR FRONT-END CSS WIDGETS
     let id = "";
@@ -333,7 +378,7 @@ $(document).ready(function () {
         })
         .then(function (response) {
             console.log(response);
-       
+        
         })
 }
 
