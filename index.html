@@ -13,10 +13,11 @@
     <!-- Materialize CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel='stylesheet' href="assets/css/style.css">
-
-
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   
 </head>
 
 <body>
@@ -126,8 +127,16 @@
 
         </div>
 
-        <div class="col s9 resResultsCont">6-columns (one-half)
-            
+        <div class="col s9">6-columns (one-half)
+            <P></P>
+            <span>
+                <a class="waves-effect waves-light btn" id="nextFive"> Next Five</a>
+            </span>  
+                
+                <span>
+                <a class="waves-effect waves-light btn" id="backFive"> Go Back</a>
+
+                </span>
 
 
             <div class="grid-example col l9"><span class="flow-text">Results</span>

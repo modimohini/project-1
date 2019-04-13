@@ -13,9 +13,40 @@ var chosen;
 var index;
 var userCats = [];
 
-function getUserFavs(){
+var offset = "";
+
+document.addEventListener('DOMContentLoaded', () => {
+    const $geolocateButton = document.getElementById('spinToWin');
+    $geolocateButton.addEventListener('click', geolocate); 
+ })
+
+function geolocate() {
+    navigator.geolocation.getCurrentPosition(onGeolocateSuccess, onGeolocateError);
+  }
+
+
+function onGeolocateSuccess(coordinates) {
+    const { latitude, longitude } = coordinates.coords;
+    console.log('Found coordinates: ', latitude, longitude);
+  }
+  
+  function onGeolocateError(error) {
+    console.warn(error.code, error.message);
+   
+    if (error.code === 1) {
+      // they said no
+    } else if (error.code === 2) {
+      // position unavailable
+    } else if (error.code === 3) {
+      // timeout
+    }
+  }
+ 
+  function getUserFavs(){
     userCats = localStorage.getItem("favRestArr");
 }
+
+
 function createWheel() {
 
     $(".gridContainer").empty();
@@ -177,6 +208,13 @@ function addToIngredientsArray() {
 
 
 $(document).ready(function () {
+    swal({
+        title: "Enter your Zipcode",
+        content: "input",
+        buttons: [true, "Enter"],
+
+      });
+
     $('.collapsible').collapsible();
     $('.tooltipped').tooltip();
     getUserFavs();
@@ -187,6 +225,10 @@ $(document).ready(function () {
     //event listener
     $(document.body).on("click", "#spinToWin", spinItUp);
     $(document.body).on("click", ".mCat", removeIngredient);
+    // $(document.body).on("click", "nextFive", nextFive);
+
+
+
 
 
     addingIngredient.addEventListener('click', function (event) {
