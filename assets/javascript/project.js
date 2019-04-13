@@ -1,5 +1,6 @@
 var ingredients = ['thai', 'mexican', 'sushi', 'japanese', 'chinese', 'american', 'brewpub', 'froyo', 'pizza', 'italian']
 console.log(ingredients)
+var colors = ['#F06292', '#FFA726', '#FFEB3B','#19F072','#0CDADB']
 
 var addingIngredient = document.getElementById("addBtn")
 var isSpinning = false;
@@ -255,6 +256,8 @@ $(document).ready(function () {
             var results = response.businesses
             for (let i = 0; i < 5; i++) {
                 var newCard = $("<div>")
+                var infoCard= $("<div>")
+                infoCard.attr('id', 'restaurantInfo')
                 var name = results[i].name
                 var phone = results[i].display_phone
                 const address1 = results[i].location.address1
@@ -284,25 +287,31 @@ $(document).ready(function () {
 
                 ]
 
-                var p = $("<p>").text(name);
+                var p = $("<h5>").text(name);
                 var searchImage = $("<img>")
-                searchImage.attr("src", results[i].image_url)
+                searchImage.attr("src", results[i].image_url).attr('id', 'resultsIMG')
                 searchImage.attr('width', 380).attr('height', 300)
                 var pSecondName = $("<p>").text(aliases);
+                pSecondName.attr('id','alias')
                 var pOne = $("<p>").text("Phone Number:  " + phone);
+                pOne.attr('id', 'phoneNum')
                 var pTwo = $("<p>").text("Location:  " + location);
+                pTwo.attr('id', 'location')
                 var pThree = $("<p>").text("Price:  " + price);
+                pThree.attr('id', 'priceRange')
                 var pFour = $("<p>")
                 var pFour = $("<p>").text("Open: " + open)
+                pFour.attr('id', 'hoursOfOp')
                 // pFour.attr("src", urlAddress);
 
                 newCard.append(searchImage)
-                newCard.append(pSecondName)
-                newCard.append(pOne)
-                newCard.append(pTwo)
-                newCard.append(pThree);
-                newCard.append(pFour);
+                infoCard.append(pSecondName)
+                infoCard.append(pOne)
+                infoCard.append(pTwo)
+                infoCard.append(pThree);
+                infoCard.append(pFour);
                 $(divIds[i]).append(newCard)
+                $(divIds[i]).append(infoCard)
                 $(divIdsName[i]).append(p)
 
 

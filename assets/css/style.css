@@ -33,9 +33,11 @@ div.card-content{
 #spinToWin{
   border-radius: 25px;
   background-image: linear-gradient(to right, #b2ebf2 20%, #80deea  45%, #b2ebf2 100%);
-  width: 20vw;
+  width: 30vw;
   height: 5vw;
   text-align: center;
+  padding: 0px 20px 50px 20px;
+  font-size: 25px;
  
 }
 .gridCell{
@@ -73,4 +75,18 @@ div.input-field{
 
 .gridCell {
   text-align: center;
+}
+p{
+  /* font-size: 30px; */
+}
+#firstName,
+ #secondName,
+  #thirdName,
+   #fourthName,
+   #fifthName{
+
+
+}
+footer{
+ 
 }
