@@ -170,14 +170,14 @@ function addToIngredientsArray() {
 
 
 
-
-
 $(document).ready(function () {
     $('.collapsible').collapsible();
     $('.tooltipped').tooltip();
     addToIngredientsArray()
     makeButtons()
     searchYelp();
+    // searchYelpById()
+
     // searchDrink()
     // createWheel();
     //event listener
@@ -214,7 +214,6 @@ $(document).ready(function () {
     //         var results = response.data
     //         for (let i = 0; i < 5; i++) {
 
-
     //             // var newCard = $("<div>")
     //             // var name = results[i].strDrink
     //             // var p = $("<p>").text("Drink Name  " + name);
@@ -230,8 +229,8 @@ $(document).ready(function () {
 
 
 
+    function searchYelp() {
 // JAVASCRIPT FOR FRONT-END CSS WIDGETS
-function searchYelp() {
     let yelpSearch = "Thai";
     var api = "yKOEUCF9Lca7gsPDyifirt-pXKuwx_YIJvpiqO__oUJgJeKQWcNFkwUGpQs4nFxhofY5wI7VKbrXF-E4D5r-28x5BXv7QenKIbXAmKR9HJ5EPtfc4SVXWWqA_-evXHYx";
     let location = "San Diego";
@@ -307,17 +306,36 @@ function searchYelp() {
                 $(divIdsName[i]).append(p)
 
 
-
-
-
-
-
-
             }
         });
 }
 
+ function searchYelpById() {
+// JAVASCRIPT FOR FRONT-END CSS WIDGETS
+    let id = "";
+    var api = "yKOEUCF9Lca7gsPDyifirt-pXKuwx_YIJvpiqO__oUJgJeKQWcNFkwUGpQs4nFxhofY5wI7VKbrXF-E4D5r-28x5BXv7QenKIbXAmKR9HJ5EPtfc4SVXWWqA_-evXHYx";
+    // let location = "San Diego";
+    let url = `https://api.yelp.com/v3/businesses/${id}`
 
+    $.ajaxPrefilter(function (options) {
+        if (options.crossDomain && $.support.cors) {
+            options.url = 'https://cors-anywhere.herokuapp.com/' + options.url;
+        }
+    });
+
+    $.ajax(url, {
+            headers: {
+                "accept": "application/json",
+                "x-requested-with": "xmlhttprequest",
+                "Access-Control-Allow-Origin": "*",
+                "Authorization": `Bearer ${api}`
+            }
+        })
+        .then(function (response) {
+            console.log(response);
+       
+        })
+}
 
 
 // ------------------------------------------------------------------------------------------------------------
