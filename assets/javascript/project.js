@@ -11,7 +11,11 @@ var prevActive;
 var curActive;
 var chosen;
 var index;
+var userCats = [];
 
+function getUserFavs(){
+    userCats = localStorage.getItem("favRestArr");
+}
 function createWheel() {
 
     $(".gridContainer").empty();
@@ -55,6 +59,7 @@ function createWheel() {
 }
 
 function spinItUp() {
+    $(".gridSection").css("display","block");
     index = 0;
     if (!isSpinning) {
         isSpinning = true;
@@ -64,6 +69,7 @@ function spinItUp() {
 
     }
     isSpinning = true;
+    $("#spinBtnCont").css("display", "none");
     doSlowdownThing();
 }
 
@@ -76,11 +82,14 @@ function doSlowdownThing() {
         setTimeout(doSlowdownThing, timeoutDuration);
     } else {
         isSpinning = false;
+        $("#spinBtnCont").css("display", "block");
+        $(".resResultsCont").css("display","block");
         let ele = $("#cell" + prevActive);
         curActive = prevActive;
         prevActive = '';
         chosen = ele.text();
         console.log(chosen);
+        searchYelp(chosen,'92121');
     }
 }
 
@@ -99,13 +108,9 @@ function pickATimeBasedOnIndex() {
 
 function changeBground() {
 
-    let rando = Math.floor(Math.random() * ingredients.length);
-    
-   
-    
+    let rando = Math.floor(Math.random() * ingredients.length);   
         //const previousCell = `#cell${prevActive}t`;       
-        $(".gridCell").css('background', 'white');
-    
+        $(".gridCell").css('background', 'white');    
 
     if (rando == prevActive) {
         rando++;
@@ -113,6 +118,7 @@ function changeBground() {
             rando = 0;
         }
     }
+
     prevActive = rando;
     rando = rando.toString();
     $(`#cell${rando}`).css('background', 'red');
@@ -173,13 +179,11 @@ function addToIngredientsArray() {
 $(document).ready(function () {
     $('.collapsible').collapsible();
     $('.tooltipped').tooltip();
+    getUserFavs();
     addToIngredientsArray()
     makeButtons()
-    searchYelp();
-    // searchYelpById()
-
-    // searchDrink()
-    // createWheel();
+    //searchYelp();
+    
     //event listener
     $(document.body).on("click", "#spinToWin", spinItUp);
     $(document.body).on("click", ".mCat", removeIngredient);
@@ -195,7 +199,8 @@ $(document).ready(function () {
 
         //takes the user input and make it a value attribute so that we can use the attribute to call it when we need it
         var userInput = $('#userInput').val();
-
+        // localStorage.setItem()
+        $('#userInput').val("");
         //adds it to the array
         ingredients.push(userInput)
         createIngredientBtn(userInput)
@@ -204,37 +209,12 @@ $(document).ready(function () {
     })
 })
 
-    // function searchDrink(ingredient) {
-    //     var queryURL = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s="
-
-    //     $.ajax({
-    //         url: queryURL,
-    //         method: "GET",
-    //     }).then(function (response) {
-    //         var results = response.data
-    //         for (let i = 0; i < 5; i++) {
-
-    //             // var newCard = $("<div>")
-    //             // var name = results[i].strDrink
-    //             // var p = $("<p>").text("Drink Name  " + name);
-    //             // var searchImage = $("<img>");
-    //             // searchImage.attr("src", results[i].strDrinkThumb);
-    //             // newCard.prepend(p);
-    //             // newCard.prepend(searchImage);
-    //             // newCard.attr('id', new_id)
-    //         }
-    //         console.log(response)
-    //     });
-    // }
-
-
-
-    function searchYelp() {
+    function searchYelp(cat,zip) {
 // JAVASCRIPT FOR FRONT-END CSS WIDGETS
-    let yelpSearch = "Thai";
+    //let yelpSearch = "Thai";
     var api = "yKOEUCF9Lca7gsPDyifirt-pXKuwx_YIJvpiqO__oUJgJeKQWcNFkwUGpQs4nFxhofY5wI7VKbrXF-E4D5r-28x5BXv7QenKIbXAmKR9HJ5EPtfc4SVXWWqA_-evXHYx";
-    let location = "San Diego";
-    let url = `https://api.yelp.com/v3/businesses/search?term=${yelpSearch}&location=${location}&limit=12`
+    //let location = Diego";
+    let url = `https://api.yelp.com/v3/businesses/search?term=${cat}&location=${zip}&limit=12`
 
     $.ajaxPrefilter(function (options) {
         if (options.crossDomain && $.support.cors) {
@@ -253,16 +233,39 @@ $(document).ready(function () {
         .then(function (response) {
             console.log(response);
             var results = response.businesses
+            var rating = '';
+            var lat;
+            var long;
+            var reviewCount = 0;
+            var phone = '';
             for (let i = 0; i < 5; i++) {
                 var newCard = $("<div>")
                 var name = results[i].name
+                console.log(name);              
+                var id = results[i].id;
+                
+                               
                 var phone = results[i].display_phone
                 const address1 = results[i].location.address1
                 const address2 = results[i].location.address2
                 const address3 = results[i].location.address3
                 const address4 = results[i].location.city
 
-                var location = address1 + address2 + address3 + '   ' + address4
+                var location = address1 + address2;
+                if (address3 != null){location +=address3} 
+                location+= '   ' + address4;
+
+                searchYelpById(id)
+                .then(function(res) {
+                    console.log(res.review_count);
+                   reviewCount = res.review_count;
+                   rating = res.rating;
+                   console.log(name);
+                   var p = $("<p>").text(results[i].name + " - Rated " + rating + " out of 5 with " + reviewCount + " Reviews");
+                   $(divIdsName[i]).append(p)
+                   var p2= $("<p>").text(" ("+results[i].location.address1 + ", "+results[i].location.city + ")");
+                   $(divIdsName[i]).append(p2)
+                })
                 var price = results[i].price
                 var open = results[i].is_closed
                 var aliases = results[i].alias
@@ -284,35 +287,32 @@ $(document).ready(function () {
 
                 ]
 
-                var p = $("<p>").text(name);
+              
                 var searchImage = $("<img>")
                 searchImage.attr("src", results[i].image_url)
-                searchImage.attr('width', 380).attr('height', 300)
-                var pSecondName = $("<p>").text(aliases);
-                var pOne = $("<p>").text("Phone Number:  " + phone);
-                var pTwo = $("<p>").text("Location:  " + location);
+                searchImage.attr('width', 380).attr('height', 300)                  
+                var pOne = $("<p>").text("Location:  " + location);
+                var pTwo = $("<p>").text("Phone Number:  " + phone);
                 var pThree = $("<p>").text("Price:  " + price);
                 var pFour = $("<p>")
                 var pFour = $("<p>").text("Open: " + open)
                 // pFour.attr("src", urlAddress);
 
                 newCard.append(searchImage)
-                newCard.append(pSecondName)
-                newCard.append(pOne)
+                   newCard.append(pOne)
                 newCard.append(pTwo)
                 newCard.append(pThree);
                 newCard.append(pFour);
                 $(divIds[i]).append(newCard)
-                $(divIdsName[i]).append(p)
+              
 
 
             }
         });
 }
 
- function searchYelpById() {
-// JAVASCRIPT FOR FRONT-END CSS WIDGETS
-    let id = "";
+ function searchYelpById(id) {
+   
     var api = "yKOEUCF9Lca7gsPDyifirt-pXKuwx_YIJvpiqO__oUJgJeKQWcNFkwUGpQs4nFxhofY5wI7VKbrXF-E4D5r-28x5BXv7QenKIbXAmKR9HJ5EPtfc4SVXWWqA_-evXHYx";
     // let location = "San Diego";
     let url = `https://api.yelp.com/v3/businesses/${id}`
@@ -323,7 +323,7 @@ $(document).ready(function () {
         }
     });
 
-    $.ajax(url, {
+    return $.ajax(url, {
             headers: {
                 "accept": "application/json",
                 "x-requested-with": "xmlhttprequest",
@@ -332,9 +332,11 @@ $(document).ready(function () {
             }
         })
         .then(function (response) {
-            console.log(response);
-       
+        
+        
+            return response;
         })
+    
 }
 
 
