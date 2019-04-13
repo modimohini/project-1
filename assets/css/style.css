@@ -19,12 +19,23 @@ letter-spacing: 2px;
 /* width:33%; */
 /* height: 40% !important; */
 /* align-content: baseline; */
-
-
 }
+
+div.card-content{
+  width: 33vw;
+  background: red;
+}
+#btnCard{
+
+  background: blue;
+}
+
 #spinToWin{
   border-radius: 25px;
   background-image: linear-gradient(to right, #b2ebf2 20%, #80deea  45%, #b2ebf2 100%);
+  width: 20vw;
+  height: 5vw;
+  text-align: center;
  
 }
 .gridCell{
