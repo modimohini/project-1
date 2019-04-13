@@ -17,32 +17,35 @@ var offset = "";
 
 document.addEventListener('DOMContentLoaded', () => {
     const $geolocateButton = document.getElementById('spinToWin');
-    $geolocateButton.addEventListener('click', geolocate); 
- })
+    $geolocateButton.addEventListener('click', geolocate);
+})
 
 function geolocate() {
     navigator.geolocation.getCurrentPosition(onGeolocateSuccess, onGeolocateError);
-  }
+}
 
 
 function onGeolocateSuccess(coordinates) {
-    const { latitude, longitude } = coordinates.coords;
+    const {
+        latitude,
+        longitude
+    } = coordinates.coords;
     console.log('Found coordinates: ', latitude, longitude);
-  }
-  
-  function onGeolocateError(error) {
+}
+
+function onGeolocateError(error) {
     console.warn(error.code, error.message);
-   
+
     if (error.code === 1) {
-      // they said no
+        // they said no
     } else if (error.code === 2) {
-      // position unavailable
+        // position unavailable
     } else if (error.code === 3) {
-      // timeout
+        // timeout
     }
-  }
- 
-  function getUserFavs(){
+}
+
+function getUserFavs() {
     userCats = localStorage.getItem("favRestArr");
 }
 
@@ -90,7 +93,7 @@ function createWheel() {
 }
 
 function spinItUp() {
-    $(".gridSection").css("display","block");
+    $(".gridSection").css("display", "block");
     index = 0;
     if (!isSpinning) {
         isSpinning = true;
@@ -114,13 +117,13 @@ function doSlowdownThing() {
     } else {
         isSpinning = false;
         $("#spinBtnCont").css("display", "block");
-        $(".resResultsCont").css("display","block");
+        $(".resResultsCont").css("display", "block");
         let ele = $("#cell" + prevActive);
         curActive = prevActive;
         prevActive = '';
         chosen = ele.text();
         console.log(chosen);
-        searchYelp(chosen,'92121');
+        searchYelp(chosen, '92121');
     }
 }
 
@@ -139,9 +142,9 @@ function pickATimeBasedOnIndex() {
 
 function changeBground() {
 
-    let rando = Math.floor(Math.random() * ingredients.length);   
-        //const previousCell = `#cell${prevActive}t`;       
-        $(".gridCell").css('background', 'white');    
+    let rando = Math.floor(Math.random() * ingredients.length);
+    //const previousCell = `#cell${prevActive}t`;       
+    $(".gridCell").css('background', 'white');
 
     if (rando == prevActive) {
         rando++;
@@ -155,15 +158,15 @@ function changeBground() {
     $(`#cell${rando}`).css('background', 'red');
 }
 
-function removeIngredient(event){
+function removeIngredient(event) {
     event.preventDefault();
     let ix = ingredients.indexOf($(this).text())
     ingredients.splice(ix, 1)
     console.log($(this).text())
     $('#btnsGoHere').empty()
     makeButtons()
- 
- }
+
+}
 
 function createIngredientBtn(ingredient) {
 
@@ -202,7 +205,7 @@ function addToIngredientsArray() {
     $('#btnsGoHere').empty()
 
 }
-
+ 
 
 
 
@@ -214,15 +217,16 @@ $(document).ready(function () {
         content: "input",
         buttons: [true, "Enter"],
 
-      });
+    });
 
     $('.collapsible').collapsible();
     $('.tooltipped').tooltip();
     getUserFavs();
     addToIngredientsArray()
     makeButtons()
-    //searchYelp();
     
+    //searchYelp();
+
     //event listener
     $(document.body).on("click", "#spinToWin", spinItUp);
     $(document.body).on("click", ".mCat", removeIngredient);
@@ -252,8 +256,8 @@ $(document).ready(function () {
     })
 })
 
-    function searchYelp(cat,zip) {
-// JAVASCRIPT FOR FRONT-END CSS WIDGETS
+function searchYelp(cat, zip) {
+    // JAVASCRIPT FOR FRONT-END CSS WIDGETS
     //let yelpSearch = "Thai";
     var api = "yKOEUCF9Lca7gsPDyifirt-pXKuwx_YIJvpiqO__oUJgJeKQWcNFkwUGpQs4nFxhofY5wI7VKbrXF-E4D5r-28x5BXv7QenKIbXAmKR9HJ5EPtfc4SVXWWqA_-evXHYx";
     //let location = Diego";
@@ -284,10 +288,10 @@ $(document).ready(function () {
             for (let i = 0; i < 5; i++) {
                 var newCard = $("<div>")
                 var name = results[i].name
-                console.log(name);              
+                console.log(name);
                 var id = results[i].id;
-                
-                               
+
+
                 var phone = results[i].display_phone
                 const address1 = results[i].location.address1
                 const address2 = results[i].location.address2
@@ -295,24 +299,58 @@ $(document).ready(function () {
                 const address4 = results[i].location.city
 
                 var location = address1 + address2;
-                if (address3 != null){location +=address3} 
-                location+= '   ' + address4;
+                if (address3 != null) {
+                    location += address3
+                }
+                location += '   ' + address4;
 
                 searchYelpById(id)
-                .then(function(res) {
-                    console.log(res.review_count);
-                   reviewCount = res.review_count;
-                   rating = res.rating;
-                   console.log(name);
-                   var p = $("<p>").text(results[i].name + " - Rated " + rating + " out of 5 with " + reviewCount + " Reviews");
-                   $(divIdsName[i]).append(p)
-                   var p2= $("<p>").text(" ("+results[i].location.address1 + ", "+results[i].location.city + ")");
-                   $(divIdsName[i]).append(p2)
-                })
+                    .then(function (res) {
+                        console.log(res)
+                        console.log(res.review_count);
+                        const photoOne = res.photos[0]
+                        const photoTwo = res.photos[1]
+                        const photoThree = res.photos[2]
+
+                        var initialImageOne = $(`<img src=${photoOne}>`)
+                        initialImageOne.attr('width', 380).attr('height', 300)
+                        var initialImageTwo = $(`<img src=${photoTwo}>`)
+                        initialImageTwo.attr('width', 380).attr('height', 300)
+                        var initialImageThree = $(`<img src=${photoThree}>`)
+                        initialImageThree.attr('width', 380).attr('height', 300)
+
+                        var imageOne = $('<li>')
+                        imageOne.append(initialImageOne)
+                        var imageTwo = $('<li>')
+                        imageTwo.append(initialImageTwo)
+                        var imageThree = $('<li>')
+                        imageThree.append(initialImageThree)
+
+                        var carouselWheel = $("<div>")
+                        carouselWheel.attr("class", "slider")
+                        var sliderUl = $("<ul>")
+                        sliderUl.attr("class", "slides")
+                        carouselWheel.append(sliderUl)
+                        sliderUl.append(imageOne)
+                        sliderUl.append(imageTwo)
+                        sliderUl.append(imageThree)
+                        $('.slider').slider();
+                        $(divIds[i]).prepend(carouselWheel)
+                       
+                        reviewCount = res.review_count;
+                        rating = res.rating;
+                        console.log(name);
+                        var p = $("<p>").text(results[i].name + " - Rated " + rating + " out of 5 with " + reviewCount + " Reviews");
+                        $(divIdsName[i]).append(p)
+                        var p2 = $("<p>").text(" (" + results[i].location.address1 + ", " + results[i].location.city + ")");
+                        $(divIdsName[i]).append(p2)
+                    })
                 var price = results[i].price
                 var open = results[i].is_closed
                 var aliases = results[i].alias
-
+              
+            
+            
                 const divIds = [
                     '#first',
                     '#second',
@@ -330,10 +368,10 @@ $(document).ready(function () {
 
                 ]
 
-              
+
                 var searchImage = $("<img>")
                 searchImage.attr("src", results[i].image_url)
-                searchImage.attr('width', 380).attr('height', 300)                  
+                searchImage.attr('width', 380).attr('height', 300)
                 var pOne = $("<p>").text("Location:  " + location);
                 var pTwo = $("<p>").text("Phone Number:  " + phone);
                 var pThree = $("<p>").text("Price:  " + price);
@@ -341,21 +379,21 @@ $(document).ready(function () {
                 var pFour = $("<p>").text("Open: " + open)
                 // pFour.attr("src", urlAddress);
 
-                newCard.append(searchImage)
-                   newCard.append(pOne)
+                // newCard.append(carouselWheel)
+                newCard.append(pOne)
                 newCard.append(pTwo)
                 newCard.append(pThree);
                 newCard.append(pFour);
                 $(divIds[i]).append(newCard)
-              
+
 
 
             }
         });
 }
 
- function searchYelpById(id) {
-   
+function searchYelpById(id) {
+
     var api = "yKOEUCF9Lca7gsPDyifirt-pXKuwx_YIJvpiqO__oUJgJeKQWcNFkwUGpQs4nFxhofY5wI7VKbrXF-E4D5r-28x5BXv7QenKIbXAmKR9HJ5EPtfc4SVXWWqA_-evXHYx";
     // let location = "San Diego";
     let url = `https://api.yelp.com/v3/businesses/${id}`
@@ -375,11 +413,11 @@ $(document).ready(function () {
             }
         })
         .then(function (response) {
-        
-        
+
+
             return response;
         })
-    
+
 }
 
 
