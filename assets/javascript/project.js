@@ -202,6 +202,7 @@ function addToIngredientsArray() {
 
 
 
+
 $(document).ready(function () {
     swal({
         title: "Enter your Zipcode",
