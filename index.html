@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Pick my Drink</title>
+    <title>Pick my Meal!</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!--Import Google Icon Font-->
@@ -13,31 +13,27 @@
     <!-- Materialize CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel='stylesheet' href="assets/css/style.css">
-
-
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   
 </head>
 
 <body>
     <!-- Navbar goes here -->
     <nav>
         <div class="nav-wrapper teal lighten-4">
-            <a href="#" class="brand-logo right">title</a>
-            <!-- <ul id="nav-mobile" class="left hide-on-med-and-down">
-             <li><a href="sass.html">Sass</a></li>
-           </ul> -->
-        </div>
+            <a href="#" class="brand-logo right">The meal wheel of fortune</a>
+               </div>
     </nav>
 
-
-    <!-- _________________________________________________________ -->
     <div class="container">
         <div id="firstSection" class="col s3">
             <!--<h3>Type in ingredient</h3>-->
             <div class="col s12 m7 left-align">
                 <h2 class="header">
-                    <h3>some header to add</h3>
+                    <h3>Your category pool:</h3>
                 </h2>
                 <div id='btnCard' class="card horizontal" style="width:100%">
                     <!-- <div class="card-stacked"> -->
@@ -74,25 +70,33 @@
 
 
 
-
-                                        </form>
-                                    </div>
+                                            </form>
+                                        </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="col s12 m7">
-                    <h3 class="header">You're having....</h3>
-                    <div class="card horizontal">
-                        <div class="center-align ">
-                            <div class="gridContainer"></div>
+            <div class="col s12 m7">
+           
+                <div class="card horizontal">
+                    <div class="center-align ">
+                        <div class="gridSection">
+                        <h4 class="gridHeader">Meal of fortune, turn turn turn, show us the meal we wish to learn..</h3>
+                    <hr>
+                        <div class="gridContainer">
+
                         </div>
+                        </div>  
                     </div>
-                    <div class="offset-s6" align="center">
-                        <a id="spinToWin" class="pulse btn-large waves-teal teal lighten-4"><i
-                                class="material-icons left"></i>click to pick!</a>
+                </div>
+                <div class="offset-s6" id="spinBtnCont" align="center">
+                    <a id="spinToWin" class="pulse btn-large waves-teal teal lighten-4"><i class="material-icons left"></i>SPIN TO WIN</a>
+                </div>
+                <div class="card-stacked">
+                    <div class="card-content">
+                        <!-- card content goes here -->
                     </div>
                     <div class="card-stacked">
                         <div class="card-content">
@@ -127,7 +131,15 @@
         </div>
  <!-- ______________________ everything above should be a ....___________________________________ -->
         <div class="col s9">6-columns (one-half)
-            This is where the user results will go
+            <P></P>
+            <span>
+                <a class="waves-effect waves-light btn" id="nextFive"> Next Five</a>
+            </span>  
+                
+                <span>
+                <a class="waves-effect waves-light btn" id="backFive"> Go Back</a>
+
+                </span>
 
 
             <div class="grid-example col l9"><span class="flow-text">Results</span>
@@ -138,28 +150,27 @@
 
                 <ul class="collapsible">
 
-                    <li>
-                        <div class="collapsible-header" id="firstName"><i class="material-icons">filter_drama</i></div>
-                        <div class="collapsible-body" id="first"><span></span></div>
-                    </li>
-                    <li>
-                        <div class="collapsible-header" id="secondName"><i class="material-icons">place</i></div>
-                        <div class="collapsible-body" id="second"><span></span></div>
-                    </li>
-                    <li>
-                        <div class="collapsible-header" id="thirdName"><i class="material-icons">whatshot</i></div>
-                        <div class="collapsible-body" id="third"><span></span></div>
-                    </li>
-                    <li>
-                        <div class="collapsible-header" id="fourthName"><i class="material-icons">whatshot</i></div>
-                        <div class="collapsible-body" id="fourth"><span></span></div>
-                    </li>
-                    <li>
-                        <div class="collapsible-header" id="fifthName"><i class="material-icons">whatshot</i></div>
-                        <div class="collapsible-body" id="fifth"><span></span></div>
-                    </li>
-                </ul>
-            </div>
+                <li>
+                    <div class="collapsible-header" id="firstName"></div>
+                    <div class="collapsible-body" id="first"><span></span></div>
+                </li>
+                <li>
+                    <div class="collapsible-header" id="secondName"></div>
+                    <div class="collapsible-body" id="second"><span></span></div>
+                </li>
+                <li>
+                    <div class="collapsible-header" id="thirdName"></div>
+                    <div class="collapsible-body" id="third"><span></span></div>
+                </li>
+                <li>
+                    <div class="collapsible-header" id="fourthName"></div>
+                    <div class="collapsible-body" id="fourth"><span></span></div>
+                </li>
+                <li>
+                    <div class="collapsible-header" id="fifthName"></div>
+                    <div class="collapsible-body" id="fifth"><span></span></div>
+                </li>
+            </ul>
         </div>
     </div>
     <!-- </div> -->

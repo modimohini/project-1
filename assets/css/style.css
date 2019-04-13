@@ -62,6 +62,17 @@ div.card-content{
  justify-content: space-evenly;
  align-items: stretch;
  height: auto;
+ 
+}
+.resResultsCont{
+  display: none;
+}
+.gridHeader{
+  text-align: left;
+  padding: 5px;
+}
+.gridSection{
+  display: none;
 }
 #addBtn{
   /* display: inline-block; */
