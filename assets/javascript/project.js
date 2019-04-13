@@ -1,5 +1,3 @@
-
-
 var ingredients = ['thai', 'mexican', 'sushi', 'japanese', 'chinese', 'american', 'brewpub', 'froyo', 'pizza', 'italian']
 console.log(ingredients)
 
@@ -13,6 +11,7 @@ var prevActive;
 var curActive;
 var chosen;
 var index;
+
 function createWheel() {
 
     $(".gridContainer").empty();
@@ -56,15 +55,15 @@ function createWheel() {
 }
 
 function spinItUp() {
-    index =0;
+    index = 0;
     if (!isSpinning) {
         isSpinning = true;
         if (curActive != undefined) {
             $(".gridCell").css('background', 'white');
-        }     
-        
+        }
+
     }
-    isSpinning=  true;
+    isSpinning = true;
     doSlowdownThing();
 }
 
@@ -73,29 +72,31 @@ function doSlowdownThing() {
     changeBground();
     index++;
 
-    if(index < 15) {
+    if (index < 15) {
         setTimeout(doSlowdownThing, timeoutDuration);
     } else {
         isSpinning = false;
-    let ele = $("#cell" + prevActive);
-    curActive = prevActive;
-    prevActive = '';
-    chosen = ele.text();
-    console.log(chosen);
+        let ele = $("#cell" + prevActive);
+        curActive = prevActive;
+        prevActive = '';
+        chosen = ele.text();
+        console.log(chosen);
     }
 }
-function pickATimeBasedOnIndex(){
-    if(index < 5) {
+
+function pickATimeBasedOnIndex() {
+    if (index < 5) {
         return 175;
-    } else if(index < 10) {
+    } else if (index < 10) {
         return 250;
-    } else if(index < 15) {
+    } else if (index < 15) {
         return 400;
     } else {
         return 600;
     }
 
 }
+
 function changeBground() {
 
     let rando = Math.floor(Math.random() * ingredients.length);
@@ -113,7 +114,7 @@ function changeBground() {
         }
     }
     prevActive = rando;
-    rando= rando.toString();
+    rando = rando.toString();
     $(`#cell${rando}`).css('background', 'red');
 }
 
@@ -169,14 +170,14 @@ function addToIngredientsArray() {
 
 
 
-
-
 $(document).ready(function () {
     $('.collapsible').collapsible();
     $('.tooltipped').tooltip();
     addToIngredientsArray()
     makeButtons()
     searchYelp();
+    // searchYelpById()
+
     // searchDrink()
     // createWheel();
     //event listener
@@ -213,7 +214,6 @@ $(document).ready(function () {
     //         var results = response.data
     //         for (let i = 0; i < 5; i++) {
 
-
     //             // var newCard = $("<div>")
     //             // var name = results[i].strDrink
     //             // var p = $("<p>").text("Drink Name  " + name);
@@ -229,8 +229,8 @@ $(document).ready(function () {
 
 
 
+    function searchYelp() {
 // JAVASCRIPT FOR FRONT-END CSS WIDGETS
-function searchYelp() {
     let yelpSearch = "Thai";
     var api = "yKOEUCF9Lca7gsPDyifirt-pXKuwx_YIJvpiqO__oUJgJeKQWcNFkwUGpQs4nFxhofY5wI7VKbrXF-E4D5r-28x5BXv7QenKIbXAmKR9HJ5EPtfc4SVXWWqA_-evXHYx";
     let location = "San Diego";
@@ -266,7 +266,7 @@ function searchYelp() {
                 var price = results[i].price
                 var open = results[i].is_closed
                 var aliases = results[i].alias
-                
+
                 const divIds = [
                     '#first',
                     '#second',
@@ -295,7 +295,7 @@ function searchYelp() {
                 var pFour = $("<p>")
                 var pFour = $("<p>").text("Open: " + open)
                 // pFour.attr("src", urlAddress);
-  
+
                 newCard.append(searchImage)
                 newCard.append(pSecondName)
                 newCard.append(pOne)
@@ -306,17 +306,36 @@ function searchYelp() {
                 $(divIdsName[i]).append(p)
 
 
-
-
-
-
-
-
             }
         });
 }
 
+ function searchYelpById() {
+// JAVASCRIPT FOR FRONT-END CSS WIDGETS
+    let id = "";
+    var api = "yKOEUCF9Lca7gsPDyifirt-pXKuwx_YIJvpiqO__oUJgJeKQWcNFkwUGpQs4nFxhofY5wI7VKbrXF-E4D5r-28x5BXv7QenKIbXAmKR9HJ5EPtfc4SVXWWqA_-evXHYx";
+    // let location = "San Diego";
+    let url = `https://api.yelp.com/v3/businesses/${id}`
 
+    $.ajaxPrefilter(function (options) {
+        if (options.crossDomain && $.support.cors) {
+            options.url = 'https://cors-anywhere.herokuapp.com/' + options.url;
+        }
+    });
+
+    $.ajax(url, {
+            headers: {
+                "accept": "application/json",
+                "x-requested-with": "xmlhttprequest",
+                "Access-Control-Allow-Origin": "*",
+                "Authorization": `Bearer ${api}`
+            }
+        })
+        .then(function (response) {
+            console.log(response);
+       
+        })
+}
 
 
 // ------------------------------------------------------------------------------------------------------------

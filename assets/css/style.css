@@ -22,12 +22,12 @@ letter-spacing: 2px;
 }
 
 div.card-content{
-  width: 33vw;
-  background: red;
+  /* width: 33vw;
+  background: red; */
 }
 #btnCard{
 
-  background: blue;
+  /* background: blue; */
 }
 
 #spinToWin{
