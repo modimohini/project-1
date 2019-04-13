@@ -141,6 +141,7 @@ function pickATimeBasedOnIndex() {
 function changeBground() {
 
     let rando = Math.floor(Math.random() * ingredients.length);   
+    let colorRandom = Math.floor(Math.random() * colors.length);   
         //const previousCell = `#cell${prevActive}t`;       
         $(".gridCell").css('background', 'white');    
 
@@ -153,7 +154,7 @@ function changeBground() {
 
     prevActive = rando;
     rando = rando.toString();
-    $(`#cell${rando}`).css('background', 'red');
+    $(`#cell${rando}`).css('background', colors[colorRandom]);
 }
 
 function removeIngredient(event){
@@ -209,12 +210,30 @@ function addToIngredientsArray() {
 
 
 $(document).ready(function () {
-    swal({
-        title: "Enter your Zipcode",
-        content: "input",
-        buttons: [true, "Enter"],
 
-      });
+    var userZip = localStorage.getItem("resPickerZip");
+    if (userZip != undefined && userZip != ''){
+        $("#zipText").text(userZip); 
+    } else{
+        userZip = Swal.fire({
+            title: 'Enter your Zipcode to Search Local Restaurants',
+            input: 'text',
+            inputPlaceholder: 'Enter ZIPCode'
+          }).then(function(result){
+userzip = result.value;
+            $("#zipText").text(result.value); 
+            localStorage.setItem("resPickerZip",result.value)
+          }) 
+    
+        
+    // swal({
+    //     title: "Enter your Zipcode to Search Local Restaurants!",
+    //     content: "input",
+    //     buttons: [true, "Enter"],
+
+    //   });
+
+    }
 
     $('.collapsible').collapsible();
     $('.tooltipped').tooltip();
@@ -274,6 +293,21 @@ $(document).ready(function () {
             }
         })
         .then(function (response) {
+            const divIds = [
+                '#first',
+                '#second',
+                '#third',
+                '#fourth',
+                '#fifth'
+
+            ]
+            const divIdsName = [
+                '#firstName',
+                '#secondName',
+                '#thirdName',
+                '#fourthName',
+                '#fifthName'
+            ]
             console.log(response);
             var results = response.businesses
             var rating = '';
@@ -282,6 +316,8 @@ $(document).ready(function () {
             var reviewCount = 0;
             var phone = '';
             for (let i = 0; i < 5; i++) {
+                $(divIdsName[i]).text("");
+                $(divIds[i]).text("");
                 var newCard = $("<div>")
                 var infoCard= $("<div>")
                 infoCard.attr('id', 'restaurantInfo')
@@ -315,22 +351,7 @@ $(document).ready(function () {
                 var open = results[i].is_closed
                 var aliases = results[i].alias
 
-                const divIds = [
-                    '#first',
-                    '#second',
-                    '#third',
-                    '#fourth',
-                    '#fifth'
-
-                ]
-                const divIdsName = [
-                    '#firstName',
-                    '#secondName',
-                    '#thirdName',
-                    '#fourthName',
-                    '#fifthName'
-
-                ]
+              
 
                 var p = $("<h5>").text(name);
                 var searchImage = $("<img>")
@@ -350,14 +371,14 @@ $(document).ready(function () {
                 // pFour.attr("src", urlAddress);
 
                 newCard.append(searchImage)
-                infoCard.append(pSecondName)
+                // infoCard.append(pSecondName)
                 infoCard.append(pOne)
                 infoCard.append(pTwo)
                 infoCard.append(pThree);
                 infoCard.append(pFour);
                 $(divIds[i]).append(newCard)
                 $(divIds[i]).append(infoCard)
-                $(divIdsName[i]).append(p)
+                // $(divIdsName[i]).append(p)
 
 
             }

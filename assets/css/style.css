@@ -40,6 +40,11 @@ div.card-content{
   font-size: 25px;
  
 }
+
+
+#offsetButtonsCont{
+  margin: 15px;
+}
 .gridCell{
   margin: 0;
   padding: 20px;
@@ -63,6 +68,10 @@ div.card-content{
  align-items: stretch;
  height: auto;
  
+}
+
+.zipContainer{
+  display: inline-block;
 }
 .resResultsCont{
   display: none;

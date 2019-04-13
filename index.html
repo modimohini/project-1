@@ -6,26 +6,38 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Pick my Meal!</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!-- Materialize CDN -->
+    <script type="text/javascript" src="materialize/js/materialize.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel='stylesheet' href="assets/css/style.css">
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    
+
+
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-   
+
 </head>
 
 <body>
     <!-- Navbar goes here -->
     <nav>
         <div class="nav-wrapper teal lighten-4">
-            <a href="#" class="brand-logo right">The meal wheel of fortune</a>
-               </div>
+            <a href="#" class="brand-logo left">The meal wheel of fortune</a>
+           
+          
+           
+            <div class="zipContainer right" id="userZip "> Your Location (for search results)
+                    <div class="input-field inline">
+                            <div class="input-field inline">
+             <input id="zipEntry">
+             <label for="zipEntry" id="zipText"></label>
+            </div>
+            </div>
+        </div>
+
     </nav>
 
     <div class="container">
@@ -37,62 +49,64 @@
                 </h2>
                 <div id='btnCard' class="card horizontal" style="width:100%">
                     <!-- <div class="card-stacked"> -->
-                        <div class="card-content">
-                            <div id="btnsGoHere"> </div>
-                            <br>
+                    <div class="card-content">
+                        <div id="btnsGoHere"> </div>
+                        <br>
 
-                            <div class="card-action">
+                        <div class="card-action">
 
-                                <div id="formDiv" class=" row input-field">
-
-
-
-                                    <div class="row valign-wrapper">
-                                        <form class="col s12">
-
-                                            <div class="input-field col s12 center-align">
-                                                <label class="validate" for="userInput">What are you in the mood
-                                                    for?<i class="material-icons"></i></label>
-                                                <i class="material-icons"></i>
-                                                <input id='userInput' class="form-control mr-sm-2 validate"
-                                                    type="search" aria-label="Search">
-
-                                                <!-- a spin wheel button needs to be made -->
-                                                <!-- button text needs to be centered -->
-                                            </div>
-                                            <button id="addBtn" type='submit' name="action"
-                                                class="btn-floating btn-large btn tooltipped waves-effect waves-teal waves-circle  teal lighten-4"
-                                                data-position="right" data-tooltip="make ingredient button"><i
-                                                    class="material-icons">add</i></button>
-                                            <i class="material-icons right"></i>
-                                            </button>
+                            <div id="formDiv" class=" row input-field">
 
 
 
+                                <div class="row valign-wrapper">
+                                    <form class="col s12">
 
-                                            </form>
+                                        <div class="input-field col s12 center-align">
+                                            <label class="validate" for="userInput">What are you in the mood
+                                                for?<i class="material-icons"></i></label>
+                                            <i class="material-icons"></i>
+                                            <input id='userInput' class="form-control mr-sm-2 validate" type="search"
+                                                aria-label="Search">
+
+                                            <!-- a spin wheel button needs to be made -->
+                                            <!-- button text needs to be centered -->
                                         </div>
+                                        <button id="addBtn" type='submit' name="action"
+                                            class="btn-floating btn-large btn tooltipped waves-effect waves-teal waves-circle  teal lighten-4"
+                                            data-position="right" data-tooltip="make ingredient button"><i
+                                                class="material-icons">add</i></button>
+                                        <i class="material-icons right"></i>
+                                        </button>
+
+
+
+
+                                    </form>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
 
             <div class="col s12 m7">
-           
+
                 <div class="card horizontal">
                     <div class="center-align ">
                         <div class="gridSection">
-                        <h4 class="gridHeader">Meal of fortune, turn turn turn, show us the meal we wish to learn..</h3>
-                    <hr>
-                        <div class="gridContainer">
+                            <h4 class="gridHeader">Meal of fortune, turn turn turn, show us the meal we wish to learn..
+                                </h3>
+                                <hr>
+                                <div class="gridContainer">
 
+                                </div>
                         </div>
-                        </div>  
                     </div>
                 </div>
                 <div class="offset-s6" id="spinBtnCont" align="center">
-                    <a id="spinToWin" class="pulse btn-large waves-teal teal lighten-4"><i class="material-icons left"></i>SPIN TO WIN</a>
+                    <a id="spinToWin" class="pulse btn-large waves-teal teal lighten-4"><i
+                            class="material-icons left"></i>SPIN TO WIN</a>
                 </div>
                 <div class="card-stacked">
                     <div class="card-content">
@@ -129,20 +143,13 @@
 
 
         </div>
- <!-- ______________________ everything above should be a ....___________________________________ -->
+        <!-- ______________________ everything above should be a ....___________________________________ -->
         <div class="col s9">6-columns (one-half)
-            <P></P>
-            <span>
-                <a class="waves-effect waves-light btn" id="nextFive"> Next Five</a>
-            </span>  
-                
-                <span>
-                <a class="waves-effect waves-light btn" id="backFive"> Go Back</a>
-
-                </span>
 
 
-            <div class="grid-example col l9"><span class="flow-text">Results</span>
+
+
+            <div class="grid-example col l9 resResultsCont"><span class="flow-text">Results</span>
                 <!-- i replaced the <div id="resultsGoHere">  with a tbody element-->
 
                 <div id="resultsGoHere"></div>
@@ -150,30 +157,38 @@
 
                 <ul class="collapsible">
 
-                <li>
-                    <div class="collapsible-header" id="firstName"></div>
-                    <div class="collapsible-body" id="first"><span></span></div>
-                </li>
-                <li>
-                    <div class="collapsible-header" id="secondName"></div>
-                    <div class="collapsible-body" id="second"><span></span></div>
-                </li>
-                <li>
-                    <div class="collapsible-header" id="thirdName"></div>
-                    <div class="collapsible-body" id="third"><span></span></div>
-                </li>
-                <li>
-                    <div class="collapsible-header" id="fourthName"></div>
-                    <div class="collapsible-body" id="fourth"><span></span></div>
-                </li>
-                <li>
-                    <div class="collapsible-header" id="fifthName"></div>
-                    <div class="collapsible-body" id="fifth"><span></span></div>
-                </li>
-            </ul>
+                    <li>
+                        <div class="collapsible-header" id="firstName"></div>
+                        <div class="collapsible-body" id="first"><span></span></div>
+                    </li>
+                    <li>
+                        <div class="collapsible-header" id="secondName"></div>
+                        <div class="collapsible-body" id="second"><span></span></div>
+                    </li>
+                    <li>
+                        <div class="collapsible-header" id="thirdName"></div>
+                        <div class="collapsible-body" id="third"><span></span></div>
+                    </li>
+                    <li>
+                        <div class="collapsible-header" id="fourthName"></div>
+                        <div class="collapsible-body" id="fourth"><span></span></div>
+                    </li>
+                    <li>
+                        <div class="collapsible-header" id="fifthName"></div>
+                        <div class="collapsible-body" id="fifth"><span></span></div>
+                    </li>
+                </ul>
+                <span id="offsetButtonsCont">
+                    <a class="waves-effect waves-light btn" id="backFive"> Go Back</a>
+                </span>
+
+                <span>
+                    <a class="waves-effect waves-light btn" id="nextFive"> Next Five</a>
+
+                </span>
+            </div>
         </div>
-    </div>
-    <!-- </div> -->
+        <!-- </div> -->
 
     </div>
     <!-- FOOTER STARTS HERE -->
@@ -208,12 +223,18 @@
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script> -->
 
     <!-- javascript file -->
-    <script type="text/javascript" src="assets/javascript/project.js"></script>
+
 
     <!-- ------------------------------------------------------------------- -->
 
     <!--JavaScript at end of body for optimized loading-->
-    <script type="text/javascript" src="materialize/js/materialize.min.js"></script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+    <!-- Optional: include a polyfill for ES6 Promises for IE11 and Android browser -->
+
+    <script type="text/javascript" src="assets/javascript/project.js"></script>
+
 
 </body>
 
