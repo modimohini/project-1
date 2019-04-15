@@ -41,8 +41,9 @@
             </div>
         </div>
     </nav>
-
-    <div class="container">
+<main>
+    <div class="main">
+        <div class="container">
         <!--  <div id="firstSection" class="col s3"> -->
         <!--<h3>Type in ingredient</h3>-->
         <div class="row">
@@ -65,7 +66,7 @@
                                 </div>
                                 <button id="addBtn" type='submit' name="action"
                                     class="btn-floating btn-large btn tooltipped waves-effect waves-teal waves-circle  teal lighten-4"
-                                    data-position="bottom" data-tooltip="make cateory button"><i
+                                    data-position="bottom" data-tooltip="add to choices"><i
                                         class="material-icons">add</i></button>
                                 <i class="material-icons right"></i>
                                 </button>
@@ -128,59 +129,60 @@
         </div>
 
 
-    </div>
-    <!-- ______________________ everything above should be a ....___________________________________ -->
-    <div class="col s9">6-columns (one-half)
+
+        <!-- ______________________ everything above should be a ....___________________________________ -->
+        <div class="col s9">6-columns (one-half)
 
 
 
 
-        <div class="grid-example col l9 resResultsCont"><span class="flow-text">Results</span>
-            <!-- i replaced the <div id="resultsGoHere">  with a tbody element-->
+            <div class="grid-example col l9 resResultsCont"><span class="flow-text">Results</span>
 
-            <div id="resultsGoHere"></div>
+                <div id="resultsGoHere"></div>
 
 
-            <ul class="collapsible">
+                <ul class="collapsible">
 
-                <li>
-                    <div class="collapsible-header" id="firstName"></div>
-                    <div class="collapsible-body row " id="first"><span></span></div>
-                </li>
-                <li>
-                    <div class="collapsible-header" id="secondName"></div>
-                    <div class="collapsible-body row" id="second"><span></span></div>
-                </li>
-                <li>
-                    <div class="collapsible-header" id="thirdName"></div>
-                    <div class="collapsible-body row" id="third"><span></span></div>
-                </li>
-                <li>
-                    <div class="collapsible-header" id="fourthName"></div>
-                    <div class="collapsible-body row" id="fourth"><span></span></div>
-                </li>
-                <li>
-                    <div class="collapsible-header" id="fifthName"></div>
-                    <div class="collapsible-body row" id="fifth"><span></span></div>
-                </li>
-            </ul>
-            <span id="offsetButtonsCont">
-                <a class="waves-effect waves-light btn" id="backFive"> Go Back</a>
-            </span>
+                    <li>
+                        <div class="collapsible-header" id="firstName"></div>
+                        <div class="collapsible-body row " id="first"><span></span></div>
+                    </li>
+                    <li>
+                        <div class="collapsible-header" id="secondName"></div>
+                        <div class="collapsible-body row" id="second"><span></span></div>
+                    </li>
+                    <li>
+                        <div class="collapsible-header" id="thirdName"></div>
+                        <div class="collapsible-body row" id="third"><span></span></div>
+                    </li>
+                    <li>
+                        <div class="collapsible-header" id="fourthName"></div>
+                        <div class="collapsible-body row" id="fourth"><span></span></div>
+                    </li>
+                    <li>
+                        <div class="collapsible-header" id="fifthName"></div>
+                        <div class="collapsible-body row" id="fifth"><span></span></div>
+                    </li>
+                </ul>
+                <span id="offsetButtonsCont">
+                    <a class="waves-effect waves-light btn" id="backFive"> Go Back</a>
+                </span>
 
-            <span>
-                <a class="waves-effect waves-light btn" id="nextFive"> Next Five</a>
+                <span>
+                    <a class="waves-effect waves-light btn" id="nextFive"> Next Five</a>
 
-            </span>
+                </span>
+            </div>
         </div>
+        <!-- </div> -->
+</div>
     </div>
-    <!-- </div> -->
-
-    </div>
+</main>
+  
     <!-- FOOTER STARTS HERE -->
 
     <footer class="page-footer teal lighten-5">
-        <div class="container">
+        <div>
             <div class="row">
                 <div class="col l6 s12">
                     <!-- <h5 class="white-text">Footer Content</h5>
@@ -203,10 +205,10 @@
 
     <!-- ------------------------------------------------------------------- -->
     <!-- jQuery -->
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
     <!-- materialize javascript CDN -->
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
     <!-- javascript file -->
 

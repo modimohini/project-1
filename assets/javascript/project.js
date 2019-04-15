@@ -143,10 +143,10 @@ function pickATimeBasedOnIndex() {
 
 function changeBground() {
 
-    let rando = Math.floor(Math.random() * ingredients.length);   
-    let colorRandom = Math.floor(Math.random() * colors.length);   
-        //const previousCell = `#cell${prevActive}t`;       
-        $(".gridCell").css('background', 'white');    
+    let rando = Math.floor(Math.random() * ingredients.length);
+    let colorRandom = Math.floor(Math.random() * colors.length);
+    //const previousCell = `#cell${prevActive}t`;       
+    $(".gridCell").css('background', 'white');
 
     if (rando == prevActive) {
         rando++;
@@ -207,7 +207,7 @@ function addToIngredientsArray() {
     $('#btnsGoHere').empty()
 
 }
- 
+
 
 
 
@@ -216,26 +216,26 @@ function addToIngredientsArray() {
 $(document).ready(function () {
 
     var userZip = localStorage.getItem("resPickerZip");
-    if (userZip != undefined && userZip != ''){
-        $("#zipText").text(userZip); 
-    } else{
+    if (userZip != undefined && userZip != '') {
+        $("#zipText").text(userZip);
+    } else {
         userZip = Swal.fire({
             title: 'Enter your Zipcode to Search Local Restaurants',
             input: 'text',
             inputPlaceholder: 'Enter ZIPCode'
-          }).then(function(result){
-userzip = result.value;
-            $("#zipText").text(result.value); 
-            localStorage.setItem("resPickerZip",result.value)
-          }) 
-    
-        
-    // swal({
-    //     title: "Enter your Zipcode to Search Local Restaurants!",
-    //     content: "input",
-    //     buttons: [true, "Enter"],
+        }).then(function (result) {
+            userzip = result.value;
+            $("#zipText").text(result.value);
+            localStorage.setItem("resPickerZip", result.value)
+        })
 
-    //   });
+
+        // swal({
+        //     title: "Enter your Zipcode to Search Local Restaurants!",
+        //     content: "input",
+        //     buttons: [true, "Enter"],
+
+        //   });
 
     }
 
@@ -244,7 +244,7 @@ userzip = result.value;
     getUserFavs();
     addToIngredientsArray()
     makeButtons()
-    
+
     //searchYelp();
 
     //event listener
@@ -375,7 +375,47 @@ function searchYelp(cat, zip) {
                         sliderUl.append(imageThree)
                         $('.slider').slider();
                         $(divIds[i]).prepend(carouselWheel)
-                       
+
+                        var sundayStart = res.hours[0].open[0].start
+                        var sundayEnd = res.hours[0].open[0].end
+
+                        var mondayStart = res.hours[0].open[1].start
+                        var mondayEnd = res.hours[0].open[1].end
+
+                        var tuesdayStart = res.hours[0].open[2].start
+                        var tuesdayEnd = res.hours[0].open[2].end
+
+                        var wednesdayStart = res.hours[0].open[3].start
+                        var wednesdayEnd = res.hours[0].open[3].end
+
+                        var thursdayStart = res.hours[0].open[4].start
+                        var thursdayEnd = res.hours[0].open[4].end
+
+                        var fridayStart = res.hours[0].open[5].start
+                        var fridayEnd = res.hours[0].open[5].end
+
+                        var saturdayStart = res.hours[0].open[6].start
+                        var saturdayEnd = res.hours[0].open[6].end
+
+                        var pHours = $("<h5>").text("Hours:")
+                        var sundayHours = $("<p>").text("Sunday:" + " " + sundayStart + "-" + sundayEnd)
+                        var mondayHours = $("<p>").text("Monday:" + " " + mondayStart + "-" + mondayEnd)
+                        var tuesdayHours = $("<p>").text("Tuesday:" + " " + tuesdayStart + "-" + tuesdayEnd)
+                        var wednesdayHours = $("<p>").text("Wednesday:" + " " + wednesdayStart + "-" + wednesdayEnd)
+                        var thursdayHours = $("<p>").text("Thursday:" + " " + thursdayStart + "-" + thursdayEnd)
+                        var fridayHours = $("<p>").text("Friday:" + " " + fridayStart + "-" + fridayEnd)
+                        var saturdayHours = $("<p>").text("Saturday:" + " " + saturdayStart + "-" + saturdayEnd)
+
+                        $(divIds[i]).append(pHours)
+                        $(divIds[i]).append(sundayHours)
+                        $(divIds[i]).append(mondayHours) 
+                        $(divIds[i]).append(tuesdayHours) 
+                        $(divIds[i]).append(wednesdayHours)
+                        $(divIds[i]).append(thursdayHours) 
+                        $(divIds[i]).append(fridayHours) 
+                        $(divIds[i]).append(saturdayHours)
+                        
+
                         reviewCount = res.review_count;
                         rating = res.rating;
                         console.log(name);
@@ -388,18 +428,19 @@ function searchYelp(cat, zip) {
                 var open = results[i].is_closed
                 var aliases = results[i].alias
 
-              
+
 
                 var p = $("<h5>").text(name);
                 var searchImage = $("<img>")
-                searchImage.attr("src", results[i].image_url).attr('id', 'resultsIMG')
-                searchImage.attr('width', 200).attr('height', 200)
+                // searchImage.attr("src", results[i].image_url).attr('id', 'resultsIMG')
+                // searchImage.attr('width', 380).attr('height', 300)
                 var pSecondName = $("<p>").text(aliases);
-                pSecondName.attr('id','alias')
+                pSecondName.attr('id', 'alias')
+
+                var pTwo = $("<p>").text("Address  " + location);
+                pTwo.attr('id', 'location')
                 var pOne = $("<p>").text("Phone Number:  " + phone);
                 pOne.attr('id', 'phoneNum')
-                var pTwo = $("<p>").text("Address:  " + location);
-                pTwo.attr('id', 'location')
                 var pThree = $("<p>").text("Price Range:  " + price);
                 pThree.attr('id', 'priceRange')
                 var pFour = $("<p>")

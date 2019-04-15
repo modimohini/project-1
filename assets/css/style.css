@@ -3,9 +3,16 @@ body {
     min-height: 100vh;
     flex-direction: column;
   }
+  .container{
+    /* min-height: 100%;
+    overflow: auto;
+    position:relative; */
+  }
 
   main {
     flex: 1 0 auto;
+    /* overflow: auto;
+    padding-bottom: 100px; */
   }
   .btn-small{
    margin: 1px;
@@ -32,7 +39,7 @@ div.card-content{
 
 #spinToWin{
   border-radius: 25px;
-  background-image: linear-gradient(to right, #b2ebf2 20%, #80deea  45%, #b2ebf2 100%);
+  background-image: linear-gradient(to right, #e0f2f1 20% , #80cbc4   100%, #b2dfdb  100%, #80cbc4   45%);
   width: 30vw;
   height: 5vw;
   text-align: center;
@@ -107,6 +114,9 @@ p{
 
 
 }
-footer{
-  flex-shrink: 0;
-}
+.page-footer{
+  /* position: absolute;
+  bottom: 0px;
+ width: 100%; */
+ 
+};
