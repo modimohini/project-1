@@ -4,8 +4,10 @@ body {
     flex-direction: column;
   }
 
+
   main {
     flex: 1 0 auto;
+  
   }
   .btn-small{
    margin: 1px;
@@ -14,25 +16,22 @@ body {
 .gridRow{
 margin: 0;
 font-size: 2vw;
-/* display: inline-block; */
+
 letter-spacing: 2px;
-/* width:33%; */
-/* height: 40% !important; */
-/* align-content: baseline; */
+
 }
 
 div.card-content{
-  /* width: 33vw;
-  background: red; */
+
 }
 #btnCard{
 
-  /* background: blue; */
+
 }
 
 #spinToWin{
   border-radius: 25px;
-  background-image: linear-gradient(to right, #b2ebf2 20%, #80deea  45%, #b2ebf2 100%);
+  background-image: linear-gradient(to right, #e0f2f1 20% , #80cbc4   100%, #b2dfdb  100%, #80cbc4   45%);
   width: 30vw;
   height: 5vw;
   text-align: center;
@@ -49,13 +48,10 @@ div.card-content{
   margin: 0;
   padding: 20px;
   text-transform: uppercase;
-  /* min-height: 100% important!; */
-  /* line-height: 10px; */
-  /* border-style: solid; */
   word-wrap: break-word;         /* All browsers since IE 5.5+ */
   overflow-wrap: break-word;     /* Renamed property in CSS3 draft spec */
   width: 33%;
-  /* background-color:#b2dfdb; */
+ 
 }
 
 .center-align{
@@ -107,6 +103,6 @@ p{
 
 
 }
-footer{
- 
-}
+.page-footer{
+
+};

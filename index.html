@@ -24,72 +24,80 @@
 <body>
     <!-- Navbar goes here -->
     <nav>
-        <div class="nav-wrapper teal lighten-4">
-            <a href="#" class="brand-logo left">The meal wheel of fortune</a>
-           
-          
-           
-            <div class="zipContainer right" id="userZip "> Your Location (for search results)
+        <div class="nav-wrapper teal lighten-4 row">
+            <div class="col s12 m12 l9">
+                <a href="#" class="brand-logo left">The meal wheel of fortune</a>
+            </div>
+
+            <div class="col s12 m12 l3">
+                <div class="zipContainer right" id="userZip "> Your Location (for search results)
                     <div class="input-field inline">
-                            <div class="input-field inline">
-             <input id="zipEntry">
-             <label for="zipEntry" id="zipText"></label>
-            </div>
-            </div>
-        </div>
-
-    </nav>
-    <div class="container">
-            <!--  <div id="firstSection" class="col s3"> -->
-            <!--<h3>Type in ingredient</h3>-->
-            <div class="row">
-                <div class="col s9">
-                    <h3>possible categories</h3>
-                    <div id="btnsGoHere"> </div>
-                </div>
-                <div class="col s3">
-                    <div id=" formDiv" class=" row input-field">
-                        <form id="form" class="center-align">
-                            <div class="row valign-wrapper">
-                                <form class="col s12">
-                                    <div class="input-field col s6 center-align">
-                                        <label class="validate" for="userInput">What are you in the mood
-                                            for?<i class="material-icons"></i></label>
-                                        <i class="material-icons"></i>
-                                        <input id='userInput' class="form-control mr-sm-2 validate" type="search"
-                                            aria-label="Search">
-                                        <!-- add button -->
-                                    </div>
-                                    <button id="addBtn" type='submit' name="action"
-                                        class="btn-floating btn-large btn tooltipped waves-effect waves-teal waves-circle  teal lighten-4"
-                                        data-position="bottom" data-tooltip="make cateory button"><i
-                                            class="material-icons">add</i></button>
-                                    <i class="material-icons right"></i>
-                                    </button>
-                                </form>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col s12 m7">
-
-                <div class="card horizontal">
-                    <div class="center-align ">
-                        <div class="gridSection">
-                            <h4 class="gridHeader">Meal of fortune, turn turn turn, show us the meal we wish to learn..
-                                </h3>
-                                <hr>
-                                <div class="gridContainer">
-
-                                </div>
+                        <div class="input-field inline">
+                            <input id="zipEntry">
+                            <label for="zipEntry" id="zipText"></label>
                         </div>
                     </div>
                 </div>
-                <div class="offset-s6" id="spinBtnCont" align="center">
-                    <a id="spinToWin" class="pulse btn-large waves-teal teal lighten-4"><i
-                            class="material-icons left"></i>SPIN TO WIN</a>
+            </div>
+        </div>
+    </nav>
+<main>
+    <div class="main">
+        <div class="container">
+        <!--  <div id="firstSection" class="col s3"> -->
+        <!--<h3>Type in ingredient</h3>-->
+        <div class="row">
+            <div class="col s9">
+                <h3>possible categories</h3>
+                <div id="btnsGoHere"> </div>
+            </div>
+            <div class="col s3">
+                <div id=" formDiv" class=" row input-field">
+                    <form id="form" class="center-align">
+                        <div class="row valign-wrapper">
+                            <form class="col s12">
+                                <div class="input-field col s6 center-align">
+                                    <label class="validate" for="userInput">What are you in the mood
+                                        for?<i class="material-icons"></i></label>
+                                    <i class="material-icons"></i>
+                                    <input id='userInput' class="form-control mr-sm-2 validate" type="search"
+                                        aria-label="Search">
+                                    <!-- add button -->
+                                </div>
+                                <button id="addBtn" type='submit' name="action"
+                                    class="btn-floating btn-large btn tooltipped waves-effect waves-teal waves-circle  teal lighten-4"
+                                    data-position="bottom" data-tooltip="add to choices"><i
+                                        class="material-icons">add</i></button>
+                                <i class="material-icons right"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col s12 m7">
+
+            <div class="card horizontal">
+                <div class="center-align ">
+                    <div class="gridSection">
+                        <h4 class="gridHeader">Meal of fortune, turn turn turn, show us the meal we wish to learn..
+                            </h3>
+                            <hr>
+                            <div class="gridContainer">
+
+                            </div>
+                    </div>
+                </div>
+            </div>
+            <div class="offset-s6" id="spinBtnCont" align="center">
+                <a id="spinToWin" class="pulse btn-large waves-teal teal lighten-4"><i
+                        class="material-icons left"></i>SPIN TO WIN</a>
+            </div>
+            <div class="card-stacked">
+                <div class="card-content">
+                    <!-- card content goes here -->
                 </div>
                 <div class="card-stacked">
                     <div class="card-content">
@@ -99,11 +107,7 @@
                         <div class="card-content">
                             <!-- card content goes here -->
                         </div>
-                        <div class="card-stacked">
-                            <div class="card-content">
-                                <!-- card content goes here -->
-                            </div>
-                            <div class="card-action">
+                        <div class="card-action">
 
 
 
@@ -111,21 +115,21 @@
 
 
 
-                                </button>
-
-                            </div>
-
-
-
-
+                            </button>
 
                         </div>
+
+
+
+
+
                     </div>
                 </div>
             </div>
-
-
         </div>
+
+
+
         <!-- ______________________ everything above should be a ....___________________________________ -->
         <div class="col s9">6-columns (one-half)
 
@@ -133,7 +137,6 @@
 
 
             <div class="grid-example col l9 resResultsCont"><span class="flow-text">Results</span>
-                <!-- i replaced the <div id="resultsGoHere">  with a tbody element-->
 
                 <div id="resultsGoHere"></div>
 
@@ -142,23 +145,23 @@
 
                     <li>
                         <div class="collapsible-header" id="firstName"></div>
-                        <div class="collapsible-body" id="first"><span></span></div>
+                        <div class="collapsible-body row " id="first"><span></span></div>
                     </li>
                     <li>
                         <div class="collapsible-header" id="secondName"></div>
-                        <div class="collapsible-body" id="second"><span></span></div>
+                        <div class="collapsible-body row" id="second"><span></span></div>
                     </li>
                     <li>
                         <div class="collapsible-header" id="thirdName"></div>
-                        <div class="collapsible-body" id="third"><span></span></div>
+                        <div class="collapsible-body row" id="third"><span></span></div>
                     </li>
                     <li>
                         <div class="collapsible-header" id="fourthName"></div>
-                        <div class="collapsible-body" id="fourth"><span></span></div>
+                        <div class="collapsible-body row" id="fourth"><span></span></div>
                     </li>
                     <li>
                         <div class="collapsible-header" id="fifthName"></div>
-                        <div class="collapsible-body" id="fifth"><span></span></div>
+                        <div class="collapsible-body row" id="fifth"><span></span></div>
                     </li>
                 </ul>
                 <span id="offsetButtonsCont">
@@ -172,12 +175,14 @@
             </div>
         </div>
         <!-- </div> -->
-
+</div>
     </div>
+</main>
+  
     <!-- FOOTER STARTS HERE -->
 
     <footer class="page-footer teal lighten-5">
-        <div class="container">
+        <div>
             <div class="row">
                 <div class="col l6 s12">
                     <!-- <h5 class="white-text">Footer Content</h5>
@@ -200,10 +205,10 @@
 
     <!-- ------------------------------------------------------------------- -->
     <!-- jQuery -->
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
     <!-- materialize javascript CDN -->
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
     <!-- javascript file -->
 

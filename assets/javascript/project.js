@@ -1,6 +1,6 @@
 var ingredients = ['thai', 'mexican', 'sushi', 'japanese', 'chinese', 'american', 'brewpub', 'froyo', 'pizza', 'italian']
 console.log(ingredients)
-var colors = ['#F06292', '#FFA726', '#FFEB3B', '#19F072', '#0CDADB']
+var colors = ['#F06292', '#FFA726', '#FFEB3B','#19F072','#0CDADB', '#7e57c2']
 
 var addingIngredient = document.getElementById("addBtn")
 var isSpinning = false;
@@ -324,8 +324,8 @@ function searchYelp(cat, zip) {
                 $(divIdsName[i]).text("");
                 $(divIds[i]).text("");
                 var newCard = $("<div>")
-                var infoCard = $("<div>")
-                infoCard.attr('id', 'restaurantInfo')
+                var infoCard= $("<div>")
+                infoCard.attr('id', 'restaurantInfo').attr('class', 'col s7')
                 var name = results[i].name
                 console.log(name);
                 var id = results[i].id;
@@ -366,7 +366,7 @@ function searchYelp(cat, zip) {
                         imageThree.append(initialImageThree)
 
                         var carouselWheel = $("<div>")
-                        carouselWheel.attr("class", "slider")
+                        carouselWheel.attr("class", "slider col s5")
                         var sliderUl = $("<ul>")
                         sliderUl.attr("class", "slides")
                         carouselWheel.append(sliderUl)
@@ -397,7 +397,7 @@ function searchYelp(cat, zip) {
                         var saturdayStart = res.hours[0].open[6].start
                         var saturdayEnd = res.hours[0].open[6].end
 
-                        var pHours = $("<p>").text("Hours:")
+                        var pHours = $("<h5>").text("Hours:")
                         var sundayHours = $("<p>").text("Sunday:" + " " + sundayStart + "-" + sundayEnd)
                         var mondayHours = $("<p>").text("Monday:" + " " + mondayStart + "-" + mondayEnd)
                         var tuesdayHours = $("<p>").text("Tuesday:" + " " + tuesdayStart + "-" + tuesdayEnd)
@@ -419,9 +419,9 @@ function searchYelp(cat, zip) {
                         reviewCount = res.review_count;
                         rating = res.rating;
                         console.log(name);
-                        var p = $("<p>").text(results[i].name + " - Rated " + rating + " out of 5 with " + reviewCount + " Reviews");
+                        var p = $("<h7>").text(results[i].name + " - Rated " + rating + " out of 5 with " + reviewCount + " Reviews");
                         $(divIdsName[i]).append(p)
-                        var p2 = $("<p>").text(" (" + results[i].location.address1 + ", " + results[i].location.city + ")");
+                        var p2 = $("<h7>").text(" (" + results[i].location.address1 + ", " + results[i].location.city + ")");
                         $(divIdsName[i]).append(p2)
                     })
                 var price = results[i].price
@@ -437,21 +437,21 @@ function searchYelp(cat, zip) {
                 var pSecondName = $("<p>").text(aliases);
                 pSecondName.attr('id', 'alias')
 
-                var pTwo = $("<p>").text("Location:  " + location);
+                var pTwo = $("<p>").text("Address  " + location);
                 pTwo.attr('id', 'location')
                 var pOne = $("<p>").text("Phone Number:  " + phone);
                 pOne.attr('id', 'phoneNum')
-                var pThree = $("<p>").text("Price:  " + price);
+                var pThree = $("<p>").text("Price Range:  " + price);
                 pThree.attr('id', 'priceRange')
                 var pFour = $("<p>")
                 var pFour = $("<p>").text("Open: " + open)
                 pFour.attr('id', 'hoursOfOp')
                 // pFour.attr("src", urlAddress);
 
-                newCard.append(searchImage)
+                // newCard.append(searchImage)
                 // infoCard.append(pSecondName)
-                infoCard.append(pOne)
                 infoCard.append(pTwo)
+                infoCard.append(pOne)
                 infoCard.append(pThree);
                 infoCard.append(pFour);
                 $(divIds[i]).append(newCard)
