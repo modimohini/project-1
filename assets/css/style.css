@@ -28,16 +28,29 @@ div.card-content{
 
 
 }
-
+.mCat{
+ margin: 0 5px 15px 5px;
+}
+.topCont{
+  padding-left: 50px !important;
+  padding-right: 50px !important;
+}
 #spinToWin{
   border-radius: 25px;
-  background-image: linear-gradient(to right, #e0f2f1 20% , #80cbc4   100%, #b2dfdb  100%, #80cbc4   45%);
-  width: 30vw;
-  height: 5vw;
+  background-image: linear-gradient(to right, #26dbcc 20% , #80cbc4   100%, #c4f8f4  100%, #80cbc4   45%);
+  width: 15vw;
+  height: 2vw;
   text-align: center;
+  /* line-height: 15px; */
   padding: 0px 20px 50px 20px;
-  font-size: 25px;
+  font-size: 2vw;
  
+}
+
+#zipText{
+  color: blue !important;
+  text-decoration: underline;
+
 }
 
 
@@ -67,7 +80,7 @@ div.card-content{
 }
 
 .zipContainer{
-  display: inline-block;
+  /* display: inline-block; */
 }
 .resResultsCont{
   display: none;
@@ -86,7 +99,9 @@ div.card-content{
 div.input-field{
   padding-left: 20px;
 }
-
+#formDiv{
+  margin-right: 50px;
+}
 
 
 .gridCell {
