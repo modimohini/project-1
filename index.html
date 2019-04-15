@@ -6,14 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Pick my Meal!</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!-- Materialize CDN -->
+    <script type="text/javascript" src="materialize/js/materialize.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel='stylesheet' href="assets/css/style.css">
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -23,28 +23,38 @@
 <body>
     <!-- Navbar goes here -->
     <nav>
-        <div class="nav-wrapper teal lighten-4">
-            <a href="#" class="brand-logo right">The meal wheel of fortune</a>
-        </div>
+        <!-- <div class="nav-wrapper teal lighten-4">
+            <a href="#" class="brand-logo left">The meal wheel of fortune</a> -->
+        <nav class="nav-wrapper teal lighten-4">
+            <div class="nav-wrapper">
+                <a href="#" class="brand-logo right">The meal wheel of fortune</a>
+                <div id="userZip" class="col s12 nav-wrapper zipContainer left">Your Location (for search results)
+                    <div class="input-field inline">
+                        <input id="zipEntry">
+                        <label for="zipEntry" id="zipText"></label>
+                    </div>
+
+                </div>
+            </div>
+        </nav>
+
+
     </nav>
-
     <div class="container">
-
         <!--  <div id="firstSection" class="col s3"> -->
         <!--<h3>Type in ingredient</h3>-->
         <div class="row">
-            <div class="col s9">
-                <h3>Please insert your choice of cuisine</h3>
+            <div class="col l9 m12 s12">
+                <h3>possible categories</h3>
                 <div id="btnsGoHere"> </div>
             </div>
-
             <div class="col s3">
                 <div id=" formDiv" class=" row input-field">
                     <form id="form" class="center-align">
                         <div class="row valign-wrapper">
-                            <form class="col s12">
-                                <div class="input-field col s6 center-align">
-                                    <label class="validate" for="userInput">What are you in the mood
+                            <form class="col s12 l9 m12">
+                                <div class="input-field col s12 l9 m12 center-align">
+                                    <label class="validate s12 l9 m12" for="userInput">What are you in the mood
                                         for?<i class="material-icons"></i></label>
                                     <i class="material-icons"></i>
                                     <input id='userInput' class="form-control mr-sm-2 validate" type="search"
@@ -52,9 +62,9 @@
                                     <!-- add button -->
                                 </div>
                                 <button id="addBtn" type='submit' name="action"
-                                    class="btn-floating btn-large btn tooltipped waves-effect waves-teal waves-circle  teal lighten-4"
+                                    class="btn-floating btn-large btn tooltipped waves-effect waves-teal waves-circle  teal lighten-4 s12 l9 m12"
                                     data-position="bottom" data-tooltip="make cateory button"><i
-                                        class="material-icons">add</i></button>
+                                        class="material-icons s12 l9 m12">add</i></button>
                                 <i class="material-icons right"></i>
                                 </button>
                             </form>
@@ -63,44 +73,30 @@
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- </div> -->
-    </div>
-    </div>
-    </div>
-    </div>
+        <div class="col s12 m7">
 
-    <div class="col s12 m7">
+            <div class="card horizontal">
+                <div class="center-align ">
+                    <div class="gridSection">
+                        <h4 class="gridHeader">Meal of fortune, turn turn turn, show us the meal we wish to learn..
+                            </h3>
+                            <hr>
+                            <div class="gridContainer">
 
-        <div class="card horizontal">
-            <div class="center-align ">
-                <div class="gridSection">
-                    <h4 class="gridHeader">Meal of fortune, turn turn turn, show us the meal we wish to learn..</h3>
-                        <hr>
-                        <div class="gridContainer">
-
-                        </div>
+                            </div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="offset-s6" id="spinBtnCont" align="center">
-            <a id="spinToWin" class="pulse btn-large waves-teal teal lighten-4"><i class="material-icons left"></i>SPIN
-                TO WIN</a>
-        </div>
-        <div class="card-stacked">
-            <div class="card-content">
-                <!-- card content goes here -->
+            <div class="offset-s6" id="spinBtnCont" align="center">
+                <a id="spinToWin" class="pulse btn-large waves-teal teal lighten-5"><i
+                        class="material-icons left"></i>SPIN</a>
             </div>
             <div class="card-stacked">
                 <div class="card-content">
                     <!-- card content goes here -->
                 </div>
-                <div class="card-stacked">
-                    <div class="card-content">
-                        <!-- card content goes here -->
-                    </div>
-                    <div class="card-action">
+                <div class="card-action">
 
 
 
@@ -108,103 +104,140 @@
 
 
 
-                        </button>
+                    </button>
 
-                    </div>
+                </div>
 
 
 
-                    <div class="col s12 m7">
-                        <h3 class="header">Horizontal Card</h3>
-                        <div class="card horizontal">
-                            <div class="center-align ">
-                                <div class="gridContainer"></div>
-                            </div>
+                <div class="col s12 m7">
+                    <h3 class="header">Horizontal Card</h3>
+                    <div class="card horizontal">
+                        <div class="center-align ">
+                            <div class="gridContainer"></div>
                         </div>
-                        <!-- a spin wheel button needs to be made -->
-                        <!-- button text needs to be centered -->
-                        <div class="offset-s6" align="center">
-                            <a id="spinToWin" class="pulse btn-large waves-teal teal lighten-4"><i
-                                    class="material-icons left"></i>SPIN
-                                TO WIN</a>
+                    </div>
+                    <!-- a spin wheel button needs to be made -->
+                    <!-- button text needs to be centered -->
+                    <div class="offset-s6" align="center">
+                        <a id="spinToWin" class="pulse btn-large waves-teal teal lighten-4"><i
+                                class="material-icons left"></i>SPIN
+                            TO WIN</a>
+                    </div>
+                    <div class="card-stacked">
+                        <div class="card-content">
+                            <!-- card content goes here -->
                         </div>
                         <div class="card-stacked">
                             <div class="card-content">
                                 <!-- card content goes here -->
                             </div>
-                            <div class="card-stacked">
-                                <div class="card-content">
-                                    <!-- card content goes here -->
-                                </div>
-                                <div class="card-action">
+                            <div class="card-action">
 
-                                    </button>
-
-                                </div>
+                                </button>
 
                             </div>
+
                         </div>
                     </div>
                 </div>
-
-
             </div>
-            <!-- ______________________ everything above should be a ....___________________________________ -->
-            <div class="col s9">6-columns (one-half)
-                <P></P>
-                <span>
-                    <a class="waves-effect waves-light btn" id="nextFive"> Next Five</a>
-                </span>
-
-                <span>
-                    <a class="waves-effect waves-light btn" id="backFive"> Go Back</a>
-
-                </span>
-
-                <div class="col s9">6-columns (one-half)
-                    This is where the user results will go
 
 
-                    <div class="grid-example col l9"><span class="flow-text">Results</span>
-                        <!-- i replaced the <div id="resultsGoHere">  with a tbody element-->
+        </div>
+        <!-- ______________________ everything above should be a ....___________________________________ -->
+        <div class="col s9">6-columns (one-half)
 
-                        <div id="resultsGoHere"></div>
 
-                        <ul class="collapsible">
+            <span>
+                <a class="waves-effect waves-light btn" id="backFive"> Go Back</a>
 
-                            <li>
-                                <div class="collapsible-header" id="firstName"></div>
-                                <div class="collapsible-body" id="first"><span></span></div>
-                            </li>
-                            <li>
-                                <div class="collapsible-header" id="secondName"></div>
-                                <div class="collapsible-body" id="second"><span></span></div>
-                            </li>
-                            <li>
-                                <div class="collapsible-header" id="thirdName"></div>
-                                <div class="collapsible-body" id="third"><span></span></div>
-                            </li>
-                            <li>
-                                <div class="collapsible-header" id="fourthName"></div>
-                                <div class="collapsible-body" id="fourth"><span></span></div>
-                            </li>
-                            <li>
-                                <div class="collapsible-header" id="fifthName"></div>
-                                <div class="collapsible-body" id="fifth"><span></span></div>
-                            </li>
-                        </ul>
-                    </div>
+
+                <div class="grid-example col l9 resResultsCont"><span class="flow-text">Results</span>
+                    <!-- i replaced the <div id="resultsGoHere">  with a tbody element-->
+
+                    <div id="resultsGoHere"></div>
+
+
+                    <ul class="collapsible">
+
+                        <li>
+                            <div class="collapsible-header" id="firstName"></div>
+                            <div class="collapsible-body" id="first"><span></span></div>
+                        </li>
+                        <li>
+                            <div class="collapsible-header" id="secondName"></div>
+                            <div class="collapsible-body" id="second"><span></span></div>
+                        </li>
+                        <li>
+                            <div class="collapsible-header" id="thirdName"></div>
+                            <div class="collapsible-body" id="third"><span></span></div>
+                        </li>
+                        <li>
+                            <div class="collapsible-header" id="fourthName"></div>
+                            <div class="collapsible-body" id="fourth"><span></span></div>
+                        </li>
+                        <li>
+                            <div class="collapsible-header" id="fifthName"></div>
+                            <div class="collapsible-body" id="fifth"><span></span></div>
+                        </li>
+                    </ul>
+                    <span id="offsetButtonsCont">
+                        <a class="waves-effect waves-light btn" id="backFive"> Go Back</a>
+                    </span>
+
+                    <span>
+                        <a class="waves-effect waves-light btn" id="nextFive"> Next Five</a>
+
+                    </span>
                 </div>
-                <!-- </div> -->
+        </div>
+        <!-- </div> -->
 
+        <div class="col s9">6-columns (one-half)
+            This is where the user results will go
+
+
+            <div class="grid-example col l9"><span class="flow-text">Results</span>
+                <!-- i replaced the <div id="resultsGoHere">  with a tbody element-->
+
+                <div id="resultsGoHere"></div>
+
+                <ul class="collapsible">
+
+                    <li>
+                        <div class="collapsible-header" id="firstName"></div>
+                        <div class="collapsible-body" id="first"><span></span></div>
+                    </li>
+                    <li>
+                        <div class="collapsible-header" id="secondName"></div>
+                        <div class="collapsible-body" id="second"><span></span></div>
+                    </li>
+                    <li>
+                        <div class="collapsible-header" id="thirdName"></div>
+                        <div class="collapsible-body" id="third"><span></span></div>
+                    </li>
+                    <li>
+                        <div class="collapsible-header" id="fourthName"></div>
+                        <div class="collapsible-body" id="fourth"><span></span></div>
+                    </li>
+                    <li>
+                        <div class="collapsible-header" id="fifthName"></div>
+                        <div class="collapsible-body" id="fifth"><span></span></div>
+                    </li>
+                </ul>
             </div>
-            <!-- FOOTER STARTS HERE -->
+        </div>
+        <!-- </div> -->
 
-            <footer class="page-footer teal lighten-5">
-                <div class="container">
-                    <div class="row">
-                        <div class="col l6 s12">
-                            <!-- <h5 class="white-text">Footer Content</h5>
+    </div>
+    <!-- FOOTER STARTS HERE -->
+
+    <footer class="page-footer teal lighten-5">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <!-- <h5 class="white-text">Footer Content</h5>
               <p class="grey-text text-lighten-4">We're learning to code!</p>
             </div>
             <div class="col l4 offset-l2 s12">
@@ -213,29 +246,35 @@
             </div>
           </div>
         </div> -->
-                            <div class="footer-copyright">
-                                <div class="container">
-                                    © 2014 Copyright Text
-                                    <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
-                                </div>
-                            </div>
-            </footer>
+                    <div class="footer-copyright">
+                        <div class="container">
+                            © 2014 Copyright Text
+                            <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+                        </div>
+                    </div>
+    </footer>
 
 
-            <!-- ------------------------------------------------------------------- -->
-            <!-- jQuery -->
-            <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+    <!-- ------------------------------------------------------------------- -->
+    <!-- jQuery -->
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
 
-            <!-- materialize javascript CDN -->
-            <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script> -->
+    <!-- materialize javascript CDN -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script> -->
 
-            <!-- javascript file -->
-            <script type="text/javascript" src="assets/javascript/project.js"></script>
+    <!-- javascript file -->
 
-            <!-- ------------------------------------------------------------------- -->
 
-            <!--JavaScript at end of body for optimized loading-->
-            <script type="text/javascript" src="materialize/js/materialize.min.js"></script>
+    <!-- ------------------------------------------------------------------- -->
+
+    <!--JavaScript at end of body for optimized loading-->
+
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+    <!-- Optional: include a polyfill for ES6 Promises for IE11 and Android browser -->
+
+    <script type="text/javascript" src="assets/javascript/project.js"></script>
+
 
 </body>
 
