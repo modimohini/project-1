@@ -158,7 +158,7 @@ function doSlowdownThing() {
         prevActive = '';
         chosen = ele.text();
         console.log(chosen);
-        searchYelp(chosen, '92121');
+        searchYelp(chosen, userLocation);
     }
 }
 
@@ -395,8 +395,8 @@ function searchYelp(cat, zip) {
                 if (address3 != null) {
                     location += " " +address3
                 }
-                location += ', ' + address4;
-
+                location = location.trim() +', ' + address4;
+            var googleLink = "https://www.google.com/maps/dir/?api=1&origin="+escape(location);
                 searchYelpById(id)
                     .then(function (res) {
                         console.log(res)
@@ -480,6 +480,7 @@ function searchYelp(cat, zip) {
                     })
                 var price = results[i].price
                 var open = results[i].is_closed
+                if (!open){open =true}
                 var aliases = results[i].alias
 
 
@@ -491,8 +492,9 @@ function searchYelp(cat, zip) {
                 var pSecondName = $("<p>").text(aliases);
                 pSecondName.attr('id', 'alias')
 
-                var pTwo = $("<p>").text("Address  " + location);
+                var pTwo = $("<a>").attr("href", googleLink);
                 pTwo.attr('id', 'location')
+                pTwo.text(location);
                 var pOne = $("<p>").text("Phone Number:  " + phone);
                 pOne.attr('id', 'phoneNum')
                 var pThree = $("<p>").text("Price Range:  " + price);
