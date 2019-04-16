@@ -429,28 +429,29 @@ function searchYelp(cat, zip) {
                         sliderUl.append(imageThree)
                         $('.slider').slider();
                         $(divIds[i]).prepend(carouselWheel)
+                        var hours = res.hours[0];
+                        
+                        var sundayStart = hours.open[0].start
+                        var sundayEnd = hours.open[0].end
 
-                        // var sundayStart = res.hours[0].open[0].start
-                        // var sundayEnd = res.hours[0].open[0].end
+                        var mondayStart = hours.open[1].start
+                        var mondayEnd = hours.open[1].end
 
-                        // var mondayStart = res.hours[0].open[1].start
-                        // var mondayEnd = res.hours[0].open[1].end
+                        var tuesdayStart = hours.open[2].start
+                        var tuesdayEnd = hours.open[2].end
 
-                        // var tuesdayStart = res.hours[0].open[2].start
-                        // var tuesdayEnd = res.hours[0].open[2].end
+                        var wednesdayStart = hours.open[3].start
+                        var wednesdayEnd = hours.open[3].end
 
-                        // var wednesdayStart = res.hours[0].open[3].start
-                        // var wednesdayEnd = res.hours[0].open[3].end
+                        var thursdayStart = hours.open[4].start
+                        var thursdayEnd = hours.open[4].end
 
-                        // var thursdayStart = res.hours[0].open[4].start
-                        // var thursdayEnd = res.hours[0].open[4].end
+                        var fridayStart = hours.open[5].start
+                        var fridayEnd = hours.open[5].end
 
-                        // var fridayStart = res.hours[0].open[5].start
-                        // var fridayEnd = res.hours[0].open[5].end
-
-                        // var saturdayStart = res.hours[0].open[6].start
-                        // var saturdayEnd = res.hours[0].open[6].end
-
+                        // var saturdayStart = hours.open[6].start
+                        // var saturdayEnd = hours.open[6].end
+                        var hoursString = `<h5>Hours: </h5><p>Sunday: ${sundayStart} - ${sundayEnd}</p><p>Monday: ${mondayStart} - ${mondayEnd}</p><p>Tuesday: ${tuesdayStart} - ${tuesdayEnd}</p><p>Wednesday: ${wednesdayStart} - ${wednesdayEnd}</p><p>Thursday: ${thursdayStart} - ${thursdayEnd}</p><p>Friday: ${fridayStart} - ${fridayEnd}</p><p>Friday: ${saturdayStart} - ${saturdayEnd}</p>`;
                         // var pHours = $("<h5>").text("Hours:")
                         // var sundayHours = $("<p>").text("Sunday:" + " " + sundayStart + "-" + sundayEnd)
                         // var mondayHours = $("<p>").text("Monday:" + " " + mondayStart + "-" + mondayEnd)
@@ -460,7 +461,7 @@ function searchYelp(cat, zip) {
                         // var fridayHours = $("<p>").text("Friday:" + " " + fridayStart + "-" + fridayEnd)
                         // var saturdayHours = $("<p>").text("Saturday:" + " " + saturdayStart + "-" + saturdayEnd)
 
-                        // $(divIds[i]).append(pHours)
+                        $(divIds[i]).append(hoursString)
                         // $(divIds[i]).append(sundayHours)
                         // $(divIds[i]).append(mondayHours) 
                         // $(divIds[i]).append(tuesdayHours) 
@@ -525,11 +526,11 @@ function searchYelpById(id) {
     // let location = "San Diego";
     let url = `https://api.yelp.com/v3/businesses/${id}`
 
-    $.ajaxPrefilter(function (options) {
-        if (options.crossDomain && $.support.cors) {
-            options.url = 'https://cors-anywhere.herokuapp.com/' + options.url;
-        }
-    });
+    // $.ajaxPrefilter(function (options) {
+    //     if (options.crossDomain && $.support.cors) {
+    //         options.url = 'https://cors-anywhere.herokuapp.com/' + options.url;
+    //     }
+    // });
 
     return $.ajax(url, {
             headers: {
