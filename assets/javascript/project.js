@@ -1,6 +1,6 @@
 var ingredients = ['thai', 'mexican', 'sushi', 'japanese', 'chinese', 'american', 'brewpub', 'froyo', 'pizza', 'italian']
 console.log(ingredients)
-var colors = ['#F06292', '#FFA726', '#FFEB3B','#19F072','#0CDADB', '#7e57c2']
+var colors = ['#fce4ec ', '#ede7f6 ', '#e8eaf6', '#e3f2fd','#e0f7fa', '#e8f5e9', '#f9fbe7', '#fff3e0', '#fbe9e7', '#ffcdd2']
 
 var addingIngredient = document.getElementById("addBtn")
 var isSpinning = false;
@@ -46,8 +46,9 @@ function promptZip(spinAfter){
 
 }
 function geolocate() {
-    if (userLocation == undefined || undefined == null)
+    //if (userLocation == undefined || undefined == null) 
     navigator.geolocation.getCurrentPosition(onGeolocateSuccess, onGeolocateError);
+
 }
 
 
@@ -192,6 +193,7 @@ function changeBground() {
     prevActive = rando;
     rando = rando.toString();
     $(`#cell${rando}`).css('background', colors[colorRandom]);
+    
 }
 
 function removeIngredient(event) {
@@ -223,6 +225,9 @@ function createIngredientBtn(ingredient) {
 
     //adds the materialize class to the button
     $(makingIngredientBtn).addClass("btn mCat waves-effect waves-light btn-small")
+    // $(makingIngredientBtn).attr('data-tooltip', 'click me to remove me from your choices')
+    // $(makingIngredientBtn).attr('data-position', 'bottom')
+
     //append each item to buttonsDiv
     $('#btnsGoHere').append(makingIngredientBtn)
     createWheel();
@@ -429,29 +434,44 @@ function searchYelp(cat, zip) {
                         sliderUl.append(imageThree)
                         $('.slider').slider();
                         $(divIds[i]).prepend(carouselWheel)
-                        var hours = res.hours[0];
+                        // var hours = res.hours[0];
+                        var resHours = processHours(res.hours[0].open);
+                        var dayArray = ["Monday",'Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday']
+                        var hourString ='<h5>Hours: </h5>';
+                       for (let z = 0; z < resHours.length; z++) {
+                           let dayHours =  resHours[z];
+                           if (dayHours=="CLOSED"){
+
+                           } else if (dayHours.length ==1){
+                           hourString +=`<p>${dayArray[z]}: ${dayHours}</p>`
+                           } else if (dayHours.length >1){
+                            hourString +=`<p>${dayArray[z]}: ${dayHours}</p>`
+                           } else {
+                            hourString +=`<p>${dayArray[z]}: Hours unavailable...</p>`  
+                           }
+                       }
                         
-                        var sundayStart = hours.open[0].start
-                        var sundayEnd = hours.open[0].end
+                        // var sundayStart = hours.open[0].start
+                        // var sundayEnd = hours.open[0].end
 
-                        var mondayStart = hours.open[1].start
-                        var mondayEnd = hours.open[1].end
+                        // var mondayStart = hours.open[1].start
+                        // var mondayEnd = hours.open[1].end
 
-                        var tuesdayStart = hours.open[2].start
-                        var tuesdayEnd = hours.open[2].end
+                        // var tuesdayStart = hours.open[2].start
+                        // var tuesdayEnd = hours.open[2].end
 
-                        var wednesdayStart = hours.open[3].start
-                        var wednesdayEnd = hours.open[3].end
+                        // var wednesdayStart = hours.open[3].start
+                        // var wednesdayEnd = hours.open[3].end
 
-                        var thursdayStart = hours.open[4].start
-                        var thursdayEnd = hours.open[4].end
+                        // var thursdayStart = hours.open[4].start
+                        // var thursdayEnd = hours.open[4].end
 
-                        var fridayStart = hours.open[5].start
-                        var fridayEnd = hours.open[5].end
+                        // var fridayStart = hours.open[5].start
+                        // var fridayEnd = hours.open[5].end
 
                         // var saturdayStart = hours.open[6].start
                         // var saturdayEnd = hours.open[6].end
-                        var hoursString = `<h5>Hours: </h5><p>Sunday: ${sundayStart} - ${sundayEnd}</p><p>Monday: ${mondayStart} - ${mondayEnd}</p><p>Tuesday: ${tuesdayStart} - ${tuesdayEnd}</p><p>Wednesday: ${wednesdayStart} - ${wednesdayEnd}</p><p>Thursday: ${thursdayStart} - ${thursdayEnd}</p><p>Friday: ${fridayStart} - ${fridayEnd}</p><p>Friday: ${saturdayStart} - ${saturdayEnd}</p>`;
+                        // var hoursString = `<h5>Hours: </h5><p>Sunday: ${sundayStart} - ${sundayEnd}</p><p>Monday: ${mondayStart} - ${mondayEnd}</p><p>Tuesday: ${tuesdayStart} - ${tuesdayEnd}</p><p>Wednesday: ${wednesdayStart} - ${wednesdayEnd}</p><p>Thursday: ${thursdayStart} - ${thursdayEnd}</p><p>Friday: ${fridayStart} - ${fridayEnd}</p><p>Friday: ${saturdayStart} - ${saturdayEnd}</p>`;
                         // var pHours = $("<h5>").text("Hours:")
                         // var sundayHours = $("<p>").text("Sunday:" + " " + sundayStart + "-" + sundayEnd)
                         // var mondayHours = $("<p>").text("Monday:" + " " + mondayStart + "-" + mondayEnd)
@@ -460,8 +480,19 @@ function searchYelp(cat, zip) {
                         // var thursdayHours = $("<p>").text("Thursday:" + " " + thursdayStart + "-" + thursdayEnd)
                         // var fridayHours = $("<p>").text("Friday:" + " " + fridayStart + "-" + fridayEnd)
                         // var saturdayHours = $("<p>").text("Saturday:" + " " + saturdayStart + "-" + saturdayEnd)
+                        // var hoursDiv= $("<div>")
 
-                        $(divIds[i]).append(hoursString)
+                        // $(hoursDiv).append(pHours)
+                        // $(hoursDiv).append(sundayHours)
+                        // $(hoursDiv).append(mondayHours) 
+                        // $(hoursDiv).append(tuesdayHours) 
+                        // $(hoursDiv).append(wednesdayHours)
+                        // $(hoursDiv).append(thursdayHours) 
+                        // $(hoursDiv).append(fridayHours) 
+                        // $(hoursDiv).append(saturdayHours)
+                        // $(divIds[i]).append(hoursDiv)
+
+                        $(divIds[i]).append(hourString)
                         // $(divIds[i]).append(sundayHours)
                         // $(divIds[i]).append(mondayHours) 
                         // $(divIds[i]).append(tuesdayHours) 
@@ -474,19 +505,19 @@ function searchYelp(cat, zip) {
                         reviewCount = res.review_count;
                         rating = res.rating;
                         console.log(name);
-                        var p = $("<h7>").text(results[i].name + " - Rated " + rating + " out of 5 with " + reviewCount + " Reviews");
+                        var p = $("<h6>").text(results[i].name + " - Rated " + rating + " out of 5 with " + reviewCount + " Reviews");
                         $(divIdsName[i]).append(p)
                         var p2 = $("<h7>").text(" (" + results[i].location.address1 + ", " + results[i].location.city + ")");
                         $(divIdsName[i]).append(p2)
                     })
                 var price = results[i].price
-                var open = results[i].is_closed
-                if (!open){open =true}
+              //  var open = results[i].is_closed
+              //  if (!open){open =true}
                 var aliases = results[i].alias
 
 
 
-                var p = $("<h5>").text(name);
+                var p = $("<h4>").text(name);
                 var searchImage = $("<img>")
                 // searchImage.attr("src", results[i].image_url).attr('id', 'resultsIMG')
                 // searchImage.attr('width', 380).attr('height', 300)
@@ -501,8 +532,8 @@ function searchYelp(cat, zip) {
                 var pThree = $("<p>").text("Price Range:  " + price);
                 pThree.attr('id', 'priceRange')
                 var pFour = $("<p>")
-                var pFour = $("<p>").text("Open: " + open)
-                pFour.attr('id', 'hoursOfOp')
+               //// var pFour = $("<p>").text("Open: " + open)
+                //pFour.attr('id', 'hoursOfOp')
                 // pFour.attr("src", urlAddress);
 
                 // newCard.append(searchImage)
@@ -550,3 +581,60 @@ function searchYelpById(id) {
 
 
 // ------------------------------------------------------------------------------------------------------------
+
+function processHours(hoursArr){
+//hoursArr is a variable length array of objects. May be more than one object per day (assume sequentially ordered), and may be no object for
+let week = [0,1,2,3,4,5,6];
+
+
+for(i=0;i<week.length;i++){
+    let tempArr =[];
+    let res='';
+for (let index = 0; index < hoursArr.length; index++) {
+    const element = hoursArr[index];
+   
+       if (hoursArr[index].day ==i){
+           let s = convertMilitary(hoursArr[index].start);
+        //    console.log(s);
+           tempArr.push(s+ ' - ' + convertMilitary(hoursArr[index].end));
+       }
+    
+}
+if (tempArr.length == 0){
+res= "CLOSED";
+} else {
+    res = tempArr;
+}
+week.splice(i,1,res);
+}
+return week;
+}
+
+
+function convertMilitary(time){
+//    time =time.toString();
+
+    var hours = time.substring(0,2); //Extract hour
+    var minutes = time.substring(3,5); 
+
+// // fetch
+// var hours = Number(time[0]);
+// var minutes = Number(time[1]);
+// // var seconds = Number(time[2]);
+
+// calculate
+var timeValue;
+
+if (hours > 0 && hours <= 12) {
+  timeValue= "" + hours;
+} else if (hours > 12) {
+  timeValue= "" + (hours - 12);
+} else if (hours == 0) {
+  timeValue= "12";
+}
+ 
+timeValue += (minutes < 10) ? ":0" + minutes : ":" + minutes;  // get minutes
+timeValue += (hours >= 12) ? " P.M." : " A.M.";  // get AM/PM
+console.log(timeValue);
+return timeValue;
+}

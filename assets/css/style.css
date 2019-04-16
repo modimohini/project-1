@@ -7,8 +7,10 @@ body {
 
   main {
     flex: 1 0 auto;
+    font-family: 'Domine', serif;
   
   }
+
   .btn-small{
    margin: 1px;
   }    
@@ -37,8 +39,7 @@ div.card-content{
 }
 #spinToWin{
   border-radius: 25px;
-  background-image: linear-gradient(to right, #26dbcc 20% , #80cbc4   100%, #c4f8f4  100%, #80cbc4   45%);
-  width: 15vw;
+  background-image: linear-gradient(to right, #e0f2f1 20% , #80cbc4   100%, #b2dfdb  100%, #80cbc4   45%);  width: 15vw;
   height: 2vw;
   text-align: center;
   /* line-height: 15px; */
@@ -110,14 +111,28 @@ div.input-field{
 p{
   /* font-size: 30px; */
 }
-#firstName,
- #secondName,
-  #thirdName,
-   #fourthName,
-   #fifthName{
-
+#restaurantInfo{
+  /* background: red; */
+ 
 
 }
-.page-footer{
+p{
+  letter-spacing: 1px;
+  margin-left: 20px;
+  font-size: 20px;
 
+}
+#instructions{
+  font-size:25px;
+}
+#phoneNum{
+  /* margin-top: 75px; */
+}
+#location{
+  font-size: 23px;
+  margin-left: 20px;
+ padding-top: 100px;
+}
+.page-footer{
+margin-top: 20px;
 };
