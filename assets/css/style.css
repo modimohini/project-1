@@ -9,6 +9,7 @@ body {
     flex: 1 0 auto;
   
   }
+
   .btn-small{
    margin: 1px;
   }    
@@ -95,14 +96,8 @@ div.input-field{
 p{
   /* font-size: 30px; */
 }
-#firstName,
- #secondName,
-  #thirdName,
-   #fourthName,
-   #fifthName{
 
 
-}
 .page-footer{
-
+margin-top: 20px;
 };

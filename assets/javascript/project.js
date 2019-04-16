@@ -1,6 +1,6 @@
 var ingredients = ['thai', 'mexican', 'sushi', 'japanese', 'chinese', 'american', 'brewpub', 'froyo', 'pizza', 'italian']
 console.log(ingredients)
-var colors = ['#F06292', '#FFA726', '#FFEB3B','#19F072','#0CDADB', '#7e57c2']
+var colors = ['#fce4ec ', '#ede7f6 ', '#e8eaf6', '#e3f2fd','#e0f7fa', '#e8f5e9', '#f9fbe7', '#fff3e0', '#fbe9e7', '#ffcdd2']
 
 var addingIngredient = document.getElementById("addBtn")
 var isSpinning = false;
@@ -158,6 +158,7 @@ function changeBground() {
     prevActive = rando;
     rando = rando.toString();
     $(`#cell${rando}`).css('background', colors[colorRandom]);
+    
 }
 
 function removeIngredient(event) {
@@ -397,7 +398,7 @@ function searchYelp(cat, zip) {
                         var saturdayStart = res.hours[0].open[6].start
                         var saturdayEnd = res.hours[0].open[6].end
 
-                        var pHours = $("<h5>").text("Hours:")
+                        var pHours = $("<h6>").text("Hours:")
                         var sundayHours = $("<p>").text("Sunday:" + " " + sundayStart + "-" + sundayEnd)
                         var mondayHours = $("<p>").text("Monday:" + " " + mondayStart + "-" + mondayEnd)
                         var tuesdayHours = $("<p>").text("Tuesday:" + " " + tuesdayStart + "-" + tuesdayEnd)
@@ -405,15 +406,18 @@ function searchYelp(cat, zip) {
                         var thursdayHours = $("<p>").text("Thursday:" + " " + thursdayStart + "-" + thursdayEnd)
                         var fridayHours = $("<p>").text("Friday:" + " " + fridayStart + "-" + fridayEnd)
                         var saturdayHours = $("<p>").text("Saturday:" + " " + saturdayStart + "-" + saturdayEnd)
+                        var hoursDiv= $("<div>")
 
-                        $(divIds[i]).append(pHours)
-                        $(divIds[i]).append(sundayHours)
-                        $(divIds[i]).append(mondayHours) 
-                        $(divIds[i]).append(tuesdayHours) 
-                        $(divIds[i]).append(wednesdayHours)
-                        $(divIds[i]).append(thursdayHours) 
-                        $(divIds[i]).append(fridayHours) 
-                        $(divIds[i]).append(saturdayHours)
+                        $(hoursDiv).append(pHours)
+                        $(hoursDiv).append(sundayHours)
+                        $(hoursDiv).append(mondayHours) 
+                        $(hoursDiv).append(tuesdayHours) 
+                        $(hoursDiv).append(wednesdayHours)
+                        $(hoursDiv).append(thursdayHours) 
+                        $(hoursDiv).append(fridayHours) 
+                        $(hoursDiv).append(saturdayHours)
+                        $(divIds[i]).append(hoursDiv)
+
                         
 
                         reviewCount = res.review_count;
