@@ -12,16 +12,41 @@ var prevActive;
 var curActive;
 var chosen;
 var index;
+var useCoords = false;
+var userLocation;
+var lat='';
+var long ='';
 var userCats = [];
 
 var offset = "";
 
-document.addEventListener('DOMContentLoaded', () => {
-    const $geolocateButton = document.getElementById('spinToWin');
-    $geolocateButton.addEventListener('click', geolocate);
-})
+// document.addEventListener('DOMContentLoaded', () => {
+//     const $geolocateButton = document.getElementById('spinToWin');
+//     $geolocateButton.addEventListener('click', geolocate);
+// })
+function promptZip(spinAfter){  
+    Swal.fire({
+        title: 'Enter your Zipcode to Search Local Restaurants',
+        input: 'text',
+        inputPlaceholder: 'Enter ZIPCode'
+    }).then(function (result) {
+        console.log(result);
+        userLocation = result.value;
+       if (userLocation != undefined && userLocation != ''){
+        $("#zipText").text(result.value + " (Click to Update)");
+        localStorage.setItem("resPickerZip", result.value)
+        localStorage.setItem("isCoords", false);
+        if (spinAfter){
+            spinItUp();
+        }
+    } else {
+        $("#zipText").text("Location not set (Click to Update)");
+    }
+    })       
 
+}
 function geolocate() {
+    if (userLocation == undefined || undefined == null)
     navigator.geolocation.getCurrentPosition(onGeolocateSuccess, onGeolocateError);
 }
 
@@ -32,11 +57,20 @@ function onGeolocateSuccess(coordinates) {
         longitude
     } = coordinates.coords;
     console.log('Found coordinates: ', latitude, longitude);
+    userLocation = latitude +','+longitude;
+    useCoords = true;
+    localStorage.setItem("resPickerZip", userLocation);
+    localStorage.setItem("isCoords", true);
+    $("#zipText").text("Location Saved as Coordinates (Click to Update)");
+    lat = latitude;
+    long = longitude;
+
 }
 
 function onGeolocateError(error) {
     console.warn(error.code, error.message);
-
+    useCoords = false;
+promptZip();
     if (error.code === 1) {
         // they said no
     } else if (error.code === 2) {
@@ -124,7 +158,7 @@ function doSlowdownThing() {
         prevActive = '';
         chosen = ele.text();
         console.log(chosen);
-        searchYelp(chosen, '92121');
+        searchYelp(chosen, userLocation);
     }
 }
 
@@ -186,10 +220,13 @@ function createIngredientBtn(ingredient) {
 
 
     //adds the materialize class to the button
-    $(makingIngredientBtn).addClass("waves-effect waves-light btn-small teal lighten-2")
+    // $(makingIngredientBtn).addClass("waves-effect waves-light btn-small teal lighten-2")
 
     //adds the materialize class to the button
     $(makingIngredientBtn).addClass("btn mCat waves-effect waves-light btn-small")
+    // $(makingIngredientBtn).attr('data-tooltip', 'click me to remove me from your choices')
+    // $(makingIngredientBtn).attr('data-position', 'bottom')
+
     //append each item to buttonsDiv
     $('#btnsGoHere').append(makingIngredientBtn)
     createWheel();
@@ -209,36 +246,34 @@ function addToIngredientsArray() {
 
 }
 
-
-
-
-
-
 $(document).ready(function () {
+    
 
-    var userZip = localStorage.getItem("resPickerZip");
-    if (userZip != undefined && userZip != '') {
-        $("#zipText").text(userZip);
-    } else {
-        userZip = Swal.fire({
-            title: 'Enter your Zipcode to Search Local Restaurants',
-            input: 'text',
-            inputPlaceholder: 'Enter ZIPCode'
-        }).then(function (result) {
-            userzip = result.value;
-            $("#zipText").text(result.value);
-            localStorage.setItem("resPickerZip", result.value)
-        })
-
-
-        // swal({
-        //     title: "Enter your Zipcode to Search Local Restaurants!",
-        //     content: "input",
-        //     buttons: [true, "Enter"],
-
-        //   });
-
+    userLocation= localStorage.getItem("resPickerZip");
+    console.log(userLocation);
+    useCoords = localStorage.getItem("isCoords");
+    if (useCoords == undefined){
+        useCoords = false;
     }
+
+    if (useCoords){
+        let coordSplit = userLocation.split(',');
+        if (coordSplit[0] != undefined && coordSplit[1] != undefined){
+            lat = coordSplit[0];
+            long = coordSplit[1];
+            console.log(lat+ ' ' + long);
+        } else {
+            useCoords = false;
+        }
+    }
+
+    if (userLocation != undefined && userLocation != '') {
+        $("#zipText").text(userLocation + " (Click to Update)");
+    } else {
+        userLocation =  promptZip();
+        
+    }
+     
 
     $('.collapsible').collapsible();
     $('.tooltipped').tooltip();
@@ -249,9 +284,21 @@ $(document).ready(function () {
     //searchYelp();
 
     //event listener
-    $(document.body).on("click", "#spinToWin", spinItUp);
+    $(document.body).on("click", "#spinToWin", function(){
+    
+        if (useCoords == false && (userLocation == undefined || userLocation == null || userLocation == "undefined")){
+            promptZip(true);
+        } else {
+            console.log("Found Location " + userLocation);
+        spinItUp();
+        }
+    });
     $(document.body).on("click", ".mCat", removeIngredient);
     // $(document.body).on("click", "nextFive", nextFive);
+
+    $(document.body).on("click", "#zipText", function(){
+            geolocate();
+    });
 
 
 
@@ -280,10 +327,18 @@ $(document).ready(function () {
 function searchYelp(cat, zip) {
     // JAVASCRIPT FOR FRONT-END CSS WIDGETS
     //let yelpSearch = "Thai";
+    if (zip == undefined || zip ==''){
+        zip = 92121;
+    }
     var api = "yKOEUCF9Lca7gsPDyifirt-pXKuwx_YIJvpiqO__oUJgJeKQWcNFkwUGpQs4nFxhofY5wI7VKbrXF-E4D5r-28x5BXv7QenKIbXAmKR9HJ5EPtfc4SVXWWqA_-evXHYx";
     //let location = Diego";
-    let url = `https://api.yelp.com/v3/businesses/search?term=${cat}&location=${zip}&limit=12`
+    if (useCoords){
+        var url = `https://api.yelp.com/v3/businesses/search?term=${cat}&latitude=${lat}&longitude=${long}&limit=12`
+    } else {
+    var url = `https://api.yelp.com/v3/businesses/search?term=${cat}&location=${zip}&limit=12`
+    }
 
+    console.log(url);
     $.ajaxPrefilter(function (options) {
         if (options.crossDomain && $.support.cors) {
             options.url = 'https://cors-anywhere.herokuapp.com/' + options.url;
@@ -317,8 +372,6 @@ function searchYelp(cat, zip) {
             console.log(response);
             var results = response.businesses
             var rating = '';
-            var lat;
-            var long;
             var reviewCount = 0;
             var phone = '';
             for (let i = 0; i < 5; i++) {
@@ -338,19 +391,23 @@ function searchYelp(cat, zip) {
                 const address3 = results[i].location.address3
                 const address4 = results[i].location.city
 
-                var location = address1 + address2;
-                if (address3 != null) {
-                    location += address3
-                }
-                location += '   ' + address4;
+                var location = address1;
+                if (address2 != null){
 
+                location += " " + address2;
+            }
+                if (address3 != null) {
+                    location += " " +address3
+                }
+                location = location.trim() +', ' + address4;
+            var googleLink = "https://www.google.com/maps/dir/?api=1&origin="+escape(location);
                 searchYelpById(id)
                     .then(function (res) {
                         console.log(res)
                         console.log(res.review_count);
-                        const photoOne = res.photos[0]
-                        const photoTwo = res.photos[1]
-                        const photoThree = res.photos[2]
+                        let photoOne = res.photos[0]
+                        let photoTwo = res.photos[1]
+                        let photoThree = res.photos[2]
 
                         var initialImageOne = $(`<img src=${photoOne}>`)
                         initialImageOne.attr('width', 380).attr('height', 300)
@@ -377,72 +434,74 @@ function searchYelp(cat, zip) {
                         $('.slider').slider();
                         $(divIds[i]).prepend(carouselWheel)
 
-                        var sundayStart = res.hours[0].open[0].start
-                        var sundayEnd = res.hours[0].open[0].end
+                        // var sundayStart = res.hours[0].open[0].start
+                        // var sundayEnd = res.hours[0].open[0].end
 
-                        var mondayStart = res.hours[0].open[1].start
-                        var mondayEnd = res.hours[0].open[1].end
+                        // var mondayStart = res.hours[0].open[1].start
+                        // var mondayEnd = res.hours[0].open[1].end
 
-                        var tuesdayStart = res.hours[0].open[2].start
-                        var tuesdayEnd = res.hours[0].open[2].end
+                        // var tuesdayStart = res.hours[0].open[2].start
+                        // var tuesdayEnd = res.hours[0].open[2].end
 
-                        var wednesdayStart = res.hours[0].open[3].start
-                        var wednesdayEnd = res.hours[0].open[3].end
+                        // var wednesdayStart = res.hours[0].open[3].start
+                        // var wednesdayEnd = res.hours[0].open[3].end
 
-                        var thursdayStart = res.hours[0].open[4].start
-                        var thursdayEnd = res.hours[0].open[4].end
+                        // var thursdayStart = res.hours[0].open[4].start
+                        // var thursdayEnd = res.hours[0].open[4].end
 
-                        var fridayStart = res.hours[0].open[5].start
-                        var fridayEnd = res.hours[0].open[5].end
+                        // var fridayStart = res.hours[0].open[5].start
+                        // var fridayEnd = res.hours[0].open[5].end
 
-                        var saturdayStart = res.hours[0].open[6].start
-                        var saturdayEnd = res.hours[0].open[6].end
+                        // var saturdayStart = res.hours[0].open[6].start
+                        // var saturdayEnd = res.hours[0].open[6].end
 
-                        var pHours = $("<h6>").text("Hours:")
-                        var sundayHours = $("<p>").text("Sunday:" + " " + sundayStart + "-" + sundayEnd)
-                        var mondayHours = $("<p>").text("Monday:" + " " + mondayStart + "-" + mondayEnd)
-                        var tuesdayHours = $("<p>").text("Tuesday:" + " " + tuesdayStart + "-" + tuesdayEnd)
-                        var wednesdayHours = $("<p>").text("Wednesday:" + " " + wednesdayStart + "-" + wednesdayEnd)
-                        var thursdayHours = $("<p>").text("Thursday:" + " " + thursdayStart + "-" + thursdayEnd)
-                        var fridayHours = $("<p>").text("Friday:" + " " + fridayStart + "-" + fridayEnd)
-                        var saturdayHours = $("<p>").text("Saturday:" + " " + saturdayStart + "-" + saturdayEnd)
-                        var hoursDiv= $("<div>")
+                        // var pHours = $("<h6>").text("Hours:")
+                        // var sundayHours = $("<p>").text("Sunday:" + " " + sundayStart + "-" + sundayEnd)
+                        // var mondayHours = $("<p>").text("Monday:" + " " + mondayStart + "-" + mondayEnd)
+                        // var tuesdayHours = $("<p>").text("Tuesday:" + " " + tuesdayStart + "-" + tuesdayEnd)
+                        // var wednesdayHours = $("<p>").text("Wednesday:" + " " + wednesdayStart + "-" + wednesdayEnd)
+                        // var thursdayHours = $("<p>").text("Thursday:" + " " + thursdayStart + "-" + thursdayEnd)
+                        // var fridayHours = $("<p>").text("Friday:" + " " + fridayStart + "-" + fridayEnd)
+                        // var saturdayHours = $("<p>").text("Saturday:" + " " + saturdayStart + "-" + saturdayEnd)
+                        // var hoursDiv= $("<div>")
 
-                        $(hoursDiv).append(pHours)
-                        $(hoursDiv).append(sundayHours)
-                        $(hoursDiv).append(mondayHours) 
-                        $(hoursDiv).append(tuesdayHours) 
-                        $(hoursDiv).append(wednesdayHours)
-                        $(hoursDiv).append(thursdayHours) 
-                        $(hoursDiv).append(fridayHours) 
-                        $(hoursDiv).append(saturdayHours)
-                        $(divIds[i]).append(hoursDiv)
+                        // $(hoursDiv).append(pHours)
+                        // $(hoursDiv).append(sundayHours)
+                        // $(hoursDiv).append(mondayHours) 
+                        // $(hoursDiv).append(tuesdayHours) 
+                        // $(hoursDiv).append(wednesdayHours)
+                        // $(hoursDiv).append(thursdayHours) 
+                        // $(hoursDiv).append(fridayHours) 
+                        // $(hoursDiv).append(saturdayHours)
+                        // $(divIds[i]).append(hoursDiv)
 
                         
 
                         reviewCount = res.review_count;
                         rating = res.rating;
                         console.log(name);
-                        var p = $("<h7>").text(results[i].name + " - Rated " + rating + " out of 5 with " + reviewCount + " Reviews");
+                        var p = $("<h6>").text(results[i].name + " - Rated " + rating + " out of 5 with " + reviewCount + " Reviews");
                         $(divIdsName[i]).append(p)
                         var p2 = $("<h7>").text(" (" + results[i].location.address1 + ", " + results[i].location.city + ")");
                         $(divIdsName[i]).append(p2)
                     })
                 var price = results[i].price
                 var open = results[i].is_closed
+                if (!open){open =true}
                 var aliases = results[i].alias
 
 
 
-                var p = $("<h5>").text(name);
+                var p = $("<h4>").text(name);
                 var searchImage = $("<img>")
                 // searchImage.attr("src", results[i].image_url).attr('id', 'resultsIMG')
                 // searchImage.attr('width', 380).attr('height', 300)
                 var pSecondName = $("<p>").text(aliases);
                 pSecondName.attr('id', 'alias')
 
-                var pTwo = $("<p>").text("Address  " + location);
+                var pTwo = $("<a>").attr("href", googleLink);
                 pTwo.attr('id', 'location')
+                pTwo.text(location);
                 var pOne = $("<p>").text("Phone Number:  " + phone);
                 pOne.attr('id', 'phoneNum')
                 var pThree = $("<p>").text("Price Range:  " + price);
