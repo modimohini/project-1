@@ -22,6 +22,9 @@ font-size: 2vw;
 letter-spacing: 2px;
 
 }
+#lastFive{
+  display:none;
+}
 
 div.card-content{
 
