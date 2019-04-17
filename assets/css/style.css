@@ -12,13 +12,16 @@ body {
  
   } 
 
-  main {
+main {
     flex: 1 0 auto;
     font-family: 'Domine', serif;
   
   }
+#btnsGoHere{
+  margin-top: 20px; 
+  }
 
-  .btn-small{
+.btn-small{
    margin: 5px;
   }    
  
@@ -31,7 +34,9 @@ body {
 #lastFive{
   display:none;
 }
-
+#resTextLabel{
+  margin-bottom: 20px;
+}
 .hours{
   font-size: 15px;
   line-height: 15px;
@@ -119,6 +124,8 @@ div.input-field{
 
 #topDiv{ 
   margin-top: 20px;
+  margin-bottom: 20px;
+  
 }
 p{
   letter-spacing: 1px;
@@ -138,4 +145,3 @@ p{
 .page-footer{
 margin-top: 20px;
 };
-
