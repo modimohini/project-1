@@ -1,9 +1,16 @@
+.container{
+  width: 90vw;
+}
+
 body {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
   }
-
+.nav-bar{
+  font-family: 'Itim', cursive;
+    
+  } 
 
   main {
     flex: 1 0 auto;
@@ -12,7 +19,7 @@ body {
   }
 
   .btn-small{
-   margin: 1px;
+   margin: 5px;
   }    
  
 .gridRow{
@@ -47,9 +54,15 @@ div.card-content{
   text-align: center;
   /* line-height: 15px; */
   padding: 0px 20px 50px 20px;
+  
   font-size: 2vw;
+  box-align:center;
+  margin-left: 0%;
+  margin-right: 0%;
+  align-items: center;
  
 }
+
 
 #zipText{
   color: blue !important;
@@ -139,3 +152,4 @@ p{
 .page-footer{
 margin-top: 20px;
 };
+
