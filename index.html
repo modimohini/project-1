@@ -29,7 +29,7 @@
     <nav>
         <div class="nav-wrapper teal lighten-4 row">
             <div class="col s12 m9 nav-bar">
-                <href="#" class="brand-logo left">The Meal Wheel of Fortune</a>
+                <a href="#" class="brand-logo center">Meal of Fortune</a>
             </div>
 
 
@@ -44,8 +44,7 @@
                 <div class="row">
                     <div class="col s12 m9 l9 mCatCont">
                         <p id='instructions'>
-                            Choose up to five categories of places you'd like to eat from the menu below or add your
-                            own. Click spin to get your results!
+                            Select the food categories that you're not interested in eating below. If you don't see something that you want to add to your list, you can always add a category. Once you're done, click spin to get a list of restaurants matching your results. 
                         </p>
                         <div id="btnsGoHere"> </div>
                         <div class="col s12">
@@ -85,9 +84,9 @@
                     </div>
                 </div>
             </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col l12">
+            <div class="container ">
+                <div class="row ">
+                    <div class="col s12 m12 l12">
 
                         <div class="card horizontal">
                             <div class="center-align ">
@@ -102,8 +101,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="offset-s6" id="spinBtnCont" align="center">
-                            <a id="spinToWin" class="btn-large waves-teal teal lighten-4"><i
+                        <div class="offset-s6 center-align m12 s12 l12" id="spinBtnCont" >
+                            <a id="spinToWin" class="btn-large waves-teal teal lighten-4 "><i
                                     class="material-icons left"></i>Spin!</a>
                         </div>
                         <div class="card-stacked">
@@ -125,10 +124,10 @@
                             </div>
                         </div>
                     </div>
-                    <!-- ______________________ everything above should be a ....___________________________________ -->
+                    <!-- ______________________ ___________________________________ -->
                     <div class="col s12">
                         <div class="grid-example col s12 resResultsCont"><span class="flow-text">
-                                <h5>Results</h5>
+                                <h5 id="resTextLabel">Results</h5>
                             </span>
                             <div id="resultsGoHere"></div>
                             <ul class="collapsible">
@@ -160,7 +159,7 @@
                                 </li>
                             </ul>
                             <span id="offsetButtonsCont">
-                                <a class="waves-effect waves-light btn" id="backFive"> Go Back</a>
+                                <a class="waves-effect waves-light btn" id="lastFive"> Go Back</a>
                             </span>
 
                             <span>

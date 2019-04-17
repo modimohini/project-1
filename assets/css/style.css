@@ -5,6 +5,7 @@ body {
   }
 .nav-bar{
    font-family: 'Grand Hotel', cursive;
+   margin-bottom: 20px;
 
 
 }
@@ -25,6 +26,9 @@ font-size: 2vw;
 
 letter-spacing: 2px;
 
+}
+#lastFive{
+  display:none;
 }
 
 div.card-content{
@@ -127,7 +131,7 @@ p{
 
 }
 #instructions{
-  font-size:25px;
+  font-size:20px;
 }
 #phoneNum{
   /* margin-top: 75px; */
