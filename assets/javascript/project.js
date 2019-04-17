@@ -436,7 +436,7 @@ $(document).ready(function () {
                     $(divIds[i]).text("");
                     var newCard = $("<div>")
                     var infoCard = $("<div id='restaurantInfo" + i + "'>")
-                    infoCard.attr('class', 'col s 12 m7 l7')
+                    infoCard.attr('class', 'col s12 m12 l7')
                     var name = results[i].name
                     console.log(name);
                     var id = results[i].id;
@@ -472,7 +472,7 @@ $(document).ready(function () {
                     pSecondName.attr('id', 'alias')
 
                     var pTwo = $("<a>").attr("href", googleLink);
-                    pTwo.attr('id', 'location')
+                    pTwo.attr('id', 'location').attr('class', 's12 m12')
                     pTwo.text(location);
 
                     var pOne = $("<p>").text("Phone Number:  " + phone);
@@ -498,9 +498,9 @@ $(document).ready(function () {
                             var initialImageOne = $(`<img src=${photoOne}>`)
                             initialImageOne.attr('width', 100).attr('height', 100).attr('class', 'responsive-img s12')
                             var initialImageTwo = $(`<img src=${photoTwo}>`)
-                            initialImageTwo.attr('width', 380).attr('height', 300).attr('class', 'responsive-img s12')
+                            initialImageTwo.attr('width', 100).attr('height', 100).attr('class', 'responsive-img s12')
                             var initialImageThree = $(`<img src=${photoThree}>`)
-                            initialImageThree.attr('width', 380).attr('height', 300).attr('class', 'responsive-img s12')
+                            initialImageThree.attr('width', 100).attr('height', 100).attr('class', 'responsive-img s12')
 
                             var imageOne = $('<li>')
                             imageOne.append(initialImageOne)
@@ -510,7 +510,7 @@ $(document).ready(function () {
                             imageThree.append(initialImageThree)
 
                             var carouselWheel = $("<div>")
-                            carouselWheel.attr("class", "slider col s5")
+                            carouselWheel.attr("class", "slider col s12 l5")
                             carouselWheel.attr("id", "caro"+cardIndex)
                             var sliderUl = $("<ul>")
                             sliderUl.attr("class", "slides")
@@ -523,7 +523,7 @@ $(document).ready(function () {
                             // var hours = res.hours[0];
                             var resHours = processHours(res.hours[0].open);
                             var dayArray = ["Monday", 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
-                            var hourString = '<h5>Hours: </h5>';
+                            var hourString = '<h6>Hours: </h6>';
                             for (let z = 0; z < resHours.length; z++) {
                                 let dayHours = resHours[z];
                                 if (dayHours == "CLOSED") {

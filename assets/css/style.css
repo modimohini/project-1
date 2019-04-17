@@ -1,5 +1,5 @@
 .container{
-  /* width: 90vw; */
+  width: 90vw;
 }
 
 body {
@@ -9,8 +9,7 @@ body {
   }
 .nav-bar{
   font-family: 'Grand Hotel', cursive;
-  /* font-family: 'Grand Hotel', cursive;
-  margin-bottom: 20px; */
+ 
   } 
 
   main {
@@ -24,25 +23,21 @@ body {
   }    
  
 .gridRow{
-margin: 0;
-font-size: 2vw;
+  margin: 0;
+  font-size: 2vw;
+  letter-spacing: 2px;
+  }
 
-letter-spacing: 2px;
-
-}
 #lastFive{
   display:none;
 }
 
-div.card-content{
-
-}
 .hours{
- font-size: 15px;
- line-height: 20px;
+  font-size: 15px;
+  line-height: 15px;
 }
 .mCat{
- margin: 0 5px 15px 5px;
+  margin: 0 5px 15px 5px;
 }
 .topCont{
   padding-left: 50px !important;
@@ -53,9 +48,7 @@ div.card-content{
   background-image: linear-gradient(to right, #e0f2f1 20% , #80cbc4   100%, #b2dfdb  100%, #80cbc4   45%);  width: 15vw;
   height: 2vw;
   text-align: center;
-  /* line-height: 15px; */
   padding: 0px 20px 50px 20px;
-  
   font-size: 2vw;
   box-align:center;
   margin-left: 0%;
@@ -75,6 +68,8 @@ div.card-content{
 #offsetButtonsCont{
   margin: 15px;
 }
+
+
 .gridCell{
   margin: 0;
   padding: 20px;
@@ -90,16 +85,13 @@ div.card-content{
   flex-grow: 1;
   flex-direction: column;
 }
+
 .gridContainer{
- justify-content: space-evenly;
- align-items: stretch;
- height: auto;
- 
+  justify-content: space-evenly;
+  align-items: stretch;
+  height: auto;
 }
 
-.zipContainer{
-  /* display: inline-block; */
-}
 .resResultsCont{
   display: none;
 }
@@ -111,7 +103,7 @@ div.card-content{
   display: none;
 }
 #addBtn{
-  /* display: inline-block; */
+
   float: left;
 }
 div.input-field{
@@ -121,34 +113,27 @@ div.input-field{
   margin-right: 50px;
 }
 
-
 .gridCell {
   text-align: center;
 }
-p{
-  /* font-size: 30px; */
-}
-#restaurantInfo{
-  /* background: red; */
- 
 
+#topDiv{ 
+  margin-top: 20px;
 }
 p{
   letter-spacing: 1px;
-  margin-left: 20px;
-  /* font-size: 20px; */
-
+  margin: 3px 0px 1px 20px;
 }
+
 #instructions{
   font-size:20px;
 }
-#phoneNum{
-  /* margin-top: 75px; */
-}
+
+
 #location{
   font-size: 23px;
   margin-left: 10px;
- padding-top: 100px;
+  margin-top: 20px;
 }
 .page-footer{
 margin-top: 20px;
