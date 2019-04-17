@@ -12,7 +12,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Domine|Itim" rel="stylesheet">
-    
+
     <!-- Materialize CDN -->
     <script type="text/javascript" src="materialize/js/materialize.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
@@ -26,7 +26,7 @@
 <body>
     <!-- Navbar goes here -->
     <nav class="nav-extended teal lighten-4 row">
-        <div  class="nav-wrapper teal lighten-4 row">
+        <div class="nav-wrapper teal lighten-4 row">
             <div class="col s12 m9 nav-bar">
                 <div class="brand-logo center">The Meal Wheel of Fortune</div>
             </div>
@@ -37,49 +37,59 @@
     </nav>
     <main>
         <div class="main">
-            <div class="container-fluid topCont">
+            <div class="container">
                 <!--  <div id="firstSection" class="col s3"> -->
                 <!--<h3>Type in ingredient</h3>-->
                 <div class="row">
                     <div class="col s12 m9 l9 mCatCont">
-                        <p id='instructions'>
-                            Select the food categories that you're not interested in eating below. If you don't see something that you want to add to your list, you can always add a category. Once you're done, click spin to get a list of restaurants matching your results. 
-                        </p>
+                        <span id='instructions'>
+                            <p>
+                                Welcome to Meal of Fortune! Click the spin button to choose from the below categories.
+                            </p>
+                            <ol>
+                                <li>Add as many of your favorite food categories before spinning</li>
+                                <li>Click any category to remove from the choice pool before spinning</li>
+
+                            </ol>
+                            <div> Good luck!</div>
+
+                        </span>
                         <div id="btnsGoHere"> </div>
-                        <div class="col s12">
+                         <div id="formDiv" class="row input-field">
+                                <div class="col s12 m6">
+                                <form id="form" class="center-align">
 
-                            <div class="ezPrompt">
-                                Searching restaurants near:
-                                <i class="small material-icons">add_location</i><span id="zipText"> (Click to
-                                    Update)</span>
 
+                                    <form>
+                                        <div class="input-field center-align">
+                                            <label class="active" for="userInput">Add a category to the list!
+                                                <i class="material-icons"></i></label>
+                                            <i class="material-icons"></i>
+                                            <input id='userInput' class="form-control mr-sm-2 validate" type="search"
+                                                aria-label="Search">
+                                            <!-- add button -->
+                                        </div>
+                                        <button id="addBtn" type='submit' name="action"
+                                            class="btn-floating btn-medium btn tooltipped waves-effect waves-teal waves-circle  teal lighten-4"
+                                            data-position="bottom" data-tooltip="add to choices"><i
+                                                class="material-icons">add</i>
+                                        </button>
+
+                                    </form>
+
+                                </form>
                             </div>
                         </div>
                     </div>
                     <div class="col s12 m6 l3">
-                        <div id="formDiv" class="row input-field">
-                            <form id="form" class="center-align">
+                        <div class="ezPrompt">
+                        <div> Searching restaurants near:</div>
+                        <div><i class="small material-icons">add_location</i><span id="zipText"> (Click to
+                                    Update)</span>
+                                </div>
 
-
-                                <form>
-                                    <div class="input-field center-align">
-                                        <label class="active" for="userInput">Add a category to the list!
-                                            <i class="material-icons"></i></label>
-                                        <i class="material-icons"></i>
-                                        <input id='userInput' class="form-control mr-sm-2 validate" type="search"
-                                            aria-label="Search">
-                                        <!-- add button -->
-                                    </div>
-                                    <button id="addBtn" type='submit' name="action"
-                                        class="btn-floating btn-large btn tooltipped waves-effect waves-teal waves-circle  teal lighten-4"
-                                        data-position="bottom" data-tooltip="add to choices"><i
-                                            class="material-icons">add</i></button>
-                                    <i class="material-icons right"></i>
-                                    </button>
-                                </form>
-
-                            </form>
                         </div>
+
                     </div>
                 </div>
             </div>
