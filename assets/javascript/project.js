@@ -1,7 +1,7 @@
 $(document).ready(function () {
     var ingredients = ['thai', 'mexican', 'sushi', 'japanese', 'chinese', 'american', 'brewpub', 'froyo', 'pizza', 'italian']
     console.log(ingredients)
-    var colors = ['#fce4ec ', '#ede7f6 ', '#e8eaf6', '#e3f2fd', '#e0f7fa', '#e8f5e9', '#f9fbe7', '#fff3e0', '#fbe9e7', '#ffcdd2']
+    var colors = ['#F291BF', '#F2CB05 ', '#F2B705', '#F27405', '#F23005']
 
     var addingIngredient = document.getElementById("addBtn")
     var isSpinning = false;
