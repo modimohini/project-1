@@ -17,6 +17,10 @@ main {
     font-family: 'Domine', serif;
   
   }
+
+#userInput{
+  margin-top: 10px;
+}
 #btnsGoHere{
   margin-top: 20px; 
   }
