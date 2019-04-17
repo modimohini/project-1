@@ -27,9 +27,9 @@
 <body>
     <!-- Navbar goes here -->
     <nav>
-        <div class="nav-wrapper teal lighten-4 row">
+        <div class="nav-wrapper white valign-wrapper row">
             <div class="col s12 m9 nav-bar">
-                <a href="#" class="brand-logo center">Meal of Fortune</a>
+                <a href="#" class="brand-logo center black-text">Meal of Fortune</a>
             </div>
 
 
@@ -43,16 +43,16 @@
                 <!--<h3>Type in ingredient</h3>-->
                 <div class="row" id='topDiv'>
                     <div class="col s12 m9 l9 mCatCont">
-                        <p id='instructions'>
+                        <blockquote id='instructions' class="flow-text">
                             Select the food categories that you're not interested in eating below. If you don't see something that you want to add to your list, you can always add a category. Once you're done, click spin to get a list of restaurants matching your results. 
-                        </p>
+                        </blockquote>
                         <div id="btnsGoHere"> </div>
                         <div class="col s12">
 
                             <div class="ezPrompt">
                                 Searching restaurants near:
-                                <i class="small material-icons">add_location</i><span id="zipText"> (Click to
-                                    Update)</span>
+                                <i class="small material-icons" >add_location</i><span id="zipText" class="tooltipped" data-position="bottom" data-tooltip="click to update"> 
+                                    </span>
 
                             </div>
                         </div>
@@ -72,7 +72,7 @@
                                         <!-- add button -->
                                     </div>
                                     <button id="addBtn" type='submit' name="action"
-                                        class="btn-floating btn-large btn tooltipped waves-effect waves-teal waves-circle  teal lighten-4"
+                                        class="btn-floating btn-large btn tooltipped waves-effect waves-circle black lighten-4"
                                         data-position="bottom" data-tooltip="add to choices"><i
                                             class="material-icons">add</i></button>
                                     <i class="material-icons right"></i>
@@ -101,8 +101,8 @@
                             </div>
                         </div>
                         <div class="offset-s6 center-align m12 s12 l12" id="spinBtnCont" >
-                            <a id="spinToWin" class="btn-large waves-teal teal lighten-4 "><i
-                                    class="material-icons left"></i>Spin!</a>
+                            <a id="spinToWin" class="btn-large waves black lighten-4 "><i
+                                    class="material-icons left"></i>pick!</a>
                         </div>
                         <div class="card-stacked">
                             <div class="card-content">
@@ -176,7 +176,7 @@
 
     <!-- FOOTER STARTS HERE -->
 
-    <footer class="page-footer teal lighten-5">
+    <footer class="page-footer black lighten-5">
         <div>
             <div class="row">
                 <div class="col l6 s12">

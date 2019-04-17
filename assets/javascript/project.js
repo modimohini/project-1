@@ -270,15 +270,15 @@ $(document).ready(function () {
 
         //adding an attribute for the ajax call function
         $(makingIngredientBtn).attr("ing-data", ingredient)
-        $(makingIngredientBtn).attr("data-position", "bottom")
-        $(makingIngredientBtn).attr("data-tooltip", "add to wheel")
-        // $(makingIngredientBtn).attr("class", "btn tooltipped")
+        // $(makingIngredientBtn).attr("data-position", "bottom")
+        $(makingIngredientBtn).attr("id", "choiceBtn")
+        $(makingIngredientBtn).attr("class", "btn tooltipped btn-flat mCat waves-light btn-medium")
         // $(makingIngredientBtn).attr("onclick", "{(e)=>{e.preventDefault()}}")
 
         //adds the materialize class to the button
-        $(makingIngredientBtn).addClass("btn mCat waves-effect waves-light btn-small")
-        // $(makingIngredientBtn).attr('data-tooltip', 'click me to remove me from your choices')
-        // $(makingIngredientBtn).attr('data-position', 'bottom')
+        // $(makingIngredientBtn).addClass("btn-flat mCat waves-effect waves-light btn-small ")
+        $(makingIngredientBtn).attr('data-tooltip', 'click to remove')
+        $(makingIngredientBtn).attr('data-position', 'bottom')
 
         //append each item to buttonsDiv
         $('#btnsGoHere').append(makingIngredientBtn)
@@ -313,7 +313,7 @@ $(document).ready(function () {
         }
 
         if (userLocation != undefined && userLocation != '') {
-            $("#zipText").text(userLocation + " (Click to Update)");
+            $("#zipText").text(userLocation + "");
         } else {
             userLocation = promptZip();
         }

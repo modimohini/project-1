@@ -9,8 +9,15 @@ body {
   }
 .nav-bar{
   font-family: 'Grand Hotel', cursive;
- 
   } 
+.nav-wrapper{
+  min-height: 100px;;
+}
+
+blockquote{
+  border-left: 5px solid #000000;
+
+}
 
 main {
     flex: 1 0 auto;
@@ -24,6 +31,9 @@ main {
 #btnsGoHere{
   margin-top: 20px; 
   }
+#choiceBtn:hover{
+  background-color:#e0f2f1;
+}
 
 .btn-small{
    margin: 5px;
@@ -51,10 +61,12 @@ main {
 .topCont{
   padding-left: 50px !important;
   padding-right: 50px !important;
+  margin-top: 20px;
 }
 #spinToWin{
-  border-radius: 25px;
-  background-image: linear-gradient(to right, #e0f2f1 20% , #80cbc4   100%, #b2dfdb  100%, #80cbc4   45%);  width: 15vw;
+  
+  /* border-radius: 25px; */
+  /* background-image: linear-gradient(to right, #e0f2f1 20% , #80cbc4   100%, #b2dfdb  100%, #80cbc4   45%);  width: 15vw; */
   height: 2vw;
   text-align: center;
   padding: 0px 20px 50px 20px;
@@ -82,7 +94,7 @@ main {
 .gridCell{
   margin: 0;
   padding: 20px;
-  text-transform: uppercase;
+  text-transform: lowercase;
   word-wrap: break-word;         /* All browsers since IE 5.5+ */
   overflow-wrap: break-word;     /* Renamed property in CSS3 draft spec */
   width: 33%;
@@ -137,7 +149,10 @@ p{
 }
 
 #instructions{
-  font-size:20px;
+  font-size:15px;
+  letter-spacing: 1px;
+  padding-top: 20px;
+
 }
 
 
