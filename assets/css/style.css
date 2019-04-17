@@ -60,7 +60,7 @@ blockquote{
   margin-top: 20px; 
   }
 #choiceBtn:hover{
-  background-color:#e0f2f1;
+  background-color:#F27405;
 }
 
 .ezPrompt{
@@ -117,10 +117,13 @@ blockquote{
   text-transform: lowercase;
   font-size: 30px;
 }
+#spinToWin:hover{
+  background-color: #F27405;
+}
 
 
 #zipText{
-  color: blue !important;
+  color: #F27405 !important;
   text-decoration: underline;
 
 }
@@ -206,6 +209,7 @@ p{
   margin-left: 10px;
   margin-top: 20px;
   text-decoration-line: underline;
+  color: #F27405;
 }
 .page-footer{
 margin-top: 20px;
