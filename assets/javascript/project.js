@@ -17,13 +17,9 @@ var userLocation;
 var lat = '';
 var long = '';
 var userCats = [];
+var offset = 0;
 
-var offset = "";
 
-// document.addEventListener('DOMContentLoaded', () => {
-//     const $geolocateButton = document.getElementById('spinToWin');
-//     $geolocateButton.addEventListener('click', geolocate);
-// })
 function promptZip(spinAfter) {
     Swal.fire({
         title: 'Enter your Zipcode to Search Local Restaurants',
@@ -72,22 +68,25 @@ function onGeolocateError(error) {
     console.warn(error.code, error.message);
     useCoords = false;
     promptZip();
-    if (error.code === 1) {
-        // they said no
-    } else if (error.code === 2) {
-        // position unavailable
-    } else if (error.code === 3) {
-        // timeout
-    }
 }
 
 function getUserFavs() {
-    userCats = localStorage.getItem("favRestArr");
+    // userCats = JSON.parse(localStorage.getItem("favRestArr"));
+    
+    // userCats.forEach(uItem => {
+    //     addToIngredientsArray(uItem);
+    // });
+}
+function addToIngredientsArray(item) {
+    
+    if (ingredients.indexOf(item) == -1) {
+        ingredients.push(item);
+        createIngredientBtn(item)
+    }
 }
 
-
 function createWheel() {
-
+    //really, a grid. Creates table-grid, appends to panel, calls function to create light up animation that lands on a result, passes into api call. 
     $(".gridContainer").empty();
     let arrL = ingredients.length;
 
@@ -219,10 +218,6 @@ function createIngredientBtn(ingredient) {
     // $(makingIngredientBtn).attr("class", "btn tooltipped")
     // $(makingIngredientBtn).attr("onclick", "{(e)=>{e.preventDefault()}}")
 
-
-    //adds the materialize class to the button
-    // $(makingIngredientBtn).addClass("waves-effect waves-light btn-small teal lighten-2")
-
     //adds the materialize class to the button
     $(makingIngredientBtn).addClass("btn mCat waves-effect waves-light btn-small")
     // $(makingIngredientBtn).attr('data-tooltip', 'click me to remove me from your choices')
@@ -241,14 +236,7 @@ function makeButtons() {
     createWheel();
 }
 
-function addToIngredientsArray() {
-    //clears out the input
-    $('#btnsGoHere').empty()
-
-}
-
 $(document).ready(function () {
-
 
     userLocation = localStorage.getItem("resPickerZip");
     console.log(userLocation);
@@ -271,19 +259,15 @@ $(document).ready(function () {
         $("#zipText").text(userLocation + " (Click to Update)");
     } else {
         userLocation = promptZip();
-
     }
 
 
     $('.collapsible').collapsible();
     $('.tooltipped').tooltip();
     getUserFavs();
-    addToIngredientsArray()
-    makeButtons()
+    makeButtons();
 
-    //searchYelp();
-
-    //event listener
+    //event listeners
     $(document.body).on("click", "#spinToWin", function () {
 
         if (useCoords == false && (userLocation == undefined || userLocation == null || userLocation == "undefined")) {
@@ -293,6 +277,7 @@ $(document).ready(function () {
             spinItUp();
         }
     });
+
     $(document.body).on("click", ".mCat", removeIngredient);
     // $(document.body).on("click", "nextFive", nextFive);
 
@@ -306,11 +291,36 @@ $(document).ready(function () {
         var userInput = $('#userInput').val();
         // localStorage.setItem()
         $('#userInput').val("");
-        //adds it to the array
-        ingredients.push(userInput)
-        createIngredientBtn(userInput)
+        //adds it to the array   
+        addToUserFavorites(userInput);     
+        addToIngredientsArray(userInput);
+        
+
     })
 })
+function addToUserFavorites(item){
+    console.log(item);
+     var check = localStorage.getItem("favRestArr");
+     console.log(check);
+     if (check != null){
+    var parseCheck = JSON.parse(check);
+console.log(parseCheck);
+    // if (typeof parseCheck ==='object'){
+
+        if (parseCheck.indexOf(item) >-1){
+            console.log("pushing to local");
+            parseCheck.push(item);
+            localStorage.setItem("favRestArr",JSON.stringify(parseCheck));
+        }
+    // }
+     } else {
+         let itemArr = [];
+         itemArr.push(item);
+        localStorage.setItem("favRestArr",JSON.stringify(itemArr));
+     }
+
+    }
+
 
 function searchYelp(cat, zip) {
     // JAVASCRIPT FOR FRONT-END CSS WIDGETS
@@ -391,8 +401,7 @@ function searchYelp(cat, zip) {
                 var googleLink = "https://www.google.com/maps/dir/?api=1&origin=" + escape(location);
                 searchYelpById(id)
                     .then(function (res) {
-                        console.log(res)
-                        console.log(res.review_count);
+
                         let photoOne = res.photos[0]
                         let photoTwo = res.photos[1]
                         let photoThree = res.photos[2]

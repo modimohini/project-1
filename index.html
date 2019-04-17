@@ -12,7 +12,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Domine" rel="stylesheet">
-    
+
     <!-- Materialize CDN -->
     <script type="text/javascript" src="materialize/js/materialize.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
@@ -44,40 +44,42 @@
                 <div class="row">
                     <div class="col s12 m9 l9 mCatCont">
                         <p id='instructions'>
-                            Choose up to five categories of places you'd like to eat from the menu below or add your own. Click spin to get your results!
+                            Choose up to five categories of places you'd like to eat from the menu below or add your
+                            own. Click spin to get your results!
                         </p>
                         <div id="btnsGoHere"> </div>
                         <div class="col s12">
-                              
-                                <div class="ezPrompt">
-                                   Searching restaurants near: 
-                                     <i class="small material-icons">add_location</i><span id="zipText"> (Click to Update)</span> 
-                                    
-                                </div>
+
+                            <div class="ezPrompt">
+                                Searching restaurants near:
+                                <i class="small material-icons">add_location</i><span id="zipText"> (Click to
+                                    Update)</span>
+
+                            </div>
+                        </div>
                     </div>
-                </div>
                     <div class="col s12 m3 l3">
                         <div id="formDiv" class="row input-field">
                             <form id="form" class="center-align">
-                                                               
-                                
-                                    <form >
-                                        <div class="input-field center-align">
-                                            <label class="active" for="userInput">Add a category to the list!
-                                                <i class="material-icons"></i></label>
-                                            <i class="material-icons"></i>
-                                            <input id='userInput' class="form-control mr-sm-2 validate" type="search"
-                                                aria-label="Search">
-                                            <!-- add button -->
-                                        </div>
-                                        <button id="addBtn" type='submit' name="action"
-                                            class="btn-floating btn-large btn tooltipped waves-effect waves-teal waves-circle  teal lighten-4"
-                                            data-position="bottom" data-tooltip="add to choices"><i
-                                                class="material-icons">add</i></button>
-                                        <i class="material-icons right"></i>
-                                        </button>
-                                    </form>
-                                
+
+
+                                <form>
+                                    <div class="input-field center-align">
+                                        <label class="active" for="userInput">Add a category to the list!
+                                            <i class="material-icons"></i></label>
+                                        <i class="material-icons"></i>
+                                        <input id='userInput' class="form-control mr-sm-2 validate" type="search"
+                                            aria-label="Search">
+                                        <!-- add button -->
+                                    </div>
+                                    <button id="addBtn" type='submit' name="action"
+                                        class="btn-floating btn-large btn tooltipped waves-effect waves-teal waves-circle  teal lighten-4"
+                                        data-position="bottom" data-tooltip="add to choices"><i
+                                            class="material-icons">add</i></button>
+                                    <i class="material-icons right"></i>
+                                    </button>
+                                </form>
+
                             </form>
                         </div>
                     </div>
@@ -92,11 +94,11 @@
                                 <div class="gridSection">
                                     <h5 class="gridHeader">Meal of fortune, turn turn turn, show us the meal we wish to
                                         learn...
-                                        </h5>
-                                        <hr>
-                                        <div class="gridContainer">
+                                    </h5>
+                                    <hr>
+                                    <div class="gridContainer">
 
-                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -125,28 +127,35 @@
                     </div>
                     <!-- ______________________ everything above should be a ....___________________________________ -->
                     <div class="col s12">
-                        <div class="grid-example col s12 resResultsCont"><span class="flow-text"><h5>Results</h5></span>
+                        <div class="grid-example col s12 resResultsCont"><span class="flow-text">
+                                <h5>Results</h5>
+                            </span>
                             <div id="resultsGoHere"></div>
                             <ul class="collapsible">
 
                                 <li>
-                                     <div class="collapsible-header">  <i class="small material-icons">info</i><span id="firstName"></span></div>
+                                    <div class="collapsible-header"> <i class="small material-icons">info</i><span
+                                            id="firstName"></span></div>
                                     <div class="collapsible-body row " id="first"><span></span></div>
                                 </li>
                                 <li>
-                                    <div class="collapsible-header"> <i class="small material-icons">info</i> <span id="secondName"></span></div>
+                                    <div class="collapsible-header"> <i class="small material-icons">info</i> <span
+                                            id="secondName"></span></div>
                                     <div class="collapsible-body row" id="second"><span></span></div>
                                 </li>
                                 <li>
-                                    <div class="collapsible-header"> <i class="small material-icons">info</i><span id="thirdName"></span></div>
+                                    <div class="collapsible-header"> <i class="small material-icons">info</i><span
+                                            id="thirdName"></span></div>
                                     <div class="collapsible-body row" id="third"><span></span></div>
                                 </li>
                                 <li>
-                                    <div class="collapsible-header"> <i class="small material-icons">info</i><span id="fourthName"></span></div>
+                                    <div class="collapsible-header"> <i class="small material-icons">info</i><span
+                                            id="fourthName"></span></div>
                                     <div class="collapsible-body row" id="fourth"><span></span></div>
                                 </li>
                                 <li>
-                                    <div class="collapsible-header"><i class="small material-icons">info</i> <span id="fifthName"></span></div>
+                                    <div class="collapsible-header"><i class="small material-icons">info</i> <span
+                                            id="fifthName"></span></div>
                                     <div class="collapsible-body row" id="fifth"><span></span></div>
                                 </li>
                             </ul>
