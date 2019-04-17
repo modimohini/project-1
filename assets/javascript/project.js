@@ -22,11 +22,11 @@ var offset = 0;
 
 function promptZip(spinAfter) {
     Swal.fire({
-        title: 'Enter your Zipcode to Search Local Restaurants',
+        title: 'Enter your location (Zip, City, Etc) to Search Local Restaurants',
         input: 'text',
         inputPlaceholder: 'Enter ZIPCode'
     }).then(function (result) {
-        console.log(result);
+        // console.log(result);
         userLocation = result.value;
         if (userLocation != undefined && userLocation != '') {
             $("#zipText").text(result.value + " (Click to Update)");
@@ -71,11 +71,14 @@ function onGeolocateError(error) {
 }
 
 function getUserFavs() {
-    // userCats = JSON.parse(localStorage.getItem("favRestArr"));
+let storedItem = localStorage.getItem("favRestArr");
+if (storedItem != '' && storedItem != undefined){
+    storedItem = JSON.parse(storedItem);
     
-    // userCats.forEach(uItem => {
-    //     addToIngredientsArray(uItem);
-    // });
+    storedItem.forEach(uItem => {
+        addToIngredientsArray(uItem);
+    });
+}
 }
 function addToIngredientsArray(item) {
     
@@ -128,6 +131,7 @@ function createWheel() {
 }
 
 function spinItUp() {
+    offset = 0;
     $(".gridSection").css("display", "block");
     index = 0;
     if (!isSpinning) {
@@ -151,17 +155,55 @@ function doSlowdownThing() {
         setTimeout(doSlowdownThing, timeoutDuration);
     } else {
         isSpinning = false;
-        $("#spinBtnCont").css("display", "block");
-        $(".resResultsCont").css("display", "block");
         let ele = $("#cell" + prevActive);
         curActive = prevActive;
         prevActive = '';
         chosen = ele.text();
         console.log(chosen);
-        searchYelp(chosen, userLocation);
+        acceptSpinCheck();
+        
     }
 }
 
+function acceptSpinCheck(){
+    Swal.fire({
+        title: chosen.toUpperCase(),
+        text: "You got " + chosen + "! Does that sound good or would you like to spin again?",
+        type: 'info',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Show me the food!',
+        cancelButtonText: 'SPIN AGAIN!!!'
+      }).then((result) => {
+        if (result.value) {
+          Swal.fire(
+            'Looking up restaurants near your location!'
+            
+          )
+          $("#spinBtnCont").css("display", "block");
+          $(".resResultsCont").css("display", "block");
+          $("#resTextLabel").text("Results for: " +chosen);
+          searchYelp(chosen, userLocation, offset);
+        } else {
+            spinItUp();
+        }
+      })
+}
+function searchNext(){
+   
+    offset = offset + 5;
+    $("#lastFive").css("display","inline-block");
+    searchYelp(chosen, userLocation,offset);
+}
+
+function searchLast(){
+    offset = offset - 5;
+    if (offset == 0){
+        $("#lastFive").css("display","none");
+    }
+    searchYelp(chosen, userLocation,offset);
+}
 function pickATimeBasedOnIndex() {
     if (index < 5) {
         return 175;
@@ -196,13 +238,27 @@ function changeBground() {
 }
 
 function removeIngredient(event) {
+    let ing = $(this).text()
     event.preventDefault();
-    let ix = ingredients.indexOf($(this).text())
+    let ix = ingredients.indexOf(ing)
     ingredients.splice(ix, 1)
-    console.log($(this).text())
+    // console.log(ing)
     $('#btnsGoHere').empty()
-    makeButtons()
+    removeFromLocal(ing);
+    makeButtons();
 
+}
+function removeFromLocal(ingredient){
+    var check = localStorage.getItem("favRestArr");
+    // console.log(check);
+    if (check != null){
+   var parseCheck = JSON.parse(check);
+   let ix = parseCheck.indexOf(ingredient);
+    if (ix> -1){
+    parseCheck.splice(ix,1);
+    localStorage.setItem('favRestArr',JSON.stringify(parseCheck));
+    }
+    }
 }
 
 function createIngredientBtn(ingredient) {
@@ -239,7 +295,7 @@ function makeButtons() {
 $(document).ready(function () {
 
     userLocation = localStorage.getItem("resPickerZip");
-    console.log(userLocation);
+    // console.log(userLocation);
     useCoords = localStorage.getItem("isCoords");
     if (useCoords == undefined) {
         useCoords = false;
@@ -273,13 +329,14 @@ $(document).ready(function () {
         if (useCoords == false && (userLocation == undefined || userLocation == null || userLocation == "undefined")) {
             promptZip(true);
         } else {
-            console.log("Found Location " + userLocation);
+            // console.log("Found Location " + userLocation);
             spinItUp();
         }
     });
 
     $(document.body).on("click", ".mCat", removeIngredient);
-    // $(document.body).on("click", "nextFive", nextFive);
+    $(document.body).on("click", "#nextFive", searchNext);
+    $(document.body).on("click", "#lastFive", searchLast);
 
     $(document.body).on("click", "#zipText", function () {
         geolocate();
@@ -290,11 +347,12 @@ $(document).ready(function () {
         event.preventDefault()
         var userInput = $('#userInput').val();
         // localStorage.setItem()
+        if (userInput != ''){
         $('#userInput').val("");
         //adds it to the array   
         addToUserFavorites(userInput);     
         addToIngredientsArray(userInput);
-        
+        }
 
     })
 })
@@ -304,25 +362,25 @@ function addToUserFavorites(item){
      console.log(check);
      if (check != null){
     var parseCheck = JSON.parse(check);
-console.log(parseCheck);
+    console.log(parseCheck);
     // if (typeof parseCheck ==='object'){
 
-        if (parseCheck.indexOf(item) >-1){
+        if (parseCheck.indexOf(item) ==-1){
             console.log("pushing to local");
             parseCheck.push(item);
             localStorage.setItem("favRestArr",JSON.stringify(parseCheck));
         }
-    // }
-     } else {
+        
+    }else {
          let itemArr = [];
          itemArr.push(item);
         localStorage.setItem("favRestArr",JSON.stringify(itemArr));
-     }
+     
 
     }
 
-
-function searchYelp(cat, zip) {
+}
+function searchYelp(cat, zip, offset) {
     // JAVASCRIPT FOR FRONT-END CSS WIDGETS
     //let yelpSearch = "Thai";
     if (zip == undefined || zip == '') {
@@ -331,9 +389,9 @@ function searchYelp(cat, zip) {
     var api = "yKOEUCF9Lca7gsPDyifirt-pXKuwx_YIJvpiqO__oUJgJeKQWcNFkwUGpQs4nFxhofY5wI7VKbrXF-E4D5r-28x5BXv7QenKIbXAmKR9HJ5EPtfc4SVXWWqA_-evXHYx";
     //let location = Diego";
     if (useCoords) {
-        var url = `https://api.yelp.com/v3/businesses/search?term=${cat}&latitude=${lat}&longitude=${long}&limit=12`
+        var url = `https://api.yelp.com/v3/businesses/search?term=${cat}&latitude=${lat}&longitude=${long}&limit=5&offset=${offset}`
     } else {
-        var url = `https://api.yelp.com/v3/businesses/search?term=${cat}&location=${zip}&limit=12`
+        var url = `https://api.yelp.com/v3/businesses/search?term=${cat}&location=${zip}&limit=5&offset=${offset}`
     }
 
     console.log(url);
@@ -498,7 +556,6 @@ function searchYelpById(id) {
     // let location = "San Diego";
     let url = `https://api.yelp.com/v3/businesses/${id}`
 
-
     return $.ajax(url, {
         headers: {
             "accept": "application/json",
@@ -559,6 +616,6 @@ function convertMilitary(time) {
 
     timeValue += (minutes < 10) ? ":0" + minutes : ":" + minutes;  // get minutes
     timeValue += (hours >= 12) ? " P.M." : " A.M.";  // get AM/PM
-    console.log(timeValue);
+    // console.log(timeValue);
     return timeValue;
 }
