@@ -3,7 +3,11 @@ body {
     min-height: 100vh;
     flex-direction: column;
   }
+.nav-bar{
+   font-family: 'Grand Hotel', cursive;
 
+
+}
 
   main {
     flex: 1 0 auto;
@@ -26,9 +30,9 @@ letter-spacing: 2px;
 div.card-content{
 
 }
-#btnCard{
-
-
+.hours{
+ font-size: 15px;
+ line-height: 20px;
 }
 .mCat{
  margin: 0 5px 15px 5px;
@@ -119,7 +123,7 @@ p{
 p{
   letter-spacing: 1px;
   margin-left: 20px;
-  font-size: 20px;
+  /* font-size: 20px; */
 
 }
 #instructions{
@@ -130,7 +134,7 @@ p{
 }
 #location{
   font-size: 23px;
-  margin-left: 20px;
+  margin-left: 10px;
  padding-top: 100px;
 }
 .page-footer{

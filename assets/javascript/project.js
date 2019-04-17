@@ -377,7 +377,7 @@ function searchYelp(cat, zip) {
                 $(divIds[i]).text("");
                 var newCard = $("<div>")
                 var infoCard = $("<div>")
-                infoCard.attr('id', 'restaurantInfo').attr('class', 'col s7')
+                infoCard.attr('id', 'restaurantInfo').attr('class', 'col m7 s12 ')
                 var name = results[i].name
                 console.log(name);
                 var id = results[i].id;
@@ -407,11 +407,11 @@ function searchYelp(cat, zip) {
                         let photoThree = res.photos[2]
 
                         var initialImageOne = $(`<img src=${photoOne}>`)
-                        initialImageOne.attr('width', 380).attr('height', 300)
+                        initialImageOne.attr('width', 380).attr('height', 300).attr('class', 's12 m3')
                         var initialImageTwo = $(`<img src=${photoTwo}>`)
-                        initialImageTwo.attr('width', 380).attr('height', 300)
+                        initialImageTwo.attr('width', 380).attr('height', 300).attr('class', 's12 m3')
                         var initialImageThree = $(`<img src=${photoThree}>`)
-                        initialImageThree.attr('width', 380).attr('height', 300)
+                        initialImageThree.attr('width', 380).attr('height', 300).attr('class', 's12 m3')
 
                         var imageOne = $('<li>')
                         imageOne.append(initialImageOne)
@@ -433,7 +433,7 @@ function searchYelp(cat, zip) {
                         // var hours = res.hours[0];
                         var resHours = processHours(res.hours[0].open);
                         var dayArray = ["Monday", 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
-                        var hourString = '<h5>Hours: </h5>';
+                        var hourString = '<h6>Hours: </h6>';
                         for (let z = 0; z < resHours.length; z++) {
                             let dayHours = resHours[z];
                             if (dayHours == "CLOSED") {
@@ -445,10 +445,21 @@ function searchYelp(cat, zip) {
                             } else {
                                 hourString += `<p>${dayArray[z]}: Hours unavailable...</p>`
                             }
+                            
+
+                        
+                        
                         }
 
+                      
 
-                        $(divIds[i]).append(hourString);
+                        var hourDiv = $('<div>')
+                        hourDiv.attr('class', 'col s12 m7 hours')
+                        hourDiv.append(hourString)
+                        $(divIds[i]).append(hourDiv);
+                      
+                        // $(divIds[i]).append(hourString);
+                        
                         reviewCount = res.review_count;
                         rating = res.rating;
                         var p = $("<h6>").text(results[i].name + " - Rated " + rating + " out of 5 with " + reviewCount + " Reviews");
