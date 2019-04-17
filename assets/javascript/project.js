@@ -496,11 +496,11 @@ $(document).ready(function () {
                             let photoThree = res.photos[2]
 
                             var initialImageOne = $(`<img src=${photoOne}>`)
-                            initialImageOne.attr('width', 380).attr('height', 300).attr('class', 'responsive-img')
+                            initialImageOne.attr('width', 100).attr('height', 100).attr('class', 'responsive-img s12')
                             var initialImageTwo = $(`<img src=${photoTwo}>`)
-                            initialImageTwo.attr('width', 380).attr('height', 300).attr('class', 'responsive-img')
+                            initialImageTwo.attr('width', 380).attr('height', 300).attr('class', 'responsive-img s12')
                             var initialImageThree = $(`<img src=${photoThree}>`)
-                            initialImageThree.attr('width', 380).attr('height', 300).attr('class', 'responsive-img')
+                            initialImageThree.attr('width', 380).attr('height', 300).attr('class', 'responsive-img s12')
 
                             var imageOne = $('<li>')
                             imageOne.append(initialImageOne)
@@ -511,14 +511,15 @@ $(document).ready(function () {
 
                             var carouselWheel = $("<div>")
                             carouselWheel.attr("class", "slider col s5")
+                            carouselWheel.attr("id", "caro"+cardIndex)
                             var sliderUl = $("<ul>")
                             sliderUl.attr("class", "slides")
-                            carouselWheel.append(sliderUl)
                             sliderUl.append(imageOne)
                             sliderUl.append(imageTwo)
                             sliderUl.append(imageThree)
-                            $('.slider').slider();
+                            carouselWheel.append(sliderUl)
                             $(divIds[i]).prepend(carouselWheel)
+                            $(`#caro${cardIndex}`).slider();
                             // var hours = res.hours[0];
                             var resHours = processHours(res.hours[0].open);
                             var dayArray = ["Monday", 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
