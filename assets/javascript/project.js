@@ -311,10 +311,15 @@ $(document).ready(function () {
                 useCoords = false;
             }
         }
-
-        if (userLocation != undefined && userLocation != '') {
+        
+        if (userLocation != undefined && userLocation != '' && useCoords == false)
+        {
             $("#zipText").text(userLocation + " (Click to Update)");
-        } else {
+        } else if (userLocation != undefined && userLocation != '' && useCoords)
+        {
+            $("#zipText").text("Location Saved as Coordinates (Click to Update)");  
+        } else
+        {
             userLocation = promptZip();
         }
 
