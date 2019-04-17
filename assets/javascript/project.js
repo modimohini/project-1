@@ -511,14 +511,15 @@ $(document).ready(function () {
 
                             var carouselWheel = $("<div>")
                             carouselWheel.attr("class", "slider col s5")
+                            carouselWheel.attr("id", "caro"+cardIndex)
                             var sliderUl = $("<ul>")
                             sliderUl.attr("class", "slides")
-                            carouselWheel.append(sliderUl)
                             sliderUl.append(imageOne)
                             sliderUl.append(imageTwo)
                             sliderUl.append(imageThree)
-                            $('.slider').slider();
+                            carouselWheel.append(sliderUl)
                             $(divIds[i]).prepend(carouselWheel)
+                            $(`#caro${cardIndex}`).slider();
                             // var hours = res.hours[0];
                             var resHours = processHours(res.hours[0].open);
                             var dayArray = ["Monday", 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
