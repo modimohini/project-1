@@ -37,7 +37,7 @@ $(document).ready(function () {
                     spinItUp();
                 }
             } else {
-                $("#zipText").text("Location not set (Click to Update)");
+                $("#zipText").text("Location not set");
             }
         })
 
