@@ -1,6 +1,6 @@
 var ingredients = ['thai', 'mexican', 'sushi', 'japanese', 'chinese', 'american', 'brewpub', 'froyo', 'pizza', 'italian']
 console.log(ingredients)
-var colors = ['#F06292', '#FFA726', '#FFEB3B','#19F072','#0CDADB']
+var colors = ['#fce4ec ', '#ede7f6 ', '#e8eaf6', '#e3f2fd', '#e0f7fa', '#e8f5e9', '#f9fbe7', '#fff3e0', '#fbe9e7', '#ffcdd2']
 
 var addingIngredient = document.getElementById("addBtn")
 var isSpinning = false;
@@ -12,17 +12,39 @@ var prevActive;
 var curActive;
 var chosen;
 var index;
+var useCoords = false;
+var userLocation;
+var lat = '';
+var long = '';
 var userCats = [];
+var offset = 0;
 
-var offset = "";
 
-document.addEventListener('DOMContentLoaded', () => {
-    const $geolocateButton = document.getElementById('spinToWin');
-    $geolocateButton.addEventListener('click', geolocate);
-})
+function promptZip(spinAfter) {
+    Swal.fire({
+        title: 'Enter your Zipcode to Search Local Restaurants',
+        input: 'text',
+        inputPlaceholder: 'Enter ZIPCode'
+    }).then(function (result) {
+        console.log(result);
+        userLocation = result.value;
+        if (userLocation != undefined && userLocation != '') {
+            $("#zipText").text(result.value + " (Click to Update)");
+            localStorage.setItem("resPickerZip", result.value)
+            localStorage.setItem("isCoords", false);
+            if (spinAfter) {
+                spinItUp();
+            }
+        } else {
+            $("#zipText").text("Location not set (Click to Update)");
+        }
+    })
 
+}
 function geolocate() {
+    //if (userLocation == undefined || undefined == null) 
     navigator.geolocation.getCurrentPosition(onGeolocateSuccess, onGeolocateError);
+
 }
 
 
@@ -32,27 +54,39 @@ function onGeolocateSuccess(coordinates) {
         longitude
     } = coordinates.coords;
     console.log('Found coordinates: ', latitude, longitude);
+    userLocation = latitude + ',' + longitude;
+    useCoords = true;
+    localStorage.setItem("resPickerZip", userLocation);
+    localStorage.setItem("isCoords", true);
+    $("#zipText").text("Location Saved as Coordinates (Click to Update)");
+    lat = latitude;
+    long = longitude;
+
 }
 
 function onGeolocateError(error) {
     console.warn(error.code, error.message);
-
-    if (error.code === 1) {
-        // they said no
-    } else if (error.code === 2) {
-        // position unavailable
-    } else if (error.code === 3) {
-        // timeout
-    }
+    useCoords = false;
+    promptZip();
 }
 
 function getUserFavs() {
-    userCats = localStorage.getItem("favRestArr");
+    // userCats = JSON.parse(localStorage.getItem("favRestArr"));
+    
+    // userCats.forEach(uItem => {
+    //     addToIngredientsArray(uItem);
+    // });
+}
+function addToIngredientsArray(item) {
+    
+    if (ingredients.indexOf(item) == -1) {
+        ingredients.push(item);
+        createIngredientBtn(item)
+    }
 }
 
-
 function createWheel() {
-
+    //really, a grid. Creates table-grid, appends to panel, calls function to create light up animation that lands on a result, passes into api call. 
     $(".gridContainer").empty();
     let arrL = ingredients.length;
 
@@ -124,7 +158,7 @@ function doSlowdownThing() {
         prevActive = '';
         chosen = ele.text();
         console.log(chosen);
-        searchYelp(chosen, '92121');
+        searchYelp(chosen, userLocation);
     }
 }
 
@@ -143,10 +177,10 @@ function pickATimeBasedOnIndex() {
 
 function changeBground() {
 
-    let rando = Math.floor(Math.random() * ingredients.length);   
-    let colorRandom = Math.floor(Math.random() * colors.length);   
-        //const previousCell = `#cell${prevActive}t`;       
-        $(".gridCell").css('background', 'white');    
+    let rando = Math.floor(Math.random() * ingredients.length);
+    let colorRandom = Math.floor(Math.random() * colors.length);
+    //const previousCell = `#cell${prevActive}t`;       
+    $(".gridCell").css('background', 'white');
 
     if (rando == prevActive) {
         rando++;
@@ -158,6 +192,7 @@ function changeBground() {
     prevActive = rando;
     rando = rando.toString();
     $(`#cell${rando}`).css('background', colors[colorRandom]);
+
 }
 
 function removeIngredient(event) {
@@ -183,12 +218,11 @@ function createIngredientBtn(ingredient) {
     // $(makingIngredientBtn).attr("class", "btn tooltipped")
     // $(makingIngredientBtn).attr("onclick", "{(e)=>{e.preventDefault()}}")
 
-
-    //adds the materialize class to the button
-    $(makingIngredientBtn).addClass("waves-effect waves-light btn-small teal lighten-2")
-
     //adds the materialize class to the button
     $(makingIngredientBtn).addClass("btn mCat waves-effect waves-light btn-small")
+    // $(makingIngredientBtn).attr('data-tooltip', 'click me to remove me from your choices')
+    // $(makingIngredientBtn).attr('data-position', 'bottom')
+
     //append each item to buttonsDiv
     $('#btnsGoHere').append(makingIngredientBtn)
     createWheel();
@@ -202,87 +236,107 @@ function makeButtons() {
     createWheel();
 }
 
-function addToIngredientsArray() {
-    //clears out the input
-    $('#btnsGoHere').empty()
-
-}
- 
-
-
-
-
-
 $(document).ready(function () {
 
-    var userZip = localStorage.getItem("resPickerZip");
-    if (userZip != undefined && userZip != ''){
-        $("#zipText").text(userZip); 
-    } else{
-        userZip = Swal.fire({
-            title: 'Enter your Zipcode to Search Local Restaurants',
-            input: 'text',
-            inputPlaceholder: 'Enter ZIPCode'
-          }).then(function(result){
-userzip = result.value;
-            $("#zipText").text(result.value); 
-            localStorage.setItem("resPickerZip",result.value)
-          }) 
-    
-        
-    // swal({
-    //     title: "Enter your Zipcode to Search Local Restaurants!",
-    //     content: "input",
-    //     buttons: [true, "Enter"],
-
-    //   });
-
+    userLocation = localStorage.getItem("resPickerZip");
+    console.log(userLocation);
+    useCoords = localStorage.getItem("isCoords");
+    if (useCoords == undefined) {
+        useCoords = false;
     }
+    if (useCoords) {
+        let coordSplit = userLocation.split(',');
+        if (coordSplit[0] != undefined && coordSplit[1] != undefined) {
+            lat = coordSplit[0];
+            long = coordSplit[1];
+            console.log(lat + ' ' + long);
+        } else {
+            useCoords = false;
+        }
+    }
+
+    if (userLocation != undefined && userLocation != '') {
+        $("#zipText").text(userLocation + " (Click to Update)");
+    } else {
+        userLocation = promptZip();
+    }
+
 
     $('.collapsible').collapsible();
     $('.tooltipped').tooltip();
     getUserFavs();
-    addToIngredientsArray()
-    makeButtons()
-    
-    //searchYelp();
+    makeButtons();
 
-    //event listener
-    $(document.body).on("click", "#spinToWin", spinItUp);
+    //event listeners
+    $(document.body).on("click", "#spinToWin", function () {
+
+        if (useCoords == false && (userLocation == undefined || userLocation == null || userLocation == "undefined")) {
+            promptZip(true);
+        } else {
+            console.log("Found Location " + userLocation);
+            spinItUp();
+        }
+    });
+
     $(document.body).on("click", ".mCat", removeIngredient);
     // $(document.body).on("click", "nextFive", nextFive);
 
-
-
+    $(document.body).on("click", "#zipText", function () {
+        geolocate();
+    });
 
 
     addingIngredient.addEventListener('click', function (event) {
-
-        //keeps the page from clearing out when it refreshes
         event.preventDefault()
-
-        //what happens when the button is click?
-        //take the user input 
-
-        //takes the user input and make it a value attribute so that we can use the attribute to call it when we need it
         var userInput = $('#userInput').val();
         // localStorage.setItem()
         $('#userInput').val("");
-        //adds it to the array
-        ingredients.push(userInput)
-        createIngredientBtn(userInput)
-
+        //adds it to the array   
+        addToUserFavorites(userInput);     
+        addToIngredientsArray(userInput);
+        
 
     })
 })
+function addToUserFavorites(item){
+    console.log(item);
+     var check = localStorage.getItem("favRestArr");
+     console.log(check);
+     if (check != null){
+    var parseCheck = JSON.parse(check);
+console.log(parseCheck);
+    // if (typeof parseCheck ==='object'){
+
+        if (parseCheck.indexOf(item) >-1){
+            console.log("pushing to local");
+            parseCheck.push(item);
+            localStorage.setItem("favRestArr",JSON.stringify(parseCheck));
+        }
+    // }
+     } else {
+         let itemArr = [];
+         itemArr.push(item);
+        localStorage.setItem("favRestArr",JSON.stringify(itemArr));
+     }
+
+    }
+
 
 function searchYelp(cat, zip) {
     // JAVASCRIPT FOR FRONT-END CSS WIDGETS
     //let yelpSearch = "Thai";
+    if (zip == undefined || zip == '') {
+        zip = 92121;
+    }
     var api = "yKOEUCF9Lca7gsPDyifirt-pXKuwx_YIJvpiqO__oUJgJeKQWcNFkwUGpQs4nFxhofY5wI7VKbrXF-E4D5r-28x5BXv7QenKIbXAmKR9HJ5EPtfc4SVXWWqA_-evXHYx";
     //let location = Diego";
-    let url = `https://api.yelp.com/v3/businesses/search?term=${cat}&location=${zip}&limit=12`
+    if (useCoords) {
+        var url = `https://api.yelp.com/v3/businesses/search?term=${cat}&latitude=${lat}&longitude=${long}&limit=12`
+    } else {
+        var url = `https://api.yelp.com/v3/businesses/search?term=${cat}&location=${zip}&limit=12`
+    }
 
+    console.log(url);
     $.ajaxPrefilter(function (options) {
         if (options.crossDomain && $.support.cors) {
             options.url = 'https://cors-anywhere.herokuapp.com/' + options.url;
@@ -290,13 +344,13 @@ function searchYelp(cat, zip) {
     });
 
     $.ajax(url, {
-            headers: {
-                "accept": "application/json",
-                "x-requested-with": "xmlhttprequest",
-                "Access-Control-Allow-Origin": "*",
-                "Authorization": `Bearer ${api}`
-            }
-        })
+        headers: {
+            "accept": "application/json",
+            "x-requested-with": "xmlhttprequest",
+            "Access-Control-Allow-Origin": "*",
+            "Authorization": `Bearer ${api}`
+        }
+    })
         .then(function (response) {
             const divIds = [
                 '#first',
@@ -316,16 +370,14 @@ function searchYelp(cat, zip) {
             console.log(response);
             var results = response.businesses
             var rating = '';
-            var lat;
-            var long;
             var reviewCount = 0;
             var phone = '';
             for (let i = 0; i < 5; i++) {
                 $(divIdsName[i]).text("");
                 $(divIds[i]).text("");
                 var newCard = $("<div>")
-                var infoCard= $("<div>")
-                infoCard.attr('id', 'restaurantInfo')
+                var infoCard = $("<div>")
+                infoCard.attr('id', 'restaurantInfo').attr('class', 'col s7')
                 var name = results[i].name
                 console.log(name);
                 var id = results[i].id;
@@ -337,19 +389,22 @@ function searchYelp(cat, zip) {
                 const address3 = results[i].location.address3
                 const address4 = results[i].location.city
 
-                var location = address1 + address2;
-                if (address3 != null) {
-                    location += address3
-                }
-                location += '   ' + address4;
+                var location = address1;
+                if (address2 != null) {
 
+                    location += " " + address2;
+                }
+                if (address3 != null) {
+                    location += " " + address3
+                }
+                location = location.trim() + ', ' + address4;
+                var googleLink = "https://www.google.com/maps/dir/?api=1&origin=" + escape(location);
                 searchYelpById(id)
                     .then(function (res) {
-                        console.log(res)
-                        console.log(res.review_count);
-                        const photoOne = res.photos[0]
-                        const photoTwo = res.photos[1]
-                        const photoThree = res.photos[2]
+
+                        let photoOne = res.photos[0]
+                        let photoTwo = res.photos[1]
+                        let photoThree = res.photos[2]
 
                         var initialImageOne = $(`<img src=${photoOne}>`)
                         initialImageOne.attr('width', 380).attr('height', 300)
@@ -366,7 +421,7 @@ function searchYelp(cat, zip) {
                         imageThree.append(initialImageThree)
 
                         var carouselWheel = $("<div>")
-                        carouselWheel.attr("class", "slider")
+                        carouselWheel.attr("class", "slider col s5")
                         var sliderUl = $("<ul>")
                         sliderUl.attr("class", "slides")
                         carouselWheel.append(sliderUl)
@@ -375,49 +430,64 @@ function searchYelp(cat, zip) {
                         sliderUl.append(imageThree)
                         $('.slider').slider();
                         $(divIds[i]).prepend(carouselWheel)
-                       
+                        // var hours = res.hours[0];
+                        var resHours = processHours(res.hours[0].open);
+                        var dayArray = ["Monday", 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+                        var hourString = '<h5>Hours: </h5>';
+                        for (let z = 0; z < resHours.length; z++) {
+                            let dayHours = resHours[z];
+                            if (dayHours == "CLOSED") {
+                                hourString += `<p>${dayArray[z]}: CLOSED</p>`
+                            } else if (dayHours.length == 1) {
+                                hourString += `<p>${dayArray[z]}: ${dayHours}</p>`
+                            } else if (dayHours.length > 1) {
+                                hourString += `<p>${dayArray[z]}: ${dayHours}</p>`
+                            } else {
+                                hourString += `<p>${dayArray[z]}: Hours unavailable...</p>`
+                            }
+                        }
+
+
+                        $(divIds[i]).append(hourString);
                         reviewCount = res.review_count;
                         rating = res.rating;
-                        console.log(name);
-                        var p = $("<p>").text(results[i].name + " - Rated " + rating + " out of 5 with " + reviewCount + " Reviews");
+                        var p = $("<h6>").text(results[i].name + " - Rated " + rating + " out of 5 with " + reviewCount + " Reviews");
                         $(divIdsName[i]).append(p)
-                        var p2 = $("<p>").text(" (" + results[i].location.address1 + ", " + results[i].location.city + ")");
+                        var p2 = $("<h7>").text(" (" + results[i].location.address1 + ", " + results[i].location.city + ")");
                         $(divIdsName[i]).append(p2)
                     })
+
                 var price = results[i].price
-                var open = results[i].is_closed
+                //  var open = results[i].is_closed
+                //  if (!open){open =true}
                 var aliases = results[i].alias
 
-              
 
-                var p = $("<h5>").text(name);
+                var p = $("<h4>").text(name);
                 var searchImage = $("<img>")
-                searchImage.attr("src", results[i].image_url).attr('id', 'resultsIMG')
-                searchImage.attr('width', 380).attr('height', 300)
+                // searchImage.attr("src", results[i].image_url).attr('id', 'resultsIMG')
+                // searchImage.attr('width', 380).attr('height', 300)
                 var pSecondName = $("<p>").text(aliases);
-                pSecondName.attr('id','alias')
+                pSecondName.attr('id', 'alias')
+
+                var pTwo = $("<a>").attr("href", googleLink);
+                pTwo.attr('id', 'location')
+                pTwo.text(location);
+
                 var pOne = $("<p>").text("Phone Number:  " + phone);
                 pOne.attr('id', 'phoneNum')
-                var pTwo = $("<p>").text("Location:  " + location);
-                pTwo.attr('id', 'location')
-                var pThree = $("<p>").text("Price:  " + price);
-                pThree.attr('id', 'priceRange')
-                var pFour = $("<p>")
-                var pFour = $("<p>").text("Open: " + open)
-                pFour.attr('id', 'hoursOfOp')
-                // pFour.attr("src", urlAddress);
 
-                newCard.append(searchImage)
-                // infoCard.append(pSecondName)
-                infoCard.append(pOne)
+                var pThree = $("<p>").text("Price Range:  " + price);
+                pThree.attr('id', 'priceRange')
+
+
                 infoCard.append(pTwo)
+                infoCard.append(pOne)
                 infoCard.append(pThree);
-                infoCard.append(pFour);
+
                 $(divIds[i]).append(newCard)
                 $(divIds[i]).append(infoCard)
                 // $(divIdsName[i]).append(p)
-
-
             }
         });
 }
@@ -428,27 +498,67 @@ function searchYelpById(id) {
     // let location = "San Diego";
     let url = `https://api.yelp.com/v3/businesses/${id}`
 
-    $.ajaxPrefilter(function (options) {
-        if (options.crossDomain && $.support.cors) {
-            options.url = 'https://cors-anywhere.herokuapp.com/' + options.url;
-        }
-    });
 
     return $.ajax(url, {
-            headers: {
-                "accept": "application/json",
-                "x-requested-with": "xmlhttprequest",
-                "Access-Control-Allow-Origin": "*",
-                "Authorization": `Bearer ${api}`
-            }
-        })
+        headers: {
+            "accept": "application/json",
+            "x-requested-with": "xmlhttprequest",
+            "Access-Control-Allow-Origin": "*",
+            "Authorization": `Bearer ${api}`
+        }
+    })
         .then(function (response) {
-
-
             return response;
         })
+}
 
+// ------------------------------------------------------------------------------------------------------------
+
+function processHours(hoursArr) {
+    //hoursArr is a variable length array of objects. May be more than one object per day (assume sequentially ordered), and may be no object for
+    let week = [0, 1, 2, 3, 4, 5, 6];
+
+    for (i = 0; i < week.length; i++) {
+        let tempArr = [];
+        let res = '';
+        for (let index = 0; index < hoursArr.length; index++) {
+            const element = hoursArr[index];
+
+            if (hoursArr[index].day == i) {
+                let s = convertMilitary(hoursArr[index].start);
+                //    console.log(s);
+                tempArr.push(s + ' - ' + convertMilitary(hoursArr[index].end));
+            }
+
+        }
+        if (tempArr.length == 0) {
+            res = "CLOSED";
+        } else {
+            res = tempArr;
+        }
+        week.splice(i, 1, res);
+    }
+    return week;
 }
 
 
-// ------------------------------------------------------------------------------------------------------------
+function convertMilitary(time) {
+
+    var hours = time.substring(0, 2);
+    var minutes = time.substring(3, 5);
+
+    var timeValue;
+
+    if (hours > 0 && hours <= 12) {
+        timeValue = "" + hours;
+    } else if (hours > 12) {
+        timeValue = "" + (hours - 12);
+    } else if (hours == 0) {
+        timeValue = "12";
+    }
+
+    timeValue += (minutes < 10) ? ":0" + minutes : ":" + minutes;  // get minutes
+    timeValue += (hours >= 12) ? " P.M." : " A.M.";  // get AM/PM
+    console.log(timeValue);
+    return timeValue;
+}
