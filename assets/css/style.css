@@ -59,9 +59,7 @@ blockquote{
 #btnsGoHere{
   margin-top: 20px; 
   }
-#choiceBtn:hover{
-  background-color:#F27405;
-}
+
 
 .ezPrompt{
   margin-top:30px;
@@ -94,7 +92,11 @@ blockquote{
   line-height: 15px;
 }
 .mCat{
-  margin: 20px 5px 15px 5px;
+  margin: 10px 5px 5px 5px;
+}
+.mCat:hover{
+  background-color:#F27405;
+ 
 }
 .topCont{
   padding-left: 50px !important;
@@ -118,7 +120,7 @@ blockquote{
   font-size: 30px;
 }
 #spinToWin:hover{
-  background-color: #F27405;
+  
 }
 
 
