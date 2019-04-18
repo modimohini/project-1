@@ -1,7 +1,7 @@
 $(document).ready(function () {
     var ingredients = ['thai', 'mexican', 'sushi', 'japanese', 'chinese', 'american', 'brewpub', 'froyo', 'pizza', 'italian']
     console.log(ingredients)
-    var colors = ['#fce4ec ', '#ede7f6 ', '#e8eaf6', '#e3f2fd', '#e0f7fa', '#e8f5e9', '#f9fbe7', '#fff3e0', '#fbe9e7', '#ffcdd2']
+    var colors = ['#F291BF', '#F2CB05 ', '#F2B705', '#F27405', '#F23005']
 
     var addingIngredient = document.getElementById("addBtn")
     var isSpinning = false;
@@ -37,7 +37,7 @@ $(document).ready(function () {
                     spinItUp();
                 }
             } else {
-                $("#zipText").text("Location not set (Click to Update)");
+                $("#zipText").text("Location not set");
             }
         })
 
@@ -270,15 +270,15 @@ $(document).ready(function () {
 
         //adding an attribute for the ajax call function
         $(makingIngredientBtn).attr("ing-data", ingredient)
-        $(makingIngredientBtn).attr("data-position", "bottom")
-        $(makingIngredientBtn).attr("data-tooltip", "add to wheel")
-        // $(makingIngredientBtn).attr("class", "btn tooltipped")
+        // $(makingIngredientBtn).attr("data-position", "bottom")
+        $(makingIngredientBtn).attr("id", "choiceBtn")
+        $(makingIngredientBtn).attr("class", "btn tooltipped btn-flat mCat waves-light btn-medium")
         // $(makingIngredientBtn).attr("onclick", "{(e)=>{e.preventDefault()}}")
 
         //adds the materialize class to the button
-        $(makingIngredientBtn).addClass("btn mCat waves-effect waves-light btn-small")
-        // $(makingIngredientBtn).attr('data-tooltip', 'click me to remove me from your choices')
-        // $(makingIngredientBtn).attr('data-position', 'bottom')
+        // $(makingIngredientBtn).addClass("btn-flat mCat waves-effect waves-light btn-small ")
+        $(makingIngredientBtn).attr('data-tooltip', 'click to remove')
+        $(makingIngredientBtn).attr('data-position', 'bottom')
 
         //append each item to buttonsDiv
         $('#btnsGoHere').append(makingIngredientBtn)
@@ -311,15 +311,10 @@ $(document).ready(function () {
                 useCoords = false;
             }
         }
-        
-        if (userLocation != undefined && userLocation != '' && useCoords == false)
-        {
-            $("#zipText").text(userLocation + " (Click to Update)");
-        } else if (userLocation != undefined && userLocation != '' && useCoords)
-        {
-            $("#zipText").text("Location Saved as Coordinates (Click to Update)");  
-        } else
-        {
+
+        if (userLocation != undefined && userLocation != '') {
+            $("#zipText").text(userLocation + "");
+        } else {
             userLocation = promptZip();
         }
 
@@ -441,7 +436,7 @@ $(document).ready(function () {
                     $(divIds[i]).text("");
                     var newCard = $("<div>")
                     var infoCard = $("<div id='restaurantInfo" + i + "'>")
-                    infoCard.attr('class', 'col s7')
+                    infoCard.attr('class', 'col s12 m12 l7')
                     var name = results[i].name
                     console.log(name);
                     var id = results[i].id;
@@ -477,7 +472,7 @@ $(document).ready(function () {
                     pSecondName.attr('id', 'alias')
 
                     var pTwo = $("<a>").attr("href", googleLink);
-                    pTwo.attr('id', 'location')
+                    pTwo.attr('id', 'location').attr('class', 's12 m12')
                     pTwo.text(location);
 
                     var pOne = $("<p>").text("Phone Number:  " + phone);
@@ -501,11 +496,11 @@ $(document).ready(function () {
                             let photoThree = res.photos[2]
 
                             var initialImageOne = $(`<img src=${photoOne}>`)
-                            initialImageOne.attr('width', 380).attr('height', 300)
+                            initialImageOne.attr('width', 100).attr('height', 100).attr('class', 'responsive-img s12')
                             var initialImageTwo = $(`<img src=${photoTwo}>`)
-                            initialImageTwo.attr('width', 380).attr('height', 300)
+                            initialImageTwo.attr('width', 100).attr('height', 100).attr('class', 'responsive-img s12')
                             var initialImageThree = $(`<img src=${photoThree}>`)
-                            initialImageThree.attr('width', 380).attr('height', 300)
+                            initialImageThree.attr('width', 100).attr('height', 100).attr('class', 'responsive-img s12')
 
                             var imageOne = $('<li>')
                             imageOne.append(initialImageOne)
@@ -515,7 +510,7 @@ $(document).ready(function () {
                             imageThree.append(initialImageThree)
 
                             var carouselWheel = $("<div>")
-                            carouselWheel.attr("class", "slider col s5")
+                            carouselWheel.attr("class", "slider col s12 l5")
                             carouselWheel.attr("id", "caro"+cardIndex)
                             var sliderUl = $("<ul>")
                             sliderUl.attr("class", "slides")
@@ -528,7 +523,7 @@ $(document).ready(function () {
                             // var hours = res.hours[0];
                             var resHours = processHours(res.hours[0].open);
                             var dayArray = ["Monday", 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
-                            var hourString = '<h5>Hours: </h5>';
+                            var hourString = '<h6>Hours: </h6>';
                             for (let z = 0; z < resHours.length; z++) {
                                 let dayHours = resHours[z];
                                 if (dayHours == "CLOSED") {

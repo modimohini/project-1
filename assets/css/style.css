@@ -8,89 +8,143 @@ body {
     flex-direction: column;
   }
 .nav-bar{
-  font-family: 'Itim', cursive;
-    
+  font-family: 'Grand Hotel', cursive;
+ 
   } 
+h1{
+  line-height: 1%;
+  margin: 30px, 0px, 20px, 0px;
+  
+}
+@media screen and (max-width: 581px){
+  h1{
 
-  main {
+    font-size: 55px;
+  }
+@media screen and (max-width: 543px){
+  h1{
+  
+    font-size: 40px;
+  }
+}
+
+}
+.nav-wrapper{
+  min-height: 100px;;
+}
+
+
+
+
+
+main {
     flex: 1 0 auto;
     font-family: 'Domine', serif;
   
   }
 
-  .btn-small{
-   margin: 5px;
-  }    
- 
-.gridRow{
-margin: 0;
-font-size: 2vw;
-
-letter-spacing: 2px;
-
-}
-#lastFive{
-  display:none;
+blockquote{
+    border-left: 5px solid #000000;
+    margin-top: 50px;
+  
+  
 }
 
-div.card-content{
-
+.slider .indicators .indicator-item.active{
+  background: #F27405 ;
 }
+#userInput{
+  margin-top: 10px;
+}
+#btnsGoHere{
+  margin-top: 20px; 
+  }
+
+
 .ezPrompt{
-  margin-top:20px;
+  margin-top:30px;
   margin-left: 15px;
   padding-left:15px;
   display: inline-block;
 }
+.zipDiv{
+  margin-top: 40px;
+}
 
-#btnCard{
+.btn-small{
+   margin: 5px;
+  }    
+ 
+.gridRow{
+  margin: 0;
+  font-size: 2vw;
+  letter-spacing: 2px;
+  }
 
-
+#lastFive{
+  display:none;
+}
+#resTextLabel{
+  margin-bottom: 20px;
+}
+.hours{
+  font-size: 15px;
+  line-height: 15px;
 }
 .mCat{
- margin: 0 5px 15px 5px;
+  margin: 10px 5px 5px 5px;
+}
+.mCat:hover{
+  background-color:#F27405;
+ 
 }
 .topCont{
   padding-left: 50px !important;
   padding-right: 50px !important;
+  margin-top: 20px;
 }
 #spinToWin{
-  border-radius: 25px;
-  background-image: linear-gradient(to right, #30a097 20% , #80cbc4   100%, #b2dfdb  100%, #57cfc3   45%);  width: 15vw;
+  
+  /* border-radius: 25px; */
+  /* background-image: linear-gradient(to right, #e0f2f1 20% , #80cbc4   100%, #b2dfdb  100%, #80cbc4   45%);  width: 15vw; */
   height: 2vw;
   text-align: center;
-  /* line-height: 15px; */
-  padding: 0px 20px 50px 20px;
-  min-width: 75px;
+  padding: 10px 40px 60px 40px;;
   font-size: 2vw;
   box-align:center;
   margin-left: 0%;
   margin-right: 0%;
   align-items: center;
- 
+  font-family: 'Grand Hotel', cursive;
+  text-transform: lowercase;
+  font-size: 30px;
+}
+#spinToWin:hover{
+  
 }
 
 
 #zipText{
-  color: blue !important;
+  color: #F27405 !important;
   text-decoration: underline;
 
-}
-.spinToWin{
-  text-align: center;
-  position: fixed;
-  bottom:0;
-  
 }
 
 
 #offsetButtonsCont{
   margin: 15px;
 }
+#nextFive{
+  margin-top: 15px;
+  text-transform: lowercase;
+  padding: 0px 30px;
+}
+
+
 .gridCell{
   margin: 0;
   padding: 20px;
-  text-transform: uppercase;
+  text-transform: lowercase;
   word-wrap: break-word;         /* All browsers since IE 5.5+ */
   overflow-wrap: break-word;     /* Renamed property in CSS3 draft spec */
   width: 33%;
@@ -102,16 +156,13 @@ div.card-content{
   flex-grow: 1;
   flex-direction: column;
 }
+
 .gridContainer{
- justify-content: space-evenly;
- align-items: stretch;
- height: auto;
- 
+  justify-content: space-evenly;
+  align-items: stretch;
+  height: auto;
 }
 
-.zipContainer{
-  /* display: inline-block; */
-}
 .resResultsCont{
   display: none;
 }
@@ -123,7 +174,7 @@ div.card-content{
   display: none;
 }
 #addBtn{
-  /* display: inline-block; */
+
   float: left;
 }
 div.input-field{
@@ -133,36 +184,35 @@ div.input-field{
   margin-right: 50px;
 }
 
-
 .gridCell {
   text-align: center;
 }
+
+#topDiv{ 
+  margin-top: 20px;
+  margin-bottom: 20px;
+  
+}
 p{
-  /* font-size: 30px; */
-}
-#restaurantInfo{
-  /* background: red; */
- 
-
-}
-#instructions{
   letter-spacing: 1px;
-  margin-left: 20px;
-  font-size: 20px;
+  margin: 3px 0px 1px 20px;
+}
+
+#instructions{
+  font-size:15px;
+  letter-spacing: 1px;
+  padding-top: 20px;
 
 }
-/* #instructions{
-  font-size:25px;
-} */
-#phoneNum{
-  /* margin-top: 75px; */
-}
+
+
 #location{
   font-size: 23px;
-  margin-left: 20px;
- margin-top: 100px;
+  margin-left: 10px;
+  margin-top: 20px;
+  text-decoration-line: underline;
+  color: #F27405;
 }
 .page-footer{
-/* margin-top: 20px; */
+margin-top: 20px;
 };
-

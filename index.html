@@ -11,12 +11,13 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Domine|Itim" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Domine|Grand+Hotel" rel="stylesheet">
 
     <!-- Materialize CDN -->
     <script type="text/javascript" src="materialize/js/materialize.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel='stylesheet' href="assets/css/style.css">
+
 
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -25,10 +26,10 @@
 
 <body>
     <!-- Navbar goes here -->
-    <nav class="nav-extended teal lighten-4 row">
-        <div class="nav-wrapper teal lighten-4 row">
+    <nav>
+        <div class="nav-wrapper white valign-wrapper row">
             <div class="col s12 m9 nav-bar">
-                <div class="brand-logo center">The Meal Wheel of Fortune</div>
+                <a href="#" class="brand-logo center black-text s12 flow-text"><h1>Meal of Fortune</h1></a>
             </div>
 
 
@@ -37,71 +38,70 @@
     </nav>
     <main>
         <div class="main">
-            <div class="container">
-                <!--  <div id="firstSection" class="col s3"> -->
-                <!--<h3>Type in ingredient</h3>-->
-                <div class="row">
-                    <div class="col s12 m9 l9 mCatCont">
-                        <span id='instructions'>
-                            <p>
-                                Welcome to Meal of Fortune! Click the spin button to choose from the below categories.
-                            </p>
-                            <ol>
-                                <li>Add as many of your favorite food categories before spinning</li>
-                                <li>Click any category to remove from the choice pool before spinning</li>
-
-                            </ol>
-                            <div> Good luck!</div>
-
-                        </span>
-                        <div id="btnsGoHere"> </div>
-                         <div id="formDiv" class="row input-field">
-                                <div class="col s12 m6">
-                                <form id="form" class="center-align">
-
-
-                                    <form>
-                                        <div class="input-field center-align">
-                                            <label class="active" for="userInput">Add a category to the list!
-                                                <i class="material-icons"></i></label>
-                                            <i class="material-icons"></i>
-                                            <input id='userInput' class="form-control mr-sm-2 validate" type="search"
-                                                aria-label="Search">
-                                            <!-- add button -->
+            <div class="container-fluid topCont">
+            
+               
+                    
+    
+                      
+                      
+                                <div class="row" id='topDiv'>
+                                    <div class="col s12 m9 l9 mCatCont">
+                                        <blockquote id='instructions' class="flow-text">
+                                        
+                                            
+                                                Welcome to Meal of Fortune! Click the spin button to choose from the below categories.
+                                            
+                                            <ol>
+                                                <li>Add as many of your favorite food categories before spinning</li>
+                                                <li>Click any category to remove from the choice pool before spinning</li>
+                                            </ol>
+                                            <div> Good luck!</div>
+                                        </blockquote>
+                                        <div id="btnsGoHere"> </div>
+                                         <div id="formDiv" class="row input-field">
+                                                <div class="col s12 m6">
+                                                <form id="form" class="center-align">
+                                                    <form>
+                                                        <div class="input-field center-align">
+                                                            <label class="active" for="userInput">Add a category to the list!
+                                                                <i class="material-icons"></i></label>
+                                                            <i class="material-icons"></i>
+                                                            <input id='userInput' class="form-control mr-sm-2 validate" type="search"
+                                                                aria-label="Search">
+                                                            <!-- add button -->
+                                                        </div>
+                                                        <button id="addBtn" type='submit' name="action"
+                                                        class="btn-floating btn-large btn tooltipped waves-effect waves-circle black lighten-4"
+                                                        data-position="bottom" data-tooltip="add to choices"><i
+                                                            class="material-icons">add</i></button>
+                                                    <i class="material-icons right"></i>
+                                                    </button>
+                                                    </form>
+                                                </form>
+                                            </div>
                                         </div>
-                                        <button id="addBtn" type='submit' name="action"
-                                            class="btn-floating btn-medium btn tooltipped waves-effect waves-teal waves-circle  teal lighten-4"
-                                            data-position="bottom" data-tooltip="add to choices"><i
-                                                class="material-icons">add</i>
-                                        </button>
-
-                                    </form>
-
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col s12 m6 l3">
-                        <div class="ezPrompt">
-                        <div> Searching restaurants near:</div>
-                        <div><i class="small material-icons">add_location</i><span id="zipText"> (Click to
-                                    Update)</span>
+                                    </div>
+                                    <div  class="col s12 m6 l3 zipDiv">
+                                        <div class="ezPrompt">
+                                        <div> Searching restaurants near:</div>
+                                        <div><i class="small material-icons">add_location</i><span id="zipText" class="tooltipped" data-position="bottom" data-tooltip="click to update"> 
+                                                    </span>
+                                                </div>
+                                        </div>
+                                    </div>
                                 </div>
+                            </div>
+                    
 
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col  s12 m3 l9">
+            <div class="container ">
+                <div class="row ">
+                    <div class="col s12 m12 l12">
 
                         <div class="card horizontal">
-                            <div class="center-align  s12 m3 l9">
+                            <div class="center-align ">
                                 <div class="gridSection">
-                                    <h5 class="gridHeader">Meal of fortune, turn turn turn, show us the meal we wish to
-                                        learn...
+                                    <h5 class="gridHeader center-align">Meal of fortune, turn turn turn, show us the meal our taste buds yearn...
                                     </h5>
                                     <hr>
                                     <div class="gridContainer">
@@ -110,9 +110,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="offset-s6" id="spinBtnCont" align="center">
-                            <a id="spinToWin" class="btn-large waves-teal teal s12 m3 l9 ligten-4"><i
-                                    class="material-icons left mr-sm-12"></i>Spin!</a>
+                        <div class="offset-s6 center-align m12 s12 l12" id="spinBtnCont" >
+                            <a id="spinToWin" class="btn-large waves black lighten-4 "><i
+                                    class="material-icons left"></i>pick!</a>
                         </div>
                         <div class="card-stacked">
                             <div class="card-content">
@@ -172,7 +172,7 @@
                             </span>
 
                             <span>
-                                <a class="waves-effect waves-light btn" id="nextFive"> Next Five</a>
+                                <a class="waves-effect waves-light btn-large black" id="nextFive"> Next Five</a>
 
                             </span>
                         </div>
@@ -186,10 +186,10 @@
 
     <!-- FOOTER STARTS HERE -->
 
-    <footer class="page-footer teal lighten-4">
+    <footer class="page-footer black lighten-5">
         <div>
             <div class="row">
-                <div class="col s12">
+                <div class="col l6 s12">
                     <!-- <h5 class="white-text">Footer Content</h5>
               <p class="grey-text text-lighten-4">We're learning to code!</p>
             </div>
@@ -199,9 +199,12 @@
             </div>
           </div>
         </div> -->
-                    <div class="page-footer teal lighten-4 row center footerText">
-                        © 2019 Copyright
-                    </div>
+                   
+                      
+                            © 2019 Copyright Text
+                       
+                        
+                  
     </footer>
 
 
