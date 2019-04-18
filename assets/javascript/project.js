@@ -183,6 +183,7 @@ $(document).ready(function () {
 
                 )
                 $("#spinBtnCont").css("display", "block");
+                $("#spinToWin").text("Spin again?");
                 $(".resResultsCont").css("display", "block");
                 $("#resTextLabel").text("Results for: " + chosen);
                 searchYelp(chosen, userLocation, offset);
@@ -312,9 +313,11 @@ $(document).ready(function () {
             }
         }
 
-        if (userLocation != undefined && userLocation != '') {
-            $("#zipText").text(userLocation + "");
-        } else {
+        if (userLocation != undefined && userLocation != '' && !useCoords) {
+            $("#zipText").text(userLocation + "(Click to Update)");
+        } else if(userLocation != undefined && userLocation != '' && useCoords){
+            $("#zipText").text("Location stored as Coordinates (Click to Update)");
+        }else {
             userLocation = promptZip();
         }
 
@@ -446,7 +449,16 @@ $(document).ready(function () {
                     const address1 = results[i].location.address1
                     const address2 = results[i].location.address2
                     const address3 = results[i].location.address3
-                    const address4 = results[i].location.city
+                    const address4 = results[i].location.city  
+                    const distance = results[i].distance;
+                    var milesFromLoc = distance * 0.00062137;
+                    var disValid = false;
+                    var mileP = $("<p>")
+                    if (milesFromLoc != undefined && !isNaN(milesFromLoc)){
+                        disValid = true;
+                    milesFromLoc = parseFloat(milesFromLoc).toFixed(2);                    
+                    mileP.text("Distance: " + milesFromLoc + " miles");
+                    }
 
                     var location = address1;
                     if (address2 != null) {
@@ -485,7 +497,9 @@ $(document).ready(function () {
                     infoCard.append(pTwo)
                     infoCard.append(pOne)
                     infoCard.append(pThree);
-
+                    if (disValid){
+                        infoCard.append(mileP);
+                    }
                     searchYelpById(id)
                         .then(function (res) {
 

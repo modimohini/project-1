@@ -57,7 +57,7 @@ blockquote{
   margin-top: 10px;
 }
 #btnsGoHere{
-  margin-top: 20px; 
+  margin-top: 10px; 
   }
 
 
@@ -109,7 +109,7 @@ blockquote{
   /* background-image: linear-gradient(to right, #e0f2f1 20% , #80cbc4   100%, #b2dfdb  100%, #80cbc4   45%);  width: 15vw; */
   height: 2vw;
   text-align: center;
-  padding: 10px 40px 60px 40px;;
+  padding: 10px 40px 60px 40px;
   font-size: 2vw;
   box-align:center;
   margin-left: 0%;
@@ -122,7 +122,12 @@ blockquote{
 #spinToWin:hover{
   
 }
+#mealCatLabel{
+  font-size: larger;
+  margin: 15px 0 0 0;
+  font-weight: bold;
 
+}
 
 #zipText{
   color: #F27405 !important;
