@@ -1,7 +1,7 @@
 $(document).ready(function () {
     var ingredients = ['thai', 'mexican', 'sushi', 'japanese', 'chinese', 'american', 'brewpub', 'froyo', 'pizza', 'italian']
     console.log(ingredients)
-    var colors = ['#fce4ec ', '#ede7f6 ', '#e8eaf6', '#e3f2fd', '#e0f7fa', '#e8f5e9', '#f9fbe7', '#fff3e0', '#fbe9e7', '#ffcdd2']
+    var colors = ['#F291BF', '#F2CB05 ', '#F2B705', '#F27405', '#F23005']
 
     var addingIngredient = document.getElementById("addBtn")
     var isSpinning = false;
@@ -37,7 +37,7 @@ $(document).ready(function () {
                     spinItUp();
                 }
             } else {
-                $("#zipText").text("Location not set (Click to Update)");
+                $("#zipText").text("Location not set");
             }
         })
 
@@ -82,7 +82,7 @@ $(document).ready(function () {
         }
     }
     function addToIngredientsArray(item) {
-
+        item = item.toLowerCase();
         if (ingredients.indexOf(item) == -1) {
             ingredients.push(item);
             createIngredientBtn(item)
@@ -132,8 +132,9 @@ $(document).ready(function () {
     }
 
     function spinItUp() {
+      
         offset = 0;
-        $(".gridSection").css("display", "block");
+       
         index = 0;
         if (!isSpinning) {
             isSpinning = true;
@@ -142,11 +143,47 @@ $(document).ready(function () {
             }
 
         }
+        if (ingredients.length >1 || ingredients.length == undefined){
+        $(".gridSection").css("display", "block");
         isSpinning = true;
         $("#spinBtnCont").css("display", "none");
         doSlowdownThing();
+        } else {
+        smallListCheck();
+        }
     }
 
+    function smallListCheck(){
+        let len = ingredients.length;
+        if (len==0){
+            Swal.fire({
+                title: "No categories to pick from!",
+                text: "Add a category to the pool and then spin.",
+                type: 'warning',
+                showCancelButton: false,
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'OK!'
+            })
+        } else if (len != undefined){
+            chosen =ingredients[0];
+            Swal.fire({
+                title: "Only one category listed...",
+                text: `Searching for ${ingredients[0]}`,
+                type: 'info',
+                showCancelButton: false,
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Sounds good!'
+               
+            }).then((result) => {
+                $("#spinBtnCont").css("display", "block");
+                $("#spinToWin").text("New Search");
+                $(".resResultsCont").css("display", "block");
+                $("#resTextLabel").text("Results for: " + chosen);
+                searchYelp(chosen, userLocation, offset);
+            })
+
+        }
+    }
     function doSlowdownThing() {
         const timeoutDuration = pickATimeBasedOnIndex(index);
         changeBground();
@@ -183,6 +220,7 @@ $(document).ready(function () {
 
                 )
                 $("#spinBtnCont").css("display", "block");
+                $("#spinToWin").text("Spin again?");
                 $(".resResultsCont").css("display", "block");
                 $("#resTextLabel").text("Results for: " + chosen);
                 searchYelp(chosen, userLocation, offset);
@@ -270,15 +308,15 @@ $(document).ready(function () {
 
         //adding an attribute for the ajax call function
         $(makingIngredientBtn).attr("ing-data", ingredient)
-        $(makingIngredientBtn).attr("data-position", "bottom")
-        $(makingIngredientBtn).attr("data-tooltip", "add to wheel")
-        // $(makingIngredientBtn).attr("class", "btn tooltipped")
+        // $(makingIngredientBtn).attr("data-position", "bottom")
+        $(makingIngredientBtn).attr("id", "choiceBtn")
+        $(makingIngredientBtn).attr("class", "btn tooltipped btn-flat mCat waves-light btn-medium")
         // $(makingIngredientBtn).attr("onclick", "{(e)=>{e.preventDefault()}}")
 
         //adds the materialize class to the button
-        $(makingIngredientBtn).addClass("btn mCat waves-effect waves-light btn-small")
-        // $(makingIngredientBtn).attr('data-tooltip', 'click me to remove me from your choices')
-        // $(makingIngredientBtn).attr('data-position', 'bottom')
+        // $(makingIngredientBtn).addClass("btn-flat mCat waves-effect waves-light btn-small ")
+        $(makingIngredientBtn).attr('data-tooltip', 'click to remove')
+        $(makingIngredientBtn).attr('data-position', 'bottom')
 
         //append each item to buttonsDiv
         $('#btnsGoHere').append(makingIngredientBtn)
@@ -311,23 +349,21 @@ $(document).ready(function () {
                 useCoords = false;
             }
         }
-        
-        if (userLocation != undefined && userLocation != '' && useCoords == false)
-        {
-            $("#zipText").text(userLocation + " (Click to Update)");
-        } else if (userLocation != undefined && userLocation != '' && useCoords)
-        {
-            $("#zipText").text("Location Saved as Coordinates (Click to Update)");  
-        } else
-        {
+
+        if (userLocation != undefined && userLocation != '' && !useCoords) {
+            $("#zipText").text(userLocation + "(Click to Update)");
+        } else if(userLocation != undefined && userLocation != '' && useCoords){
+            $("#zipText").text("Location stored as Coordinates (Click to Update)");
+        }else {
             userLocation = promptZip();
         }
 
 
         $('.collapsible').collapsible();
         $('.tooltipped').tooltip();
-        getUserFavs();
         makeButtons();
+        getUserFavs();
+     
 
         //event listeners
         $(document.body).on("click", "#spinToWin", function () {
@@ -441,7 +477,7 @@ $(document).ready(function () {
                     $(divIds[i]).text("");
                     var newCard = $("<div>")
                     var infoCard = $("<div id='restaurantInfo" + i + "'>")
-                    infoCard.attr('class', 'col s7')
+                    infoCard.attr('class', 'col s12 m12 l7')
                     var name = results[i].name
                     console.log(name);
                     var id = results[i].id;
@@ -451,7 +487,16 @@ $(document).ready(function () {
                     const address1 = results[i].location.address1
                     const address2 = results[i].location.address2
                     const address3 = results[i].location.address3
-                    const address4 = results[i].location.city
+                    const address4 = results[i].location.city  
+                    const distance = results[i].distance;
+                    var milesFromLoc = distance * 0.00062137;
+                    var disValid = false;
+                    var mileP = $("<p>")
+                    if (milesFromLoc != undefined && !isNaN(milesFromLoc)){
+                        disValid = true;
+                    milesFromLoc = parseFloat(milesFromLoc).toFixed(2);                    
+                    mileP.text("Distance: " + milesFromLoc + " miles");
+                    }
 
                     var location = address1;
                     if (address2 != null) {
@@ -477,7 +522,7 @@ $(document).ready(function () {
                     pSecondName.attr('id', 'alias')
 
                     var pTwo = $("<a>").attr("href", googleLink);
-                    pTwo.attr('id', 'location')
+                    pTwo.attr('id', 'location').attr('class', 's12 m12')
                     pTwo.text(location);
 
                     var pOne = $("<p>").text("Phone Number:  " + phone);
@@ -490,7 +535,9 @@ $(document).ready(function () {
                     infoCard.append(pTwo)
                     infoCard.append(pOne)
                     infoCard.append(pThree);
-
+                    if (disValid){
+                        infoCard.append(mileP);
+                    }
                     searchYelpById(id)
                         .then(function (res) {
 
@@ -501,11 +548,11 @@ $(document).ready(function () {
                             let photoThree = res.photos[2]
 
                             var initialImageOne = $(`<img src=${photoOne}>`)
-                            initialImageOne.attr('width', 380).attr('height', 300)
+                            initialImageOne.attr('width', 100).attr('height', 100).attr('class', 'responsive-img s12')
                             var initialImageTwo = $(`<img src=${photoTwo}>`)
-                            initialImageTwo.attr('width', 380).attr('height', 300)
+                            initialImageTwo.attr('width', 100).attr('height', 100).attr('class', 'responsive-img s12')
                             var initialImageThree = $(`<img src=${photoThree}>`)
-                            initialImageThree.attr('width', 380).attr('height', 300)
+                            initialImageThree.attr('width', 100).attr('height', 100).attr('class', 'responsive-img s12')
 
                             var imageOne = $('<li>')
                             imageOne.append(initialImageOne)
@@ -515,7 +562,7 @@ $(document).ready(function () {
                             imageThree.append(initialImageThree)
 
                             var carouselWheel = $("<div>")
-                            carouselWheel.attr("class", "slider col s5")
+                            carouselWheel.attr("class", "slider col s12 l5")
                             carouselWheel.attr("id", "caro"+cardIndex)
                             var sliderUl = $("<ul>")
                             sliderUl.attr("class", "slides")
@@ -528,7 +575,7 @@ $(document).ready(function () {
                             // var hours = res.hours[0];
                             var resHours = processHours(res.hours[0].open);
                             var dayArray = ["Monday", 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
-                            var hourString = '<h5>Hours: </h5>';
+                            var hourString = '<h6>Hours: </h6>';
                             for (let z = 0; z < resHours.length; z++) {
                                 let dayHours = resHours[z];
                                 if (dayHours == "CLOSED") {
