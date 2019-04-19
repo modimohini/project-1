@@ -82,7 +82,7 @@ $(document).ready(function () {
         }
     }
     function addToIngredientsArray(item) {
-
+        item = item.toLowerCase();
         if (ingredients.indexOf(item) == -1) {
             ingredients.push(item);
             createIngredientBtn(item)
@@ -132,8 +132,9 @@ $(document).ready(function () {
     }
 
     function spinItUp() {
+      
         offset = 0;
-        $(".gridSection").css("display", "block");
+       
         index = 0;
         if (!isSpinning) {
             isSpinning = true;
@@ -142,11 +143,47 @@ $(document).ready(function () {
             }
 
         }
+        if (ingredients.length >1 || ingredients.length == undefined){
+        $(".gridSection").css("display", "block");
         isSpinning = true;
         $("#spinBtnCont").css("display", "none");
         doSlowdownThing();
+        } else {
+        smallListCheck();
+        }
     }
 
+    function smallListCheck(){
+        let len = ingredients.length;
+        if (len==0){
+            Swal.fire({
+                title: "No categories to pick from!",
+                text: "Add a category to the pool and then spin.",
+                type: 'warning',
+                showCancelButton: false,
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'OK!'
+            })
+        } else if (len != undefined){
+            chosen =ingredients[0];
+            Swal.fire({
+                title: "Only one category listed...",
+                text: `Searching for ${ingredients[0]}`,
+                type: 'info',
+                showCancelButton: false,
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Sounds good!'
+               
+            }).then((result) => {
+                $("#spinBtnCont").css("display", "block");
+                $("#spinToWin").text("New Search");
+                $(".resResultsCont").css("display", "block");
+                $("#resTextLabel").text("Results for: " + chosen);
+                searchYelp(chosen, userLocation, offset);
+            })
+
+        }
+    }
     function doSlowdownThing() {
         const timeoutDuration = pickATimeBasedOnIndex(index);
         changeBground();
@@ -324,8 +361,9 @@ $(document).ready(function () {
 
         $('.collapsible').collapsible();
         $('.tooltipped').tooltip();
-        getUserFavs();
         makeButtons();
+        getUserFavs();
+     
 
         //event listeners
         $(document.body).on("click", "#spinToWin", function () {
