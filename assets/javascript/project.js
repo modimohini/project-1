@@ -82,7 +82,7 @@ $(document).ready(function () {
         }
     }
     function addToIngredientsArray(item) {
-
+        item = item.toLowerCase();
         if (ingredients.indexOf(item) == -1) {
             ingredients.push(item);
             createIngredientBtn(item)
@@ -361,8 +361,9 @@ $(document).ready(function () {
 
         $('.collapsible').collapsible();
         $('.tooltipped').tooltip();
-        getUserFavs();
         makeButtons();
+        getUserFavs();
+     
 
         //event listeners
         $(document.body).on("click", "#spinToWin", function () {
